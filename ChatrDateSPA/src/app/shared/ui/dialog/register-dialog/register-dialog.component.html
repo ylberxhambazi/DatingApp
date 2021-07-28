@@ -1,0 +1,66 @@
+<section class="register-dialog-section app-overlay">
+  <div class="overlay-container">
+    <div class="inner">
+      <div class="frame">
+        <span title="Close" class="close" (click)="onCloseDialog()"><span class="cross">×</span></span>
+        <div class="content register">
+          <div class="register-form react-form">
+            <h3 class="title spinner-container">
+              <span class="register-title"> Grab that change and start meeting pelople </span>
+            </h3>
+            <div class="alt-registration google-registration">
+              <h4 class="subtitle">Create an account with just one click!</h4>
+              <div class="controls">
+                <div class="external-wrapper">
+                  <div class="external-auth google-auth">
+                    <div class="google-wrapper">
+                      <button class="action google large">
+                        <mat-icon svgIcon="google-icon" aria-hidden="false"></mat-icon>
+                        Sign in via Google
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="separator">
+                <div class="line"></div>
+                <div class="text">or</div>
+                <div class="line"></div>
+              </div>
+            </div>
+            <div class="email-register-section">
+              <form class="field sign-in sign-up react-popup-container-event react-form">
+                <div class="input-container email">
+                  <div class="input-container">
+                    <input type="email" name="email" class="data has-description" placeholder="Real Email" value="" />
+                  </div>
+                </div>
+                <div class="field sign-in sign-up line">
+                  <div class="input-container">
+                    <input class="data password" type="password" name="password" placeholder="Password" value="" />
+                  </div>
+                </div>
+                <div class="input-container name">
+                  <div class="input-container">
+                    <input
+                      type="name"
+                      name="name"
+                      class="data has-description"
+                      placeholder="Name or nickname"
+                      value=""
+                    />
+                  </div>
+                </div>
+
+                <button class="action call-to-action medium approve">Register</button>
+              </form>
+            </div>
+            <div class="text note">
+              By clicking «Sign in via Google» or «Continue» you agree to our Terms and Privacy Policy
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

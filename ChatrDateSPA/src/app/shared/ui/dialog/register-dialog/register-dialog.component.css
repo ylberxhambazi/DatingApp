@@ -1,0 +1,379 @@
+.app-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 7;
+  padding-top: 0;
+}
+
+:root .app-overlay {
+  filter: none;
+}
+
+.app-overlay .overlay-container {
+  display: table;
+  position: relative;
+  height: 100%;
+  margin: 0 auto;
+  vertical-align: middle;
+}
+
+.app-overlay .inner {
+  vertical-align: middle;
+  margin: 0 auto;
+  display: table-cell;
+  padding: 50px 0;
+}
+
+.app-overlay .frame {
+  position: relative;
+  padding: 0;
+  border-radius: 10px;
+  animation-name: content-anim;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+}
+
+.app-overlay .close {
+  opacity: 1;
+  z-index: 7;
+  right: 8px;
+  top: 19px;
+}
+
+.close {
+  position: absolute;
+  margin-top: -12px;
+  display: block;
+  font-size: 19px;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+  right: 8px;
+  top: 19px;
+  z-index: 2;
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close .cross {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  margin-top: -4.5px;
+  margin-left: -4.5px;
+  width: 9px;
+  height: 9px;
+  background: url(/assets/images/close.png) top center no-repeat;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 200%;
+}
+
+.app-overlay .content {
+  position: relative;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.32);
+}
+
+.register-form {
+  background: url(/assets/images/public/edit-background.jpg);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: cover;
+  padding: 55px 225px 50px;
+}
+
+.register-form .title {
+  font-size: 33px;
+  line-height: 40px;
+  width: 490px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #666;
+}
+
+.register-form .subtitle {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 20px;
+  color: #666;
+}
+
+.google-registration .subtitle {
+  display: block;
+}
+
+.register-form .alt-registration .controls {
+  margin: 0 auto 10px;
+}
+
+.register-form .alt-registration.google-registration .controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.register-form .alt-registration .controls .external-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.external-wrapper .external-auth {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.external-wrapper .external-auth > * {
+  width: 100%;
+  text-align: right;
+}
+
+.action {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0.785714em 2.285714em;
+  border: 0;
+  border-radius: 5px;
+  overflow: visible;
+  font: 700 14px 'Open Sans', Arial, 'Helvetica CY', 'Nimbus Sans L', sans-serif;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: top;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px, rgba(0, 0, 0, 0.117647) 0 1px 4px;
+  cursor: pointer;
+  outline: 0;
+  user-select: none;
+  transition: all 0.25s;
+  box-sizing: border-box;
+}
+
+.register-form .external-wrapper .action {
+  flex: 0, 1, 49%;
+  font-size: 16px;
+  height: 55px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 3px;
+  text-align: center;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.external-wrapper .action {
+  width: 100%;
+}
+
+.action.google {
+  color: #222 !important;
+  background: #fff;
+}
+
+.register-form .separator {
+  align-items: center;
+  width: 100%;
+  margin: 35px 0;
+  font-size: 15px;
+}
+
+.register-form .alt-registration.facebook-registration .separator,
+.register-form .alt-registration.google-registration .separator {
+  display: flex;
+}
+
+.register-form .separator .line {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.register-form .separator .text {
+  margin: 0 15px;
+}
+
+.register-form .email-register-section {
+  margin: auto;
+}
+
+.register-form .email-register-section .email {
+  margin-bottom: 7px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.react-form input[type='email'],
+.react-form input[type='password'],
+.react-form input[type='name'],
+.react-form input[type='text'],
+.react-form textarea {
+  font-family: 'Open Sans', Arial, 'Helvetica CY', 'Nimbus Sans L', sans-serif;
+  font-size: 16px;
+  border: 1px solid #eee;
+  padding: 8px 10px;
+  margin: 11px 0;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.register-form .email-register-section .data {
+  height: 55px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.action.call-to-action {
+  color: #fff !important;
+  background: #d5232f;
+}
+
+.register-form .email-register-section .approve {
+  font-size: 16px;
+  width: 100%;
+  height: 55px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  margin-top: 25px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.register-form .note,
+.register-form .note a {
+  color: #222;
+}
+
+.register-form .text {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .external-wrapper .external-auth.facebook-auth,
+  .external-wrapper .external-auth.google-auth {
+    min-width: 243px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .app-overlay .inner {
+    padding: 0;
+  }
+}
+
+@media (max-width: 945px) {
+  .register-form {
+    width: 446px;
+    padding: 30px 137px;
+  }
+  .register-form {
+    background-size: cover;
+  }
+  .app-overlay .inner {
+    padding: 1px 0;
+  }
+  .register-form .title {
+    margin: 0 40px 30px;
+    width: auto;
+    font-size: 25px;
+    line-height: 33px;
+  }
+  .register-form .subtitle {
+    font-size: 16px;
+  }
+  .register-form .alt-registration.facebook-registration:not(.google-registration) .controls,
+  .register-form .alt-registration.google-registration:not(.facebook-registration) .controls {
+    max-width: 300px;
+  }
+  .register-form .email-register-section {
+    text-align: center;
+    width: 375px;
+  }
+  .register-form .email-register-section .description.tip-container .react-tip {
+    top: -60px;
+  }
+  .register-form .email-register-section .data {
+    height: 42px;
+    width: 100%;
+    font-size: 16px;
+  }
+  .register-form .separator .text {
+    font-size: 13px;
+  }
+  .register-form .email-register-section .approve {
+    height: 40px;
+    margin-bottom: 35px;
+    font-size: 14px;
+  }
+  .register-form .external-wrapper .action {
+    height: 40px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 767px) {
+  .register-form {
+    width: 384px;
+    padding: 30px 96px 90px;
+  }
+  .register-form {
+    background-position: -250px 0;
+    background-size: cover;
+  }
+  .register-form .title {
+    margin: 0 0 70px;
+  }
+}
+
+@media (max-width: 599px) {
+  .register-form {
+    width: 336px;
+    padding: 20px 64px 12px;
+  }
+  .register-form .title {
+    margin: 0 35px 80px;
+    font-size: 18px;
+    line-height: 23px;
+  }
+  .register-form .subtitle {
+    font-size: 15px;
+  }
+  .register-form .email-register-section {
+    width: 100%;
+  }
+}
+
+@media (max-width: 479px) {
+  .register-form {
+    width: 272px;
+    padding: 21px 16px 14px;
+  }
+  .register-form {
+    background-position: -330px 0;
+    background-size: cover;
+  }
+  .register-form .title {
+    margin: 0 0 77px;
+    font-size: 18px;
+    line-height: 23px;
+  }
+  .register-form .external-wrapper .action {
+    font-size: 11px;
+  }
+}

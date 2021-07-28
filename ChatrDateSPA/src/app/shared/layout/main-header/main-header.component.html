@@ -1,0 +1,80 @@
+<header *ngIf="loggedIn()" class="pageHeader">
+  <div class="container">
+    <div class="logoContainer">
+      <div class="logo">
+        <a [routerLink]="['/main']"><img src="../../assets/images/logo.svg" alt="" /></a>
+      </div>
+    </div>
+    <nav class="mainNav">
+      <a [routerLink]="['/main/chats']" routerLinkActive="active" data-count="2">
+        <mat-icon>chat</mat-icon>
+        <span class="label">Chats</span>
+      </a>
+      <a [routerLink]="['/main/inbox']" routerLinkActive="active">
+        <mat-icon>letter</mat-icon>
+        <span class="label">Inbox</span>
+      </a>
+      <a [routerLink]="['/main/visitors']" routerLinkActive="active">
+        <mat-icon>eye</mat-icon>
+        <span class="label">Visitors</span>
+      </a>
+      <a [routerLink]="['/main/likes']" routerLinkActive="active">
+        <mat-icon>heart</mat-icon>
+        <span class="label">Likes</span>
+      </a>
+      <a [routerLink]="['/main/favorites']" routerLinkActive="active">
+        <mat-icon>favorite</mat-icon>
+        <span class="label">Favorites</span>
+      </a>
+    </nav>
+    <a [routerLink]="['main/add-coins']" class="addCoinsTeaser" routerLinkActive="active">
+      <small>You Have</small>
+      <span class="count"> 0 <span class="currency">Coins</span> </span>
+      <button class="btnSecondary">Buy Coins</button>
+    </a>
+    <nav class="headerAccountNav">
+      <ul>
+        <li class="dropdown nav">
+          <span class="user">
+            <a [routerLink]="['/main/my-profile']" class="username">{{
+              authService.decodedToken?.unique_name | titlecase
+            }}</a>
+            <button
+              mat-icon-button
+              color="accent"
+              class="menu-button"
+              aria-label="menu-icon"
+              [matMenuTriggerFor]="menu"
+            >
+              <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item [routerLink]="['/main/my-profile']">
+                <span>My Profile</span>
+              </button>
+              <button mat-menu-item (click)="onLogout()">
+                <span>Logout</span>
+              </button>
+              <button mat-menu-item>
+                <span>Help / Support</span>
+              </button>
+              <button mat-menu-item>
+                <span>Imprint</span>
+              </button>
+              <button mat-menu-item>
+                <span>Privacy Policy</span>
+              </button>
+              <button mat-menu-item>
+                <span>Terms and Conditions</span>
+              </button>
+            </mat-menu>
+            <a [routerLink]="['/main/my-profile']" class="imgWrp accountImage">
+              <img src="{{ photoUrl }}" alt="" />
+              <!-- <img src="../../assets//images/profile/fallback-male.jpg" alt="" /> -->
+            </a>
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

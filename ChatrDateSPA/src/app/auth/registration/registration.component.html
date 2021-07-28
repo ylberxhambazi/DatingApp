@@ -1,0 +1,92 @@
+<section class="publicPage">
+  <main>
+    <app-header></app-header>
+    <div class="container">
+      <div class="publicAuthContent medium registrationFormWrapper">
+        <div class="cnt">
+          <div class="slogan">
+            <h3>Registration</h3>
+          </div>
+          <form class="form whiteForm regForm">
+            <div class="fwWrap" id="regFormWrap">
+              <div class="field text">
+                <label for="registerFormUsername">Username</label>
+                <input type="text" id="registerFormUsername" placeholder="Your username" />
+              </div>
+              <div class="field text">
+                <label for="registerFormPassword">Password</label>
+                <input type="text" id="registerFormPassword" placeholder="Your username" />
+              </div>
+              <div class="field text">
+                <label for="registerFormEmail">Email Address</label>
+                <input type="email" name="email" id="registerFormEmail" placeholder="Your email address" />
+              </div>
+              <div class="field select single">
+                <label for="registerFormBirthday"> Your age </label>
+                <div class="wrp">
+                  <select name="birthday" id="registerFormBirthday">
+                    <option value="2002-01-01" selected="">18</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <span class="label"> I am </span>
+                <div class="radioButtons">
+                  <div class="radioBtn">
+                    <input type="radio" name="gender" value="1" id="registerFormGenderWoman" />
+                    <label for="registerFormGenderWoman"> a Woman </label>
+                  </div>
+                  <div class="radioBtn">
+                    <input type="radio" name="gender" value="2" id="registerFormGenderMen" checked />
+                    <label for="registerFormGenderMen"> a Man </label>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <span class="label"> I'm looking for </span>
+                <div class="radioButtons">
+                  <div class="radioBtn">
+                    <input type="radio" name="searchGender" value="1" id="registerFormSearchGenderWoman" checked="" />
+                    <label for="registerFormSearchGenderWoman"> a Woman </label>
+                  </div>
+                  <div class="radioBtn">
+                    <input type="radio" name="searchGender" value="2" id="registerFormSearchGenderMen" />
+                    <label for="registerFormSearchGenderMen"> a Man </label>
+                  </div>
+                </div>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="privacy" value="1" id="registerFormPrivacy" data-val="checkedPrivacy" />
+                <label for="registerFormPrivacy">
+                  <!-- <mat-icon>check</mat-icon> -->
+                  I have read and accepted the
+                  <a href="/" tabindex="-2">Terms and Conditions &amp; Communication Guidelines</a>
+                  and the <a href="#" tabindex="-3">Privacy Policy</a>.
+                </label>
+              </div>
+              <input type="submit" class="btn btnSpotColor btnXL submit fullWidth" value="Register" />
+            </div>
+          </form>
+          <div class="spacer">or</div>
+          <div class="socialButtons">
+            <button class="btn google glRegButton">
+              <div class="icon google-icon">
+                <mat-icon svgIcon="google-icon" aria-hidden="false"></mat-icon>
+              </div>
+              <span>Google</span>
+            </button>
+            <button class="btn facebook fbRegButton">
+              <div class="icon facebook-icon">
+                <mat-icon svgIcon="facebook-icon" aria-hidden="false"></mat-icon>
+              </div>
+              <span>Facebook</span>
+            </button>
+            <small> * We will never post on Facebook without your approval! </small>
+          </div>
+          <div class="moodImage" style="background-image: url('./assets/images/public/auth-mood.jpg')"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <app-footer></app-footer>
+</section>

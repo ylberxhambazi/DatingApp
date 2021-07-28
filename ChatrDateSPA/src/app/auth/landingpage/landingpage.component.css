@@ -1,0 +1,433 @@
+.publicPage main {
+  overflow: hidden;
+  min-height: 75vh;
+}
+
+/* regWrapper */
+
+.publicPage .regWrapper {
+  position: relative;
+  z-index: 2;
+  padding: 3rem 0;
+  overflow: hidden;
+  transition: opacity 240ms ease-in;
+}
+
+.publicPage .regWrapper .registrationContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row-reverse;
+}
+
+.hero-form-container.search-container {
+  position: relative;
+  z-index: 0;
+  width: 522px;
+  border-radius: 10px;
+  clear: both;
+  top: 0px;
+  background-color: #f9f9f9;
+}
+
+.hero-form-container .hello-container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-size: 0;
+  text-align: center;
+}
+
+.hero-form-container.search-container .params-form .wrapper {
+  position: relative;
+  width: 382px;
+  padding-top: 0px;
+  padding-bottom: 40px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  padding: 0 70px;
+  box-sizing: border-box;
+}
+
+.hero-form-container .hello-container .logo {
+  width: 100%;
+  position: relative;
+  margin: 0;
+}
+
+.hero-form-container.search-container h1 {
+  position: relative;
+  margin: 20px 0 0;
+  padding: 0 70px;
+  text-align: center;
+  font-size: 27px;
+}
+
+.hero-form-container.search-container .slogan {
+  position: relative;
+  padding: 0 70px;
+  margin: 0;
+  color: #717171;
+  text-align: center;
+  font-size: 18px;
+}
+
+.hero-form-container.search-container .params-form .wrapper .who-am-i,
+.hero-form-container.search-container .params-form .wrapper .age-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.form .genders-wrapper .genders-field {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.form .genders-wrapper .genders-field .mat-icon {
+  width: 36px;
+  height: 36px;
+}
+
+::ng-deep .form .genders-wrapper .genders-field .mat-icon svg {
+  color: #e7e7e7;
+}
+
+::ng-deep .form .genders-wrapper .genders-field input[value='mal']:checked + mat-icon svg {
+  color: #0d8fba;
+}
+
+::ng-deep .form .genders-wrapper .genders-field input[value='fem']:checked + mat-icon svg {
+  color: #e6282e;
+}
+
+.hero-form-container.search-container .params-form .wrapper .who-am-i .label-text {
+  padding: 0;
+}
+
+.hero-form-container.search-container .params-form .wrapper .age-wrapper .label-text,
+.hero-form-container.search-container .params-form .wrapper .who-am-i .label-text {
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.form .genders-wrapper .genders-field label {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.form .genders-wrapper .genders-field input {
+  display: none;
+}
+
+.form input[type='checkbox'],
+.form input[type='radio'] {
+  margin-right: 0;
+  padding: 0;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.customized-select:last-child {
+  margin-bottom: 0;
+}
+
+.customized-select:first-child {
+  margin-top: 0;
+}
+
+.customized-select {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 11px 0;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.action,
+.action .mat-icon svg,
+.customized-select {
+  display: inline-block;
+  position: relative;
+}
+
+.customized-select::after,
+.customized-select::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+}
+
+.customized-select::after {
+  background: url(/assets/images/arrow-down.svg) center center no-repeat;
+}
+
+.customized-select select {
+  position: relative;
+  z-index: 1;
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  font-family: 'Open Sans', Arial, 'Helvetica CY', 'Nimbus Sans L', sans-serif;
+  font-size: 16px;
+  padding: 8px 10px;
+  border: 0;
+  background: 0 0;
+  margin: 0;
+  text-indent: 0.01px;
+  text-overflow: '';
+  user-select: none;
+}
+
+.hero-form-container.search-container .params-form .wrapper .customized-select select {
+  height: 52px;
+  font-size: 18px;
+  line-height: 22px;
+  padding-right: 35px;
+}
+
+.hero-form-container.search-container .params-form .wrapper .age-wrapper .label-text.ages,
+.hero-form-container.search-container .params-form .wrapper .who-am-i .label-text.ages {
+  padding-right: 15px;
+}
+
+.hero-form-container.search-container .params-form .wrapper .max-age-container .field {
+  padding-left: 13px;
+}
+
+.hero-form-container.search-container .params-form .wrapper .max-age-container .field,
+.hero-form-container.search-container .params-form .wrapper .min-age-container .field {
+  min-width: 90px;
+  display: inline-block;
+}
+
+.hero-form-container.search-container .params-form .wrapper .button-wrapper {
+  text-align: center;
+  margin: 0;
+}
+
+.action {
+  margin: 0;
+  padding: 0.785714em 2.285714em;
+  border: 0;
+  border-radius: 5px;
+  overflow: visible;
+  font: 700 14px 'Open Sans', Arial, 'Helvetica CY', 'Nimbus Sans L', sans-serif;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: top;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0 1px 6px, rgba(0, 0, 0, 0.117647) 0 1px 4px;
+  cursor: pointer;
+  outline: 0;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.action.call-to-action,
+.action.call-to-action:active {
+  color: #fff !important;
+  background: #d5232f;
+}
+
+.action.call-to-action:hover {
+  color: #fff !important;
+  background-color: #ea4550;
+}
+
+.hero-form-container .form .call-to-action {
+  width: 100%;
+  font-size: 18px;
+  margin: 0;
+}
+
+.hero-form-container .external-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.hero-form-container .external-wrapper .external-auth {
+  display: flex;
+  justify-content: flex-end;
+  order: 0;
+}
+
+.hero-form-container .external-wrapper .external-auth > * {
+  width: 100%;
+  text-align: right;
+}
+
+.action.medium {
+  font-size: 14px;
+}
+
+.hero-form-container .external-wrapper .external-auth .google-wrapper .action.google {
+  color: #222 !important;
+  background: #fff;
+}
+
+.hero-form-container .external-wrapper .external-auth .google-wrapper .action {
+  width: 100%;
+}
+
+::ng-deep .action .mat-icon svg {
+  fill: #cf4332;
+  height: 20px;
+  width: 20px;
+  bottom: -0.375em;
+  margin-top: -1em;
+  margin-right: 0.5em;
+  display: inline-block;
+  position: relative;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.note {
+  font-size: 11px;
+  color: #717171;
+  text-align: center;
+  margin-bottom: 0 !important;
+}
+
+.publicPage .regMoodImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #dee6f2;
+  background-size: cover;
+  background-position: center;
+}
+
+/* headlineStripe */
+
+.publicPage .headlineStripe {
+  padding: 4.5rem 0;
+}
+
+.publicPage .headlineStripe .container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.publicPage .headlineStripe h1 {
+  text-align: center;
+  flex: 0 0 100%;
+  font-size: 4em;
+  margin-bottom: 1.2rem;
+}
+
+span.primary {
+  color: #e01f4d;
+}
+
+/* publicTeaserList */
+
+.publicPage .publicTeaserList,
+.publicPage .txtContent {
+  transition: opacity 0.4s ease-out;
+}
+
+.publicTeaserList {
+  padding: 3.125rem 0.625rem;
+  background: #f7f7f7;
+  margin: 0;
+}
+
+.profileTeaser {
+  width: 100%;
+  padding: 0.625rem;
+}
+
+/* articles */
+
+.publicPage .article {
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  padding: 2.8125rem 0;
+}
+
+@media (max-width: 1280px) {
+  .hero-form-container.search-container {
+    width: 410px;
+    padding-top: 35px;
+    padding-bottom: 15px;
+  }
+  .hero-form-container.search-container .params-form .wrapper {
+    padding: 0 35px 35px;
+    width: 340px;
+  }
+  .hero-form-container.search-container .params-form .wrapper .max-age-container .field,
+  .hero-form-container.search-container .params-form .wrapper .min-age-container .field {
+    height: 40px;
+    min-width: 80px;
+  }
+  .hero-form-container.search-container .params-form .wrapper .max-age-container .field {
+    padding-left: 5px;
+  }
+  .hero-form-container.search-container .params-form .wrapper .customized-select select {
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .publicPage .headlineStripe h1 {
+    font-size: 3em;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 0.3125rem;
+    padding-right: 0.3125rem;
+  }
+  .hero-form-container.search-container {
+    clear: right;
+    padding-top: 50px;
+    width: auto;
+  }
+  .hero-form-container .hello-container {
+    display: none;
+  }
+  .hero-form-container.search-container .params-form .wrapper {
+    max-width: 320px;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 25px;
+  }
+  .hero-form-container.search-container .params-form .wrapper .age-wrapper .label-text,
+  .hero-form-container.search-container .params-form .wrapper .who-am-i .label-text {
+    font-size: 14px;
+  }
+  .hero-form-container.search-container .params-form .wrapper .max-age-container .field,
+  .hero-form-container.search-container .params-form .wrapper .min-age-container .field {
+    min-width: 70px;
+    font-size: 14px;
+  }
+  .publicPage .headlineStripe h1 {
+    font-size: 2em;
+  }
+}

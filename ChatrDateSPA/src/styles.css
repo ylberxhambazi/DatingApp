@@ -1,0 +1,156 @@
+/* You can add global styles to this file, and also import other style files */
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  color: #888;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+main {
+  font-size: 14px;
+}
+
+.imgWrp {
+  overflow: hidden;
+  display: block;
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+  max-width: 100%;
+}
+
+.imgWrp:after {
+  content: '';
+  display: block;
+  position: relative;
+  padding-bottom: 100%;
+}
+
+.imgWrp img {
+  display: block;
+  width: 101%;
+  max-width: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+a {
+  color: #e01f4d;
+  text-decoration: none;
+  transition: color 240ms ease-in, background 240ms ease-in, border 240ms ease-in;
+}
+
+dl,
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
+
+.cdk-global-overlay-wrapper {
+  position: relative;
+}
+
+.cdk-overlay-pane.login-modal {
+  position: absolute !important;
+  top: 2rem;
+  right: 1rem;
+}
+
+.cdk-overlay-pane.login-modal .mat-dialog-container {
+  position: relative;
+  width: 28rem;
+  background-color: #fff;
+  padding: 0.625rem;
+  color: #888;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label,
+.mat-form-field-appearance-legacy .mat-hint {
+  color: #888;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: #888;
+}
+
+.onlineStatus {
+  display: inline-block;
+  position: relative;
+  padding-right: 1rem;
+  padding-left: 0.25rem;
+  font-size: 0.6em;
+}
+
+.onlineStatus.online:after {
+  background: #16be36;
+}
+
+.onlineStatus.offline:after {
+  background: #f30800;
+}
+
+.onlineStatus:after {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  position: absolute;
+  right: 0.25rem;
+  bottom: 0.5rem;
+  border-radius: 50%;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 14px;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.ngx-gallery {
+  display: inline-block;
+  margin-bottom: 20px;
+}

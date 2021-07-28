@@ -1,0 +1,106 @@
+<section class="mainCol">
+  <section class="chatStream">
+    <header>
+      <div class="imgWrp hideAbove-1">
+        <img src="./assets/images/user/abc1.jpg" alt="" />
+      </div>
+      <div class="cnt">
+        <h1>Elizaveta</h1>
+        <h5 class="onlineStatus online">online</h5>
+        <button mat-button class="btnS" color="accent">
+          <mat-icon>favorite_border</mat-icon>
+          Like her
+        </button>
+      </div>
+      <div class="menu hideAbove-1">
+        <button mat-raised-button>Chat</button>
+        <button mat-raised-button>Profile Info</button>
+      </div>
+    </header>
+    <article class="chatStreamMessages">
+      <ul>
+        <li class="chatBubble hasArrow in">
+          <div>
+            <a href="#" class="imgWrp">
+              <img src="./assets/images/user/abc1.jpg" alt="" />
+            </a>
+            <div class="cnt arrow">
+              <small>at 13:45</small>
+              <p><span>Hello! I'm from Borovoy</span></p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </article>
+    <footer>
+      <form action="#">
+        <div class="textarea">
+          <textarea name="message" id="writeMessage" cols="30" rows="2" placeholder="Write a message"></textarea>
+          <button class="btnPrimary">
+            <mat-icon>send</mat-icon>
+          </button>
+        </div>
+        <div class="buttons">
+          <button mat-button class="icon-kiss">
+            <mat-icon svgIcon="kiss-icon-red" aria-hidden="false"></mat-icon>
+          </button>
+        </div>
+      </form>
+    </footer>
+    <!-- profile for mobile -->
+    <div class="chatProfileInfo">
+      <a href="#" class="imgWrp">
+        <img src="./assets/images/user/abc1.jpg" alt="" />
+      </a>
+      <div class="cnt">
+        <a href="#" class="h2 ellipsis chatProfileInfoName"> Elizaveta52 </a>
+        <p>30 years old from Yurga</p>
+        <p>
+          I am a wife and a mother, but I do not feel fulfilled. I want to experience something exciting again - maybe
+          with a man who feels something similar?
+        </p>
+      </div>
+      <div class="box profileFacts">
+        <div class="facts">
+          <!-- ngFor group -->
+          <div class="group">
+            <span class="dt">Looking for</span>
+            <span class="dd">Men</span>
+          </div>
+          <div class="group">
+            <span class="dt">Interested in</span>
+            <span class="dd">Acquaintance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+<aside class="asideLeft">
+  <div class="chatProfileInfo">
+    <a href="#" class="imgWrp">
+      <img src="./assets/images/user/abc1.jpg" alt="" />
+    </a>
+    <div class="cnt">
+      <a href="#" class="h2 ellipsis chatProfileInfoName"> Elizaveta52 </a>
+      <p>30 years old from Yurga</p>
+      <p>
+        I am a wife and a mother, but I do not feel fulfilled. I want to experience something exciting again - maybe
+        with a man who feels something similar?
+      </p>
+    </div>
+    <div class="box profileFacts">
+      <div class="facts">
+        <!-- ngFor group -->
+        <div class="group">
+          <span class="dt">Looking for</span>
+          <span class="dd">Men</span>
+        </div>
+        <div class="group">
+          <span class="dt">Interested in</span>
+          <span class="dd">Acquaintance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

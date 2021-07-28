@@ -1,0 +1,97 @@
+<main *ngIf="loggedIn()" class="mainWrap" id="mainWrap">
+  <div id="mainContainer" class="container">
+    <div>
+      <aside class="asideTop fixed">
+        <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Search </mat-panel-title>
+            <mat-panel-description>
+              <mat-icon>search</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <form #searchForm="ngForm" (ngSubmit)="loadUsers()" class="asideTopForm" autocomplete="off">
+            <div class="search-wrap">
+              <div class="genders-wrapper">
+                <div class="genders-field preferences">
+                  <span class="label-text">I'm looking for</span>
+                  <div>
+                    <label *ngFor="let gender of genderList">
+                      <input
+                        id="gender"
+                        type="radio"
+                        name="gender"
+                        alt="gender.name"
+                        [value]="gender.value"
+                        (click)="changeGender(gender.value)"
+                      />
+                      <mat-icon [svgIcon]="gender.value"></mat-icon>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="select-range">
+                <div class="select-range-label">
+                  <span class="label-text">Age Range</span>
+                  <div class="formFields">
+                    <input type="number" id="minAge" [(ngModel)]="userParams.minAge" name="minAge" />
+                    <input type="number" id="maxAge" [(ngModel)]="userParams.maxAge" name="maxAge" />
+                  </div>
+                </div>
+              </div>
+              <div class="field location">
+                <label for="field-city"> City </label>
+                <div class="group">
+                  <div class="places-search" id="locationWrapper">
+                    <input
+                      name="city"
+                      id="field-city"
+                      placeholder="City"
+                      size="1"
+                      autocomplete="off"
+                      type="text"
+                      value="Thái Bình"
+                      [disabled]="false"
+                    />
+                    <div class="places" id="places"></div>
+                  </div>
+                  <button mat-icon-button class="btnPrimaryInverted" aria-label="Show my location">
+                    <mat-icon>my_location</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="search-button">
+                <button mat-raised-button color="accent" type="submit" (click)="search()">Search</button>
+              </div>
+            </div>
+          </form>
+        </mat-expansion-panel>
+      </aside>
+      <div class="fourColumn">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  <aside class="notificationStream" id="notificationStream" [style]="getNotificationStyle()">
+    <div class="menu">
+      <button mat-icon-button aria-label="Show who sent you a message">
+        <mat-icon>message</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Show who likes you">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Show who kissed you">
+        <mat-icon svgIcon="kiss-icon" aria-hidden="false" class="kiss-icon"></mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Show who visited your profile">
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
+    </div>
+    <ul class="stream">
+      <li *ngFor="let record of streamRecords">
+        <app-stream-teaser [stream]="record"> </app-stream-teaser>
+      </li>
+    </ul>
+  </aside>
+</main>
+<app-main-header></app-main-header>
+<app-main-footer></app-main-footer>

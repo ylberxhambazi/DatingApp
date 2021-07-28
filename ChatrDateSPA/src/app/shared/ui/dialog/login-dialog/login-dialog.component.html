@@ -1,0 +1,48 @@
+<section class="login-dialog-section">
+  <button class="login-dialog-close" mat-button (click)="onCloseDialog()">X</button>
+  <div class="social-buttons">
+    <button class="btn google">
+      <div class="icon google-icon">
+        <mat-icon svgIcon="google-icon" aria-hidden="false"></mat-icon>
+      </div>
+      <span>Google</span>
+    </button>
+    <button class="btn facebook">
+      <div class="icon facebook-icon">
+        <mat-icon svgIcon="facebook-icon" aria-hidden="false"></mat-icon>
+      </div>
+      <span>Facebook</span>
+    </button>
+  </div>
+  <div class="spacer">or</div>
+  <form #loginForm="ngForm" class="login-form" (ngSubmit)="login()">
+    <mat-form-field class="login-form-full-width">
+      <mat-label>Email Address/Username</mat-label>
+      <input
+        matInput
+        type="email"
+        name="username"
+        [(ngModel)]="model.username"
+        placeholder="Your email address"
+        required
+      />
+      <mat-error>Email is <strong>required</strong></mat-error>
+    </mat-form-field>
+    <mat-form-field class="login-form-full-width">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        name="password"
+        [(ngModel)]="model.password"
+        placeholder="Your password"
+        required
+      />
+      <mat-error>Password is <strong>required</strong></mat-error>
+    </mat-form-field>
+    <div class="form-buttons">
+      <a [routerLink]="['/auth/forgot-password']" (click)="dialogRef.close()">Forgot Password?</a>
+      <button mat-raised-button color="primary" [disabled]="!loginForm.valid" mat-button type="submit">Login</button>
+    </div>
+  </form>
+</section>

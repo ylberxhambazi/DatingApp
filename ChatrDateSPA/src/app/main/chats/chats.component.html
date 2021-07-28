@@ -1,0 +1,7 @@
+<section class="mainCol">
+  <ul class="chatsStream">
+    <li *ngFor="let record of streamRecords">
+      <app-stream-teaser [stream]="record"> </app-stream-teaser>
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,205 @@
+.streamTeaser {
+  position: relative;
+  background: #fff;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: flex-start;
+  color: #888;
+  overflow: hidden;
+  transition: -webkit-box-shadow 240ms ease-in;
+  transition: box-shadow 240ms ease-in;
+  transition: box-shadow 240ms ease-in, -webkit-box-shadow 240ms ease-in;
+}
+
+.streamTeaser:hover:after {
+  opacity: 1;
+  right: 0;
+}
+
+.streamTeaser.message:after,
+.streamTeaser.profileView:after {
+  content: attr(data-label);
+}
+
+.streamTeaser:after {
+  position: absolute;
+  top: 0;
+  right: -10rem;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  opacity: 0;
+  background: #e01f4d;
+  color: #fff;
+  transition: right 0.4s ease-in-out, opacity 0.2s ease-out;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+::ng-deep .chatsStream .streamTeaser {
+  height: 8rem !important;
+  overflow: hidden;
+}
+
+::ng-deep .chatsStream .imgWrp {
+  flex: 0 0 8rem !important;
+}
+
+::ng-deep .chatsStream .cnt {
+  padding: 1rem 1rem 0 !important;
+  justify-content: flex-start !important;
+}
+
+::ng-deep .chatsStream h3 {
+  margin-bottom: 0.25rem !important;
+}
+
+.ellipsis {
+  font-size: 1.5em !important;
+}
+
+.streamTeaser:hover {
+  box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.5);
+}
+
+a.streamTeaser:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  border: 1px solid #e01f4d;
+  opacity: 0;
+  -webkit-transition: opacity 240ms ease-in;
+  transition: opacity 240ms ease-in;
+}
+
+a.streamTeaser.unread:before,
+a.streamTeaser:hover:before {
+  opacity: 1;
+}
+
+.streamTeaser {
+  height: 3.75rem;
+}
+
+.streamTeaser .imgWrp {
+  flex: 0 0 3.75rem;
+}
+
+.streamTeaser .cnt {
+  flex: 1 1 100%;
+}
+
+.streamTeaser .cnt {
+  padding: 0 1rem 0 0.5rem;
+  width: 13.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.streamTeaser h4 {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  font-size: 1.1em;
+  margin-bottom: 0.1rem;
+}
+
+.streamTeaser .date {
+  font-size: 0.75em;
+  white-space: nowrap;
+}
+
+.streamTeaser .date {
+  display: inline-block;
+  margin: 0.1rem 0 0 0.1rem;
+}
+
+.streamTeaser strong {
+  display: block;
+  font-weight: 400;
+  font-size: 0.85em;
+}
+
+button.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #aeaeae;
+}
+
+.streamTeaser .buttons {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  right: -100%;
+  bottom: 0;
+  transition: right 0.4s ease-in-out, opacity 0.2s ease-out;
+}
+
+a.streamTeaser:hover .buttons {
+  max-width: 100%;
+  right: 0;
+}
+
+a.streamTeaser:hover .readButton {
+  opacity: 1;
+  border: none;
+}
+
+a.streamTeaser .readButton {
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding-left: 50%;
+  width: 100%;
+  opacity: 0;
+  background: transparent;
+  color: #e01f4d;
+  transition: right 0.4s ease-in-out, opacity 0.2s ease-out;
+  height: 100%;
+  overflow: hidden;
+  border: none;
+}
+
+a.streamTeaser:hover .archiveChat {
+  opacity: 1;
+  border: none;
+}
+
+.streamTeaser .archiveChat {
+  color: #fff;
+  background-color: #e01f4d;
+  opacity: 0;
+  transition: right 0.4s ease-in-out, opacity 0.2s ease-out;
+  height: 100%;
+  min-width: 6%;
+}
+
+/* inbox unread message */
+
+.streamTeaser.unread .cnt:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px 6px 4px 8px;
+  content: attr(data-batch);
+  display: block;
+  background: #e01f4d;
+  color: #fff;
+  font-weight: 400;
+  font-size: 0.85em;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}

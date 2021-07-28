@@ -1,0 +1,378 @@
+.publicPage main {
+  overflow: hidden;
+  min-height: 75vh;
+}
+
+.publicAuthContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  padding: 2rem 0;
+}
+
+.medium {
+  font-size: 0.9em;
+}
+
+.publicAuthContent.medium .cnt {
+  max-width: 35rem;
+}
+
+.publicAuthContent .cnt {
+  width: 90%;
+  background: #fff;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.publicAuthContent .slogan {
+  padding: 1.25rem;
+  background: #e01f4d;
+  color: #fff;
+}
+
+.publicAuthContent h3 {
+  font-weight: 400;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.publicAuthContent form {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.regForm {
+  overflow: hidden;
+}
+
+.publicAuthContent.registrationFormWrapper .fwWrap {
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+.publicAuthContent.registrationFormWrapper .fwWrap {
+  margin-top: 1.25rem;
+  width: 100%;
+}
+
+form .field {
+  margin-bottom: 1.25rem;
+}
+
+.form .label,
+.form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.form.whiteForm .select .wrp,
+.form.whiteForm input[type='date'],
+.form.whiteForm input[type='email'],
+.form.whiteForm input[type='number'],
+.form.whiteForm input[type='password'],
+.form.whiteForm input[type='text'],
+.form.whiteForm textarea {
+  border: 1px solid #d5d5d5;
+}
+
+.form input[type='date'],
+.form input[type='email'],
+.form input[type='number'],
+.form input[type='password'],
+.form input[type='text'],
+.form textarea {
+  padding: 0.6rem 0.4rem;
+}
+
+form input[type='date'],
+.form input[type='email'],
+.form input[type='number'],
+.form input[type='password'],
+.form input[type='text'],
+.form select,
+.form textarea {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding: 0.6rem 0.4rem;
+  border: 1px solid #d5d5d5;
+  background: #fff;
+  color: #888;
+  font-size: 1em;
+  outline: 0;
+  appearance: none;
+}
+
+.select label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.select .wrp {
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.select .wrp:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 1.6rem;
+  border-left: 1px solid #f2f2f2;
+  background: #fff;
+  box-shadow: -4px 0 2px #fff;
+}
+
+.select .wrp:after,
+.select .wrp:before {
+  content: '';
+  pointer-events: none;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 240ms ease-in;
+}
+
+.select.single select {
+  width: calc(100% + 40px);
+}
+
+.select .wrp select {
+  background: 0 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.radioButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.radioButtons .radioBtn {
+  position: relative;
+}
+
+.radioButtons .radioBtn input[type='radio'] {
+  border: none;
+}
+
+.radioButtons input {
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  z-index: -50;
+}
+
+.radioButtons label {
+  position: relative;
+  padding-left: 21px;
+  padding-top: 5px;
+  min-height: 16px;
+  margin-right: 1.25rem;
+}
+
+.radioButtons label:before {
+  top: 3px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d5d5d5;
+  background-color: #fff;
+}
+
+.radioButtons label:after,
+.radioButtons label:before {
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.radioButtons label:after {
+  top: 6px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  background-color: #e01f4d;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+}
+
+.checkbox {
+  position: relative;
+}
+
+.checkbox input {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: -50;
+}
+
+.regForm .checkbox label {
+  font-size: 0.9rem;
+  padding-top: unset;
+}
+
+.checkbox label {
+  position: relative;
+  padding-left: 2.025rem;
+  padding-top: 5px;
+  min-height: 1.4rem;
+}
+
+.checkbox label:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 1px solid #e01f4d;
+  background-color: #fff;
+}
+
+.publicAuthContent.registrationFormWrapper .submit {
+  margin-top: 1.25rem;
+}
+
+.form input[type='submit'] {
+  text-transform: uppercase;
+}
+
+.publicAuthContent .btn {
+  width: 100%;
+}
+
+.btn.fullWidth {
+  width: 100%;
+}
+
+.btnSpotColor {
+  color: #fff;
+  background-color: #62d182;
+  border: 1px solid #62d182;
+}
+
+.btnXL {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+.regForm .fwWrap:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.publicPage .spacer {
+  margin: 1rem 0 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.publicPage .spacer:before {
+  left: 0;
+}
+
+.publicPage .spacer:after {
+  right: 0;
+}
+
+.publicPage .spacer:after,
+.publicPage .spacer:before {
+  content: '';
+  width: 40%;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  background-color: #aeaeae;
+}
+
+.publicAuthContent.registrationFormWrapper .socialButtons {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.publicAuthContent.registrationFormWrapper .socialButtons .btn {
+  padding: 1.25rem;
+  font-size: 1.4em;
+}
+
+.socialButtons .google {
+  background: #4285f4;
+  border: 1px solid #4285f4;
+  font-family: Roboto, sans-serif;
+}
+
+.socialButtons .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  margin: 0 auto 0.625rem;
+  height: 42px;
+}
+
+.socialButtons .facebook {
+  background: #4267b2;
+}
+
+.socialButtons small {
+  display: block;
+  margin: 0.25rem auto 0;
+}
+
+.icon,
+i {
+  font-family: icons;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: none;
+  display: inline-block;
+}
+
+.socialButtons .btn .icon {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1px;
+}
+
+.socialButtons .btn .google-icon {
+  background-color: #fff;
+}
+
+.small,
+small {
+  font-size: 0.85em;
+}
+
+.moodImage {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+}

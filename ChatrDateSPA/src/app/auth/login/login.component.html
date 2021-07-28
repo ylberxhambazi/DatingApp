@@ -1,0 +1,66 @@
+<section class="publicPage">
+  <main>
+    <app-header></app-header>
+    <div class="container">
+      <div class="publicAuthContent small loginFormWrapper">
+        <div class="cnt">
+          <div class="slogan">
+            <h3>Login</h3>
+          </div>
+          <form #loginForm="ngForm" class="form loginForm" method="post" (ngSubmit)="login()">
+            <div class="field text">
+              <label for="loginFormUsername_inline"> Email Address/Username </label>
+              <input
+                type="text"
+                name="username"
+                id="loginFormUsername_inline"
+                placeholder="Your email address"
+                required
+                [(ngModel)]="model.username"
+                autocomplete="username"
+              />
+            </div>
+            <div class="field text">
+              <label for="loginFormPassword_inline"> Password </label>
+              <input
+                type="password"
+                name="password"
+                id="loginFormPassword_inline"
+                placeholder="Your password"
+                required
+                [(ngModel)]="model.password"
+                autocomplete="current-password"
+              />
+            </div>
+            <div class="formButtons">
+              <a [routerLink]="['/auth/forgot-password']"> Forgot Password? </a>
+              <input
+                type="submit"
+                [disabled]="!loginForm.valid"
+                value="Login"
+                class="btn btnXL btnSpotColor mobileSubmit"
+              />
+            </div>
+            <div class="spacer">or</div>
+            <div class="socialButtons">
+              <button href="#" class="btn google glRegButton">
+                <div class="icon google-icon">
+                  <mat-icon svgIcon="google-icon" aria-hidden="false"></mat-icon>
+                </div>
+                <span> Google </span>
+              </button>
+              <button class="btn facebook fbRegButton">
+                <div class="icon facebook-icon">
+                  <mat-icon svgIcon="facebook-icon" aria-hidden="false"></mat-icon>
+                </div>
+                <span> Facebook </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="moodImage" style="background-image: url('./assets/images/public/auth-mood.jpg')"></div>
+    </div>
+  </main>
+  <app-footer></app-footer>
+</section>

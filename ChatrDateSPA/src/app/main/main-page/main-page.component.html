@@ -1,0 +1,21 @@
+<section class="mainCol">
+  <div class="hidden"></div>
+  <mat-grid-list [cols]="breakpoint" rowHeight="1:1.3" gutterSize="0.625rem" (window:resize)="onResize($event)">
+    <mat-grid-tile *ngFor="let profile of users">
+      <app-profile-teaser [profile]="profile" [type]="profile" class="profileTeaser"></app-profile-teaser>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</section>

@@ -1,0 +1,251 @@
+.publicPage main {
+  overflow: hidden;
+  min-height: 75vh;
+}
+
+.publicAuthContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  padding: 2rem 0;
+}
+
+.small,
+small {
+  font-size: 0.85em;
+}
+
+.publicAuthContent .cnt {
+  width: 90%;
+  background: #fff;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.publicAuthContent.small .cnt {
+  max-width: 28rem;
+}
+
+.publicAuthContent .slogan {
+  padding: 1.25rem;
+  background: #e01f4d;
+  color: #fff;
+}
+
+.publicAuthContent h3 {
+  font-weight: 400;
+  font-size: 1.76rem;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.publicPage .h3,
+.publicPage h3 {
+  font-size: 2.2rem;
+}
+
+.publicAuthContent.loginFormWrapper .loginForm {
+  margin-top: 1.25rem;
+}
+
+.publicAuthContent form {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.loginForm {
+  position: relative;
+  z-index: 99;
+}
+
+.form .label,
+.form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.form input[type='date'],
+.form input[type='email'],
+.form input[type='number'],
+.form input[type='password'],
+.form input[type='text'],
+.form select,
+.form textarea {
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding: 0.6rem 0.4rem;
+  border: 1px solid #d5d5d5;
+  background: #fff;
+  color: #888;
+  font-size: 1em;
+  outline: 0;
+  appearance: none;
+}
+
+.form input[type='date'],
+.form input[type='email'],
+.form input[type='number'],
+.form input[type='password'],
+.form input[type='text'],
+.form textarea {
+  padding: 0.6rem 0.4rem;
+}
+
+.form .formButtons {
+  display: flex;
+}
+
+.loginForm .formButtons {
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  color: #e01f4d;
+  text-decoration: none;
+  transition: color 240ms ease-in, background 240ms ease-in, border 240ms ease-in;
+}
+
+.loginForm .formButtons .btn {
+  text-transform: none;
+}
+
+.btnSpotColor {
+  color: #fff;
+  background-color: #62d182;
+  border: 1px solid #62d182;
+}
+
+.btnXL {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+.publicPage .spacer {
+  margin: 1rem 0 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.publicPage .spacer:before {
+  left: 0;
+}
+
+.publicPage .spacer:after {
+  right: 0;
+}
+
+.publicPage .spacer:after,
+.publicPage .spacer:before {
+  content: '';
+  width: 40%;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  background-color: #aeaeae;
+}
+
+.loginForm .socialButtons {
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 -0.0625rem;
+}
+
+.socialButtons .google {
+  background: #4285f4;
+  border: 1px solid #4285f4;
+  font-family: Roboto, sans-serif;
+}
+
+.loginForm .socialButtons .btn {
+  width: 100%;
+  flex: 1 1 100%;
+  margin: 0 0.0625rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.publicAuthContent.loginFormWrapper .btn {
+  width: auto;
+}
+
+.publicAuthContent.loginFormWrapper .socialButtons .btn {
+  margin-bottom: 0.625rem;
+}
+
+.publicAuthContent.loginFormWrapper .socialButtons {
+  display: block;
+}
+
+.socialButtons .google {
+  background: #4285f4;
+  border: 1px solid #4285f4;
+  font-family: Roboto, sans-serif;
+}
+
+.socialButtons .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  margin: 0 auto 0.625rem;
+  height: 42px;
+}
+
+.socialButtons .facebook {
+  background: #4267b2;
+}
+
+.socialButtons small {
+  display: block;
+  margin: 0.25rem auto 0;
+}
+
+.icon,
+i {
+  font-family: icons;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: none;
+  display: inline-block;
+}
+
+.socialButtons .btn .icon {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1px;
+}
+
+.socialButtons .btn .google-icon {
+  background-color: #fff;
+}
+
+.form .field {
+  margin-bottom: 1.25rem;
+}
+
+.moodImage {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+}

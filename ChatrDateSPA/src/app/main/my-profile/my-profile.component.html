@@ -1,0 +1,43 @@
+<section class="mainCol">
+  <section class="profilePage">
+    <a [routerLink]="['main']" class="backLink"> <mat-icon>keyboard_arrow_left</mat-icon>Back </a>
+
+    <div class="box profileHeader">
+      <article class="profileInfo">
+        <a href="#" class="imgWrp">
+          <img src="{{ photoUrl || './assets/images/profile/fallback-male.jpg' }}" alt="" />
+        </a>
+        <div class="intro">
+          <h1>{{ user.username }}</h1>
+          <h2>{{ user.age }} years old from {{ user.username }}</h2>
+        </div>
+      </article>
+      <div class="intro">
+        <h1>{{ user.username }}<span class="onlineStatus online">online</span></h1>
+        <h2>25 years old from {{ user.username }}</h2>
+      </div>
+    </div>
+    <div class="box profileFacts">
+      <h3>Facts</h3>
+      <div class="facts">
+        <div class="group">
+          <span class="dt">Location:</span>
+          <span class="dd">{{ user.city }}, {{ user?.country }}</span>
+          <span class="dt">Age:</span>
+          <span class="dd">{{ user?.age }}</span>
+          <span class="dt">Last Active:</span>
+          <span class="dd">{{ user?.lastActive | timeAgo }}</span>
+          <span class="dt">Member since:</span>
+          <span class="dd">{{ user?.created | date: 'mediumDate' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="stream-grid">
+      <div class="stream-child">
+        <div class="img">
+          <app-photo-editor [photos]="user.photos" (getProfilePhotoChange)="updateMainPhoto($event)"></app-photo-editor>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

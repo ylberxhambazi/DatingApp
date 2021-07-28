@@ -1,0 +1,49 @@
+/* pageFooter */
+
+.pageFooter {
+  z-index: 3;
+  background: #515151;
+  padding: 1.25rem 0;
+  text-align: center;
+  color: #bbb;
+  font-size: 0.9em;
+  position: sticky;
+}
+
+.pageFooter .container > * {
+  margin-bottom: 1.25rem;
+}
+
+.pageFooter .container > :last-child {
+  margin-bottom: 0;
+}
+
+.pageFooter .meta {
+  flex: 0 0 100%;
+}
+
+.pageFooter .meta a:first-child {
+  border-left: 0;
+}
+
+.pageFooter .meta a {
+  display: inline-block;
+  padding: 0.125rem 0.625rem;
+  border-left: 1px solid #bbb;
+  color: #bbb;
+}
+
+.pageFooter .meta a .mat-icon {
+  margin-right: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.pageFooter .address {
+  display: block;
+  margin-top: 0.625rem;
+}
+
+.pageFooter .copy {
+  display: block;
+  margin-top: 0.625rem;
+}

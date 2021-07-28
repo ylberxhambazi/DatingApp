@@ -1,0 +1,19 @@
+:host {
+  width: 100%;
+}
+
+.mainCol {
+  flex: 1 1 100%;
+  display: block;
+  margin-bottom: 2rem;
+  padding: 0rem;
+}
+
+.mainCol > * {
+  margin-bottom: 2rem;
+}
+
+.chatsStream li {
+  margin-bottom: 0.625rem;
+  position: relative;
+}

@@ -1,0 +1,22 @@
+:host {
+  width: 100%;
+}
+
+.mainCol > * {
+  margin-bottom: 1rem;
+}
+
+.mainCol {
+  flex: 1 1 100%;
+  padding: 0rem;
+}
+
+.publicTeaserList {
+  padding: 3.125rem 0.625rem;
+  background: #f7f7f7;
+  margin: 0;
+}
+
+.profileTeaser {
+  width: 100%;
+}

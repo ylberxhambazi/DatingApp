@@ -1,0 +1,55 @@
+<section class="mainCol">
+  <section class="profilePage">
+    <a [routerLink]="['main']" class="backLink"> <mat-icon>keyboard_arrow_left</mat-icon>Back </a>
+
+    <div class="box profileHeader">
+      <article class="profileInfo">
+        <a href="#" class="imgWrp">
+          <img src="{{ profile?.photoUrl }}" alt="" />
+        </a>
+        <div class="intro">
+          <h1>{{ profile?.username }} <span class="onlineStatus online">online</span></h1>
+          <h2>{{ profile?.age }} years old from {{ profile?.username }}</h2>
+        </div>
+      </article>
+      <nav class="profileMenu">
+        <button mat-button class="profileMenuBtn"><mat-icon>favorite_border</mat-icon><span>Like Her</span></button>
+        <button mat-button class="profileMenuBtn"><mat-icon>chat</mat-icon><span>Send Her a Message</span></button>
+        <button mat-button class="profileMenuBtn">
+          <mat-icon svgIcon="kiss-icon-white" aria-hidden="false" class="kiss-icon"></mat-icon>
+          <span>Send Her a Kiss</span>
+        </button>
+        <button mat-button class="profileMenuBtn"><mat-icon>star_outline</mat-icon><span>Add As Favorite</span></button>
+        <button mat-button class="profileMenuBtn discreet"><mat-icon>block</mat-icon><span>Block Her</span></button>
+      </nav>
+      <div class="intro">
+        <h1>{{ profile?.username }}<span class="onlineStatus online">online</span></h1>
+        <h2>{{ profile?.age }} years old from {{ profile?.username }}</h2>
+      </div>
+    </div>
+    <div class="box profileFacts">
+      <h3>Facts</h3>
+      <div class="facts">
+        <div class="group">
+          <span class="dt">Location:</span>
+          <span class="dd">{{ profile?.city }}, {{ profile?.country }}</span>
+          <span class="dt">Age:</span>
+          <span class="dd">{{ profile?.age }}</span>
+          <span class="dt">Last Active:</span>
+          <span class="dd">{{ profile?.lastActive | timeAgo }}</span>
+          <span class="dt">Member since:</span>
+          <span class="dd">{{ profile?.created | date: 'mediumDate' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="stream">
+      <mat-grid-list [cols]="breakpoint" rowHeight="1:1.08" gutterSize="0.625rem" (window:resize)="onResize($event)">
+        <mat-grid-tile>
+          <div class="img">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </section>
+</section>

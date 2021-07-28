@@ -1,0 +1,20 @@
+<div class="publicHeader">
+  <div class="container">
+    <a href="#" class="logo">
+      <img src="./assets/images/logo-grey.svg" alt="myDates" />
+      <span class="hidden"> myDates </span>
+    </a>
+    <button mat-icon-button color="accent" class="menu-button" aria-label="menu-icon" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="onLogin()">
+        <span>Login</span>
+      </button>
+      <button mat-menu-item (click)="onRegistration()">
+        <span>Registration</span>
+      </button>
+    </mat-menu>
+    <button mat-raised-button color="success" mat-button (click)="openLoginDialog()">Login</button>
+  </div>
+</div>

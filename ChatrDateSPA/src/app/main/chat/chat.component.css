@@ -1,0 +1,305 @@
+:host {
+  width: 100%;
+  display: flex;
+}
+
+.mainCol {
+  padding: 0 2.5rem;
+  margin-bottom: 2rem;
+  flex: 1 1 100%;
+}
+
+.chatStream {
+  height: calc(100vh - 5.625rem);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatStream header {
+  padding: 0.625rem;
+  text-align: center;
+  flex: 0 0;
+  background: #fff;
+  margin-bottom: 0.125rem;
+}
+
+.chatStream .h1,
+.chatStream h1 {
+  display: block;
+  color: #888;
+  margin-bottom: 0.25rem;
+  font-size: 1.4em;
+}
+
+.chatStream h5 {
+  font-weight: 400;
+  font-size: 0.9em;
+  margin-bottom: 0;
+}
+
+.btnS {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.chatStream article {
+  flex: 1 1;
+  position: relative;
+  background: #fff;
+  margin-bottom: 0.125rem;
+}
+
+.chatStream article ul {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem;
+  overflow: auto;
+  margin-bottom: 0;
+}
+
+.chatBubble {
+  position: relative;
+  padding: 0.5rem 0 0;
+  min-height: 2.125rem;
+  width: 83%;
+}
+
+.chatBubble.hasArrow {
+  padding-bottom: 0.5rem;
+}
+
+.chatBubble.in {
+  padding-left: 2.9375rem;
+}
+
+.chatBubble.out {
+  padding-right: 2.9375rem;
+  margin-left: 17%;
+}
+
+.chatBubble .cnt,
+.chatBubble .imgWrp {
+  -webkit-box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.2);
+}
+
+.chatBubble .imgWrp {
+  width: 2.125rem;
+  position: absolute;
+  bottom: 0.5rem;
+}
+
+.chatBubble.in .imgWrp {
+  left: 0;
+}
+
+.chatBubble.out .imgWrp {
+  right: 0;
+}
+
+.chatBubble .cnt {
+  position: relative;
+  padding: 0.5rem;
+  line-height: 1.4;
+}
+
+.chatBubble.in .cnt {
+  background: #f0f0f0;
+}
+
+.chatBubble.out .cnt {
+  background: #d9f7ff;
+}
+
+.chatBubble.hasArrow .cnt:before {
+  content: '';
+  position: absolute;
+  bottom: 0.5625rem;
+}
+
+.chatBubble.in .cnt:before {
+  border-style: solid;
+  height: 0;
+  width: 0;
+  border-color: transparent #f0f0f0 transparent transparent;
+  border-width: 0.25rem 1rem 0.25rem 0;
+  left: -0.5rem;
+}
+
+.chatBubble.out .cnt:before {
+  border-style: solid;
+  height: 0;
+  width: 0;
+  border-color: transparent transparent transparent #d9f7ff;
+  border-width: 0.25rem 0 0.25rem 1rem;
+  right: -0.5rem;
+}
+
+.small,
+small {
+  font-size: 0.85em;
+}
+
+.chatBubble p {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.chatStream footer {
+  padding: 0.125rem 0 0;
+  flex: 0 0;
+}
+
+.chatStream form {
+  display: flex;
+}
+
+.chatStream .textarea {
+  flex: 1 1 100%;
+  display: flex;
+  z-index: 1;
+}
+
+.chatStream textarea {
+  resize: none;
+  height: 100%;
+  padding: 0.6rem 0.4rem;
+  display: block;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding: 0.6rem 0.4rem;
+  border: 1px solid #d5d5d5;
+  background: #fff;
+  color: #888;
+  font-size: 1em;
+  outline: 0;
+  appearance: none;
+}
+
+.chatStream .textarea .btn {
+  width: 4rem;
+  overflow: unset;
+}
+
+.btnPrimary {
+  color: #fff;
+  background-color: #e01f4d;
+  border: 1px solid #e01f4d;
+}
+
+.chatStream .textarea .btn .mat-icon {
+  font-size: 2rem;
+}
+
+.chatStream .buttons {
+  padding-left: 0.125rem;
+  flex: 0 0 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #e3e3e3;
+}
+
+.chatStream .buttons .mat-button.icon-kiss {
+  min-width: 50px;
+  font-size: 0.7rem;
+  color: #e01f4d;
+  border: none;
+}
+
+.chatStream .chatProfileInfo {
+  display: none;
+}
+
+.chatProfileInfo {
+  background: #fff;
+  padding: 1.25rem 0;
+}
+
+.asideLeft {
+  order: -1;
+  flex-basis: 13.875rem;
+  width: 13.875rem;
+}
+
+.asideLeft .chatProfileInfo {
+  padding: 0;
+}
+
+.chatProfileInfo .imgWrp {
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.asideLeft .chatProfileInfo .cnt {
+  padding: 0 0.625rem;
+}
+
+.asideLeft .chatProfileInfo .h2 {
+  text-align: left;
+  margin-bottom: 0.25rem;
+  font-size: 1.7em;
+  font-weight: 200;
+  line-height: 1.2;
+}
+
+.ellipsis {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+.asideLeft .chatProfileInfo p {
+  padding: 0;
+}
+
+.asideLeft .profileFacts .facts {
+  padding: 0.625rem;
+}
+
+.chatProfileInfo .facts {
+  margin: 0;
+}
+
+.profileFacts .facts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.asideLeft .profileFacts .group {
+  flex-basis: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.profileFacts .group {
+  flex: 0 0 25%;
+  padding: 0.625rem;
+}
+
+.profileFacts .dt {
+  font-weight: 200;
+  font-size: 0.85em;
+  margin-bottom: 0.25rem;
+}
+
+.profileFacts .dd,
+.profileFacts .dt {
+  display: block;
+}
+
+@media screen and (min-width: 1024px) {
+  .hideAbove-1 {
+    display: none !important;
+  }
+}

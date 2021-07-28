@@ -1,0 +1,42 @@
+:host {
+  width: 100%;
+}
+
+.mainCol > * {
+  margin-bottom: 1rem;
+}
+
+.mainCol {
+  flex: 1 1 100%;
+  padding: 0rem;
+}
+
+.publicTeaserList {
+  padding: 3.125rem 0.625rem;
+  background: #f7f7f7;
+  margin: 0;
+}
+
+.profileTeaser {
+  width: 100%;
+}
+
+.alert.hint {
+  background-color: #e4f6ff;
+  color: #0099e4;
+}
+
+.alert:first-child {
+  margin-top: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.alert {
+  line-height: 1.4;
+  padding: 0.625rem;
+  margin: 0.25rem 0;
+  text-align: center;
+}

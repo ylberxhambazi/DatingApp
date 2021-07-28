@@ -1,0 +1,166 @@
+:host {
+  width: 100%;
+  display: flex;
+}
+
+.mainCol {
+  margin-bottom: 2rem;
+  flex: 1 1 100%;
+}
+
+.mainCol > * {
+  margin-bottom: 2rem;
+}
+
+.profilePage .backLink {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  line-height: 2rem;
+  margin-bottom: 0.625rem;
+}
+
+.profilePage .backLink .mat-icon {
+  font-size: 1.4em;
+  display: block;
+  float: left;
+}
+
+.profilePage .box {
+  background: #fff;
+  padding: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.profilePage .profileHeader {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding-right: 2.95rem;
+}
+
+.profilePage .profileInfo {
+  display: flex;
+  align-items: flex-start;
+}
+
+.profilePage .profileHeader article {
+  flex: 1 1 100%;
+}
+
+.profilePage .profileInfo .imgWrp {
+  flex: 0 0 15rem;
+}
+
+.profilePage .profileInfo .intro {
+  flex: 1 1 100%;
+  padding: 0 1.25rem;
+}
+
+.profilePage .profileHeader h1 {
+  margin-bottom: 0;
+}
+
+.profilePage .profileHeader h1 .onlineStatus {
+  padding-right: 1.2rem;
+}
+
+.profilePage .profileHeader h2 {
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+.profilePage .profileHeader h2:last-child {
+  margin-bottom: 0;
+}
+
+.profilePage .profileMenu {
+  flex: 0 0 25%;
+}
+
+.profilePage .profileMenu button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+  height: 3.2rem;
+  background: #e01f4d;
+  color: #fff;
+  font-weight: 200;
+  text-transform: uppercase;
+  border: 0.0625rem solid #fff;
+  overflow: hidden;
+}
+
+.profilePage .profileMenu button.discreet {
+  color: #888;
+  background: #dcdcdc;
+}
+
+.profilePage .profileMenu .mat-icon {
+  font-size: 1.6rem;
+  flex: 0 0 2.6rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin-right: 0.625rem;
+  transform: scale(1);
+  transition: transform 240ms ease-in;
+}
+
+.profilePage .profileHeader > .intro {
+  display: none;
+}
+
+.profilePage h3 {
+  margin: 0;
+}
+
+.profileFacts .facts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.625rem;
+}
+
+.profileFacts .group {
+  flex: 0 0 25%;
+  padding: 0.625rem;
+}
+
+.profileFacts .dt {
+  font-weight: 200;
+  font-size: 0.85em;
+  margin-bottom: 0.25rem;
+}
+
+.profileFacts .dd,
+.profileFacts .dt {
+  display: block;
+}
+
+.profilePage .stream-grid {
+  background: #fff;
+  padding: 1.25rem;
+}
+
+.profilePage .stream-grid span {
+  display: block;
+  padding: 0.625rem 1.25rem;
+}
+::ng-deep .mat-grid-tile .mat-figure {
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+.stream-grid {
+  display: flex;
+}
+.stream-child {
+  flex: 1;
+}
+
+@media screen and (max-width: 880px) {
+  .profilePage .profileHeader > .intro {
+    padding: 1.25rem;
+    display: block;
+  }
+}

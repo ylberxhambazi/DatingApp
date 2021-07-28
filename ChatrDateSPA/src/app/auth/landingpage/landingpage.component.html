@@ -1,0 +1,127 @@
+<section class="publicPage">
+  <main>
+    <app-header></app-header>
+    <div class="regWrapper">
+      <div class="container">
+        <div class="registrationContainer">
+          <div class="hero-form-container search-container">
+            <div class="hello-container">
+              <span class="logo">
+                <a href="#">
+                  <img src="./assets/images/logo-grey.svg" style="width: 16rem" alt="myDates" />
+                </a>
+              </span>
+              <h1>Chat or Date with your chatter</h1>
+              <p class="slogan">Join the dating site where you could meet anyone, anywhere!</p>
+            </div>
+            <form class="params-form current form" [formGroup]="regForm" (ngSubmit)="Submit()">
+              <div class="wrapper">
+                <div class="who-am-i">
+                  <div class="genders-wrapper">
+                    <div class="genders-field gender" data-name="gender" data-type="radiogroup">
+                      <span class="label-text">I am a:</span>
+                      <label>
+                        <input type="radio" name="gender" value="mal" />
+                        <mat-icon svgIcon="male-icon"></mat-icon>
+                      </label>
+                      <label>
+                        <input type="radio" name="gender" value="fem" />
+                        <mat-icon svgIcon="female-icon"></mat-icon>
+                      </label>
+                    </div>
+                    <div class="error-notification hidden">
+                      <span class="error-message gender-empty hidden">Select your gender</span>
+                    </div>
+                  </div>
+                  <div class="genders-wrapper">
+                    <div class="genders-field preferences" data-name="gender" data-type="radiogroup">
+                      <span class="label-text">Seeking a:</span>
+                      <label>
+                        <input type="radio" name="preferences-gender" value="mal" />
+                        <mat-icon svgIcon="male-icon"></mat-icon>
+                      </label>
+                      <label>
+                        <input type="radio" name="preferences-gender" value="fem" />
+                        <mat-icon svgIcon="female-icon"></mat-icon>
+                      </label>
+                    </div>
+                    <div class="error-notification hidden">
+                      <span class="error-message gender-empty hidden">Select gender preference</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="age-wrapper">
+                  <span class="min-age-container">
+                    <span class="label-text ages">Between ages: </span>
+                    <div class="field">
+                      <div class="customized-select">
+                        <select name="minage" required>
+                          <option *ngFor="let minAge of minAges" value="minAge">
+                            {{ minAge }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </span>
+                  <span class="max-age-container"
+                    ><span class="label-text">and</span>
+                    <div class="field">
+                      <div class="customized-select">
+                        <select name="maxage" required>
+                          <option *ngFor="let maxAge of maxAges" value="maxAge">
+                            {{ maxAge }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </span>
+                </div>
+                <div class="button-wrapper">
+                  <button class="action call-to-action large" type="submit" name="submit" value="sign-up">
+                    Grab a Chance
+                  </button>
+                </div>
+                <div class="external-wrapper">
+                  <div class="external-auth google-auth">
+                    <div class="google-wrapper">
+                      <button class="action google medium">
+                        <mat-icon svgIcon="google-icon" aria-hidden="false"></mat-icon>
+                        <span>Sign in via Google</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <p class="note">By clicking “Sign in via Google” you agree to our Terms and Privacy Policy</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="regMoodImage" style="background-image: url('./assets/images/public/regform-mood.jpg')"></div>
+    </div>
+    <div class="headlineStripe">
+      <div class="container">
+        <h1><span class="primary">ChatrDate</span> - Chat or Date with your Chatter!</h1>
+      </div>
+    </div>
+    <div class="publicTeaserList">
+      <mat-grid-list [cols]="breakpoint" rowHeight="3:4" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor="let publicProfile of publicProfiles">
+          <app-profile-teaser [profile]="publicProfile" [type]="ProfileType" class="profileTeaser public">
+          </app-profile-teaser>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div class="container">
+      <app-article
+        *ngFor="let article of artiles"
+        class="article imgRight"
+        [title]="article.title"
+        [content]="article.content"
+        [imgSrc]="article.imgSrc"
+        [imgPosition]="article.imgPosition"
+      ></app-article>
+    </div>
+  </main>
+  <app-footer></app-footer>
+</section>
