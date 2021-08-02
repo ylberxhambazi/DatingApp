@@ -17,13 +17,12 @@ import { ErrorInterceptorProvide } from './_services/error.interceptor'
 import { AuthGuard } from './_guards/auth.guard'
 import { UserService } from './_services/user.service'
 import { JwtModule } from '@auth0/angular-jwt'
-import { ProfileEditService } from './_resolvers/profile-edit.resolver'
+import { ProfileEditResolver } from './_resolvers/profile-edit.resolver'
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard'
 import { ProfileDetailResolver } from './_resolvers/profile-detail.resolver'
 import { NgxGalleryModule } from '@kolkov/ngx-gallery'
-import { ProfileListService } from './_resolvers/profile-list.resolver'
+import { ProfileListResolver } from './_resolvers/profile-list.resolver'
 import { TimeAgoPipe } from 'time-ago-pipe'
-import { FileUploadModule } from 'ng2-file-upload'
 import { RouterModule } from '@angular/router'
 
 export function tokenGetter() {
@@ -54,7 +53,7 @@ export function tokenGetter() {
       },
     })
   ],
-  providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditService, PreventUnsavedChanges, ProfileDetailResolver, ProfileListService],
+  providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditResolver, PreventUnsavedChanges, ProfileDetailResolver, ProfileListResolver],
   bootstrap: [AppComponent],
   entryComponents: [LoginDialogComponent],
 })

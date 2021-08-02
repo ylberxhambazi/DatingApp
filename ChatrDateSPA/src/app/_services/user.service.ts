@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginatedResult<User[]>> {
+  getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>> {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
     let params = new HttpParams();
 
@@ -29,13 +29,13 @@ export class UserService {
       params = params.append('gender', userParams.gender);
     }
 
-    if (likesParam === 'Likers') {
-      params = params.append('Likers', 'true');
-    }
+    // if (likesParam === 'Likers') {
+    //   params = params.append('Likers', 'true');
+    // }
 
-    if (likesParam === 'Likees') {
-      params = params.append('Likees', 'true');
-    }
+    // if (likesParam === 'Likees') {
+    //   params = params.append('Likees', 'true');
+    // }
 
     return this.http.get<User[]>(this.baseUrl + 'Users', { observe: 'response', params }).pipe(
       map(response => {
@@ -47,16 +47,10 @@ export class UserService {
       })
     );
   }
-  // getSamples(): Observable<Sample[]> {
-  //   return this.http.get<Sample[]>(this.baseUrl + 'Samples')
-  // }
 
   getUser(id): Observable<User> {
     return this.http.get<User>(this.baseUrl + 'Users/' + id)
   }
-  // getSample(memberId): Observable<Sample> {
-  //   return this.http.get<Sample>(this.baseUrl + 'Samples' + memberId)
-  // }
 
   updateUser(id: number, user: User) {
     return this.http.put(this.baseUrl + 'Users/' + id, user)

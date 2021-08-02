@@ -7,7 +7,7 @@ import { AuthService } from '../_services/auth.service'
 import { UserService } from '../_services/user.service'
 
 @Injectable()
-export class ProfileEditService implements Resolve<User> {
+export class ProfileEditResolver implements Resolve<User> {
   constructor(private userService: UserService, private authService: AuthService, private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<User> {

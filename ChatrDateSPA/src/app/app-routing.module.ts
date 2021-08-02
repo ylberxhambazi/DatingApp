@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from './_guards/auth.guard'
-import { ProfileListService } from './_resolvers/profile-list.resolver'
+import { ProfileListResolver } from './_resolvers/profile-list.resolver'
 
 const routes: Routes = [
   {
@@ -16,8 +16,8 @@ const routes: Routes = [
       {
         path: 'main',
         loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
-        resolve: { users: ProfileListService }
-      },
+        resolve: { users: ProfileListResolver }
+      }
     ],
   },
   { path: '**', redirectTo: '/auth', pathMatch: 'full' },

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { ProfileTeaserComponent } from '../shared/ui/card/profile-teaser/profile-teaser.component'
 import { PreventUnsavedChanges } from '../_guards/prevent-unsaved-changes.guard'
-import { ProfileEditService } from '../_resolvers/profile-edit.resolver'
+import { ProfileEditResolver } from '../_resolvers/profile-edit.resolver'
 import { ProfileDetailResolver } from '../_resolvers/profile-detail.resolver'
 import { ChatComponent } from './chat/chat.component'
 import { ChatsComponent } from './chats/chats.component'
@@ -52,7 +51,7 @@ const routes: Routes = [
       {
         path: 'my-profile',
         component: MyProfileComponent,
-        resolve: { user: ProfileEditService },
+        resolve: { user: ProfileEditResolver },
         canDeactivate: [PreventUnsavedChanges],
       },
       {
@@ -65,7 +64,7 @@ const routes: Routes = [
         component: MainPageComponent,
         pathMatch: 'full'
       },
-    ],
+    ]
   },
 ]
 

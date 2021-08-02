@@ -12,6 +12,7 @@ namespace ChatrDate.Helpers
         public int TotalPages { get; set; }
         public int PageSize { get; set; }
         public int TotalCount { get; set; }
+        
         public PagedList(List<T> items, int count, int pageNumber, int pageSize)
         {
             TotalCount = count;
