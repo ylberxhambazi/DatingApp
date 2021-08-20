@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core'
+import { MatIconRegistry } from '@angular/material/icon'
+import { DomSanitizer } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
 import { PaginatedResult, Pagination } from 'src/app/_models/pagination'
 import { User } from 'src/app/_models/user'
+import { AuthService } from 'src/app/_services/auth.service'
 import { UserService } from 'src/app/_services/user.service'
 
 @Component({
@@ -37,12 +40,28 @@ export class MainPageComponent implements OnInit {
   //   { name: "abc24", image: ["abc8.jpg"], online: true, age: 20, address: "add1" },
   // ]
   users: User[]
+  user: User = JSON.parse(localStorage.getItem('user'));
+  genderList = [{ value: 'male', name: 'Males' }, { value: 'female', name: 'Females' }];
+  userParams: any = {};
   pagination: Pagination;
   ProfileType: string = 'private'
   breakpoint: number
-  parentValueSetter: []
+  likesParam: string
 
-  constructor(private userServices: UserService, private route: ActivatedRoute) { }
+  constructor(private userServices: UserService, private route: ActivatedRoute, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private authService: AuthService) {
+    this.matIconRegistry.addSvgIcon(
+      'kiss-icon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/kiss-black.svg')
+    )
+    this.matIconRegistry.addSvgIcon(
+      'male',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/male.svg')
+    )
+    this.matIconRegistry.addSvgIcon(
+      'female',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/female.svg')
+    )
+  }
 
   ngOnInit(): void {
     this.breakpoint = 4
@@ -51,12 +70,22 @@ export class MainPageComponent implements OnInit {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     })
+
+    this.likesParam = 'Likers';
+
+    this.userParams.gender = this.user?.gender === 'female' ? 'male' : 'female';
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 99;
+
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      this.authService.currentUser = user;
+    }
   }
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadUsers();
-    console.log(this.loadUsers())
   }
 
   onResize(event) {
@@ -73,8 +102,12 @@ export class MainPageComponent implements OnInit {
     }
   }
 
+  changeGender(gender) {
+    this.userParams.gender = gender;
+  }
+
   loadUsers() {
-    this.userServices.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe(
+    this.userServices.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams, this.likesParam).subscribe(
       (res: PaginatedResult<User[]>) => {
         this.users = res.result;
         this.pagination = res.pagination;

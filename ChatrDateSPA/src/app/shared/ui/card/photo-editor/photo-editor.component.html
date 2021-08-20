@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-2" *ngFor="let photo of photos">
+  <div class="col" *ngFor="let photo of photos">
     <img src="{{ photo.url || './assets/images/profile/fallback-male.jpg' }}" class="img-thumbnail p-1" alt="" />
     <div class="text-center">
       <button
@@ -16,7 +16,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col">
     <h3>Add Photos</h3>
     <div
       ng2FileDrop

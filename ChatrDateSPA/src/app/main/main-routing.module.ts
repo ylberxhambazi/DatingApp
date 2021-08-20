@@ -14,6 +14,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component'
 import { ProfileComponent } from './profile/profile.component'
 import { SearchComponent } from './search/search.component'
 import { VisitorsComponent } from './visitors/visitors.component'
+import { ListLikeResolver } from '../_resolvers/list-like.resolver'
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
       {
         path: 'likes',
         component: LikesComponent,
+        resolve: { users: ListLikeResolver }
       },
       {
         path: 'favorites',
@@ -49,7 +51,7 @@ const routes: Routes = [
         component: SearchComponent,
       },
       {
-        path: 'my-profile',
+        path: 'my-profile/edit',
         component: MyProfileComponent,
         resolve: { user: ProfileEditResolver },
         canDeactivate: [PreventUnsavedChanges],

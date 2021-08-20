@@ -13,7 +13,7 @@ export class ProfileEditResolver implements Resolve<User> {
   resolve(route: ActivatedRouteSnapshot): Observable<User> {
     return this.userService.getUser(this.authService.decodedToken.nameid).pipe(
       catchError((error) => {
-        error('Problem retrieving data')
+        error('Problem retrieving your data')
         this.router.navigate(['profile'])
         return of(null)
       })

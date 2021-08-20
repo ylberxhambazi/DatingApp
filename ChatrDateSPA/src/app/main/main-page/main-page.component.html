@@ -1,4 +1,69 @@
 <section class="mainCol">
+  <aside class="asideTop fixed">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Search </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon>search</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form #searchForm="ngForm" (ngSubmit)="loadUsers()" class="asideTopForm" autocomplete="off">
+        <div class="search-wrap">
+          <div class="genders-wrapper">
+            <div class="genders-field preferences">
+              <span class="label-text">I'm looking for</span>
+              <div>
+                <label *ngFor="let gender of genderList">
+                  <input
+                    id="gender"
+                    type="radio"
+                    name="gender"
+                    alt="gender.name"
+                    [value]="gender.value"
+                    (click)="changeGender(gender.value)"
+                  />
+                  <mat-icon [svgIcon]="gender.value"></mat-icon>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="select-range">
+            <div class="select-range-label">
+              <span class="label-text">Age Range</span>
+              <div class="formFields">
+                <input type="number" id="minAge" [(ngModel)]="userParams.minAge" name="minAge" />
+                <input type="number" id="maxAge" [(ngModel)]="userParams.maxAge" name="maxAge" />
+              </div>
+            </div>
+          </div>
+          <div class="field location">
+            <label for="field-city"> City </label>
+            <div class="group">
+              <div class="places-search" id="locationWrapper">
+                <input
+                  name="city"
+                  id="field-city"
+                  placeholder="City"
+                  size="1"
+                  autocomplete="off"
+                  type="text"
+                  value="Thái Bình"
+                  [disabled]="false"
+                />
+                <div class="places" id="places"></div>
+              </div>
+              <button mat-icon-button class="btnPrimaryInverted" aria-label="Show my location">
+                <mat-icon>my_location</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="search-button">
+            <button mat-raised-button color="accent" type="submit">Search</button>
+          </div>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </aside>
   <div class="hidden"></div>
   <mat-grid-list [cols]="breakpoint" rowHeight="1:1.3" gutterSize="0.625rem" (window:resize)="onResize($event)">
     <mat-grid-tile *ngFor="let profile of users">

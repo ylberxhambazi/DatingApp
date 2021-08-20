@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
-import { TimeAgoPipe } from 'time-ago-pipe';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery'
 import { User } from 'src/app/_models/user'
 import { UserService } from 'src/app/_services/user.service'

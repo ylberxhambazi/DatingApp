@@ -7,30 +7,30 @@ export interface User {
   email: string
   age: number
   gender: string
-  seek_gender?: string
-  sexual_orientation?: string
+  seekGender?: string
+  sexualOrientation?: string
   created: Date
   lastActive: Date
-  age_from?: number
-  age_to?: number
+  ageFrom?: number
+  ageTo?: number
   headline?: string
   description?: string
   country: string
   state?: string
   city: string
   zip?: string
-  material_status?: string
-  looking_for?: string
+  materialStatus?: string
+  lookingFor?: string
   occupation?: string
   language?: string
   race?: string
   religion?: string
   height?: string
-  body_type?: string
-  eye_color?: string
-  hair_color?: string
-  want_children?: string
-  have_children?: string
+  bodyType?: string
+  eyeColor?: string
+  hairColor?: string
+  wantChildren?: string
+  haveChildren?: string
   education?: string
   smoke?: string
   drink?: string

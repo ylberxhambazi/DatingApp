@@ -12,21 +12,21 @@
       </h4>
       <span class="small">{{ profile.city }}</span>
     </div>
-    <div class="menu">
-      <a
-        mat-icon-button
-        aria-label="Write a message"
-        [routerLink]="['/main/chats/chat/new/123']"
-        class="btnS btnPrimaryInverted"
-      >
-        <mat-icon>message</mat-icon>
-      </a>
-      <button mat-icon-button (click)="sendLike(profile.id)" class="btnS btnPrimaryInverted">
-        <mat-icon>favorite_border</mat-icon>
-      </button>
-      <button mat-icon-button aria-label="Send her a kiss" class="btnS btnPrimaryInverted">
-        <mat-icon svgIcon="kiss-icon" aria-hidden="false" class="kiss-icon"></mat-icon>
-      </button>
-    </div>
+  </div>
+  <div class="menu">
+    <a
+      mat-icon-button
+      aria-label="Write a message"
+      [routerLink]="['/main/chats/chat/new/123']"
+      class="btnS btnPrimaryInverted"
+    >
+      <mat-icon>message</mat-icon>
+    </a>
+    <button mat-icon-button (click)="sendLike(profile.id)" class="btnS btnPrimaryInverted">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Send her a kiss" (click)="sendLike(profile.id)" class="btnS btnPrimaryInverted">
+      <mat-icon svgIcon="kiss-icon" aria-hidden="false" class="kiss-icon"></mat-icon>
+    </button>
   </div>
 </div>

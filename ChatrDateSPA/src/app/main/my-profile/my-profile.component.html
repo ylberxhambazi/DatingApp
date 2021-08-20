@@ -1,15 +1,21 @@
 <section class="mainCol">
   <section class="profilePage">
-    <a [routerLink]="['main']" class="backLink"> <mat-icon>keyboard_arrow_left</mat-icon>Back </a>
+    <a [routerLink]="['/main']" class="backLink"> <mat-icon>keyboard_arrow_left</mat-icon>Back </a>
 
     <div class="box profileHeader">
       <article class="profileInfo">
         <a href="#" class="imgWrp">
           <img src="{{ photoUrl || './assets/images/profile/fallback-male.jpg' }}" alt="" />
         </a>
-        <div class="intro">
-          <h1>{{ user.username }}</h1>
-          <h2>{{ user.age }} years old from {{ user.username }}</h2>
+        <div class="intro-container">
+          <div class="intro">
+            <h1>{{ user.username }}</h1>
+            <h2>{{ user.age }} years old from {{ user.city }}</h2>
+          </div>
+          <div class="intro">
+            <h1>About me</h1>
+            <p>About yourself</p>
+          </div>
         </div>
       </article>
       <div class="intro">
@@ -18,21 +24,346 @@
       </div>
     </div>
     <div class="box profileFacts">
-      <h3>Facts</h3>
-      <div class="facts">
-        <div class="group">
-          <span class="dt">Location:</span>
-          <span class="dd">{{ user.city }}, {{ user?.country }}</span>
-          <span class="dt">Age:</span>
-          <span class="dd">{{ user?.age }}</span>
-          <span class="dt">Last Active:</span>
-          <span class="dd">{{ user?.lastActive | timeAgo }}</span>
-          <span class="dt">Member since:</span>
-          <span class="dd">{{ user?.created | date: 'mediumDate' }}</span>
+      <div class="mainColumn">
+        <h3>Hard Facts</h3>
+        <div class="button-container">
+          <button (click)="toggle()" class="btnEdit">{{ editSaved }}</button>
         </div>
       </div>
+      <div class="facts" *ngIf="show">
+        <div class="group">
+          <span class="dt">Looking for:</span>
+          <span class="dd">{{ user?.lookingFor === user?.lookingFor ? user?.lookingFor : 'No Answer' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Body:</span>
+          <span class="dd">{{ user?.bodyType === user?.bodyType ? user?.bodyType : 'No Answer' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Education:</span>
+          <span class="dd">{{ user?.education === user?.education ? user?.education : 'No Answer' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Interested in:</span>
+          <span class="dd">{{ user?.interests === user?.interests ? user?.interests : 'No Answer' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Kids:</span>
+          <span class="dd">{{ user?.haveChildren === user?.haveChildren ? user?.haveChildren : 'No Answer' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Profession:</span>
+          <span class="dd">{{ user?.occupation === user?.occupation ? user?.occupation : 'No Answer' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Relationship status:</span>
+          <span class="dd">{{
+            user?.sexualOrientation === user?.sexualOrientation ? user?.sexualOrientation : 'No Answer'
+          }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Smoker:</span>
+          <span class="dd">{{ user?.smoke === user?.smoke ? user?.smoke : 'No Answer' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Language:</span>
+          <span class="dd">{{ user?.language === user?.language ? user?.language : 'No Answer' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Height:</span>
+          <span class="dd">{{ user?.height === user?.height ? user?.height : '0 cm' }}</span>
+        </div>
+        <div class="group">
+          <span class="dt">Alcohol:</span>
+          <span class="dd">{{ user?.drink === user?.drink ? user?.drink : 'No Answer' }}</span>
+        </div>
+      </div>
+      <form #editFacts="ngForm" id="editFacts" (ngSubmit)="updateUser()">
+        <div class="hidden-fields" *ngIf="!show">
+          <div class="field select single">
+            <span class="dt">Looking for:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.lookingFor" name="user?.lookingFor">
+                <option value="na" selected>No Answer</option>
+                <option value="women">Women</option>
+                <option value="men">Men</option>
+                <option value="any">Any</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Interested in:</span>
+            <div class="selectedButtons">
+              <div *ngFor="let webInterest of interests; let i = index">
+                <input
+                  [(ngModel)]="user.interests"
+                  type="checkbox"
+                  [id]="webInterest.id"
+                  [value]="webInterest.value"
+                  (change)="onCheckboxChange($event)"
+                  [name]="webInterest.id"
+                  class="form-control"
+                />
+                <label [for]="webInterest.id"><i class="fa fa-check"></i>{{ webInterest.name }}</label>
+              </div>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Relationship status:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.sexualOrientation" [name]="user?.sexualOrientation">
+                <option value="na">No Answer</option>
+                <option value="single">Single</option>
+                <option value="relationship">Relationship</option>
+                <option value="openRelationship">Open relationship</option>
+                <option value="married">Married</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Height:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.height" [name]="user?.height">
+                <option value="100">100 cm</option>
+                <option value="101">101 cm</option>
+                <option value="102">102 cm</option>
+                <option value="103">103 cm</option>
+                <option value="104">104 cm</option>
+                <option value="105">105 cm</option>
+                <option value="106">106 cm</option>
+                <option value="107">107 cm</option>
+                <option value="108">108 cm</option>
+                <option value="109">109 cm</option>
+                <option value="110">110 cm</option>
+                <option value="111">111 cm</option>
+                <option value="112">112 cm</option>
+                <option value="113">113 cm</option>
+                <option value="114">114 cm</option>
+                <option value="115">115 cm</option>
+                <option value="116">116 cm</option>
+                <option value="117">117 cm</option>
+                <option value="118">118 cm</option>
+                <option value="119">119 cm</option>
+                <option value="120">120 cm</option>
+                <option value="121">121 cm</option>
+                <option value="122">122 cm</option>
+                <option value="123">123 cm</option>
+                <option value="124">124 cm</option>
+                <option value="125">125 cm</option>
+                <option value="126">126 cm</option>
+                <option value="127">127 cm</option>
+                <option value="128">128 cm</option>
+                <option value="129">129 cm</option>
+                <option value="130">130 cm</option>
+                <option value="131">131 cm</option>
+                <option value="132">132 cm</option>
+                <option value="133">133 cm</option>
+                <option value="134">134 cm</option>
+                <option value="135">135 cm</option>
+                <option value="136">136 cm</option>
+                <option value="137">137 cm</option>
+                <option value="138">138 cm</option>
+                <option value="139">139 cm</option>
+                <option value="140">140 cm</option>
+                <option value="141">141 cm</option>
+                <option value="142">142 cm</option>
+                <option value="143">143 cm</option>
+                <option value="144">144 cm</option>
+                <option value="145">145 cm</option>
+                <option value="146">146 cm</option>
+                <option value="147">147 cm</option>
+                <option value="148">148 cm</option>
+                <option value="149">149 cm</option>
+                <option value="150">150 cm</option>
+                <option value="151">151 cm</option>
+                <option value="152">152 cm</option>
+                <option value="153">153 cm</option>
+                <option value="154">154 cm</option>
+                <option value="155">155 cm</option>
+                <option value="156">156 cm</option>
+                <option value="157">157 cm</option>
+                <option value="158">158 cm</option>
+                <option value="159">159 cm</option>
+                <option value="160">160 cm</option>
+                <option value="161">161 cm</option>
+                <option value="162">162 cm</option>
+                <option value="163">163 cm</option>
+                <option value="164">164 cm</option>
+                <option value="165">165 cm</option>
+                <option value="166">166 cm</option>
+                <option value="167">167 cm</option>
+                <option value="168">168 cm</option>
+                <option value="169">169 cm</option>
+                <option value="170">170 cm</option>
+                <option value="171">171 cm</option>
+                <option value="172">172 cm</option>
+                <option value="173">173 cm</option>
+                <option value="174">174 cm</option>
+                <option value="175">175 cm</option>
+                <option value="176">176 cm</option>
+                <option value="177">177 cm</option>
+                <option value="178">178 cm</option>
+                <option value="179">179 cm</option>
+                <option value="180">180 cm</option>
+                <option value="181">181 cm</option>
+                <option value="182">182 cm</option>
+                <option value="183">183 cm</option>
+                <option value="184">184 cm</option>
+                <option value="185">185 cm</option>
+                <option value="186">186 cm</option>
+                <option value="187">187 cm</option>
+                <option value="188">188 cm</option>
+                <option value="189">189 cm</option>
+                <option value="190">190 cm</option>
+                <option value="191">191 cm</option>
+                <option value="192">192 cm</option>
+                <option value="193">193 cm</option>
+                <option value="194">194 cm</option>
+                <option value="195">195 cm</option>
+                <option value="196">196 cm</option>
+                <option value="197">197 cm</option>
+                <option value="198">198 cm</option>
+                <option value="199">199 cm</option>
+                <option value="200">200 cm</option>
+                <option value="201">201 cm</option>
+                <option value="202">202 cm</option>
+                <option value="203">203 cm</option>
+                <option value="204">204 cm</option>
+                <option value="205">205 cm</option>
+                <option value="206">206 cm</option>
+                <option value="207">207 cm</option>
+                <option value="208">208 cm</option>
+                <option value="209">209 cm</option>
+                <option value="210">210 cm</option>
+                <option value="211">211 cm</option>
+                <option value="212">212 cm</option>
+                <option value="213">213 cm</option>
+                <option value="214">214 cm</option>
+                <option value="215">215 cm</option>
+                <option value="216">216 cm</option>
+                <option value="217">217 cm</option>
+                <option value="218">218 cm</option>
+                <option value="219">219 cm</option>
+                <option value="220">220 cm</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Body:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.bodyType" [name]="user?.bodyType">
+                <option value="na">No Answer</option>
+                <option value="slim">Slim</option>
+                <option value="normal">Normal</option>
+                <option value="athletic">Athletic</option>
+                <option value="muscular">Muscular</option>
+                <option value="chubby">Chubby</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Kids:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.haveChildren" [name]="user?.haveChildren">
+                <option value="na">No Answer</option>
+                <option value="noKids">No Kids</option>
+                <option value="oneKid">One Kid</option>
+                <option value="twoKids">Two Kids</option>
+                <option value="threeKids">Three Kids</option>
+                <option value="moreThenThreeKids">More then Three Kids</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Smoker:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.smoke" [name]="user?.smoke">
+                <option value="na">No Answer</option>
+                <option value="nonSmoker">Non-Smoker</option>
+                <option value="exSmoker">Ex-Smoker</option>
+                <option value="occasionalSmoker">Occasional Smoker</option>
+                <option value="regularSmoker">Regular Smoker</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Alcohol:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.drink" [name]="user?.drink">
+                <option value="na">No Answer</option>
+                <option value="never">Never</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="gladly">Gladly</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Education:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.education" [name]="user?.education">
+                <option value="na">No Answer</option>
+                <option value="notFinished">Not finished</option>
+                <option value="apprenticeship">Apprenticeship</option>
+                <option value="secondarySchool">Secondary school</option>
+                <option value="highSchool">High school</option>
+                <option value="highSchoolDiploma">High school diploma</option>
+                <option value="collegeUniversity">College/University</option>
+                <option value="postgraduateDegree">Postgraduate degree</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Profession:</span>
+            <div class="wrp">
+              <select matNativeControl [(ngModel)]="user.occupation" [name]="user?.occupation">
+                <option value="na">No Answer</option>
+                <option value="seekingWork">Seeking work</option>
+                <option value="trainee">Trainee</option>
+                <option value="employee">Employee</option>
+                <option value="publicOfficial">Public Official</option>
+                <option value="housewife">Housewife</option>
+                <option value="retired">Retired</option>
+                <option value="selfEmployed">Self-employed</option>
+                <option value="student">Student</option>
+              </select>
+            </div>
+          </div>
+          <div class="field select single">
+            <span class="dt">Language:</span>
+            <input type="text" class="form-control" name="language" [(ngModel)]="user.language" />
+          </div>
+          <div class="field formButtons">
+            <button>Abort</button>
+            <button [disabled]="!editFacts.dirty" form="editFacts">Save</button>
+          </div>
+        </div>
+      </form>
     </div>
     <div class="stream-grid">
+      <div class="stream-child">
+        <div class="mainPersonalInformation">
+          <h3>Personal Information</h3>
+          <div class="button-container">
+            <button (click)="togglePersonalInformation()" class="btnEdit">{{ editSaved }}</button>
+          </div>
+        </div>
+        <div class="personal-information" *ngIf="showPersonalInformation">
+          <div class="group">
+            <span class="dt">Email*</span>
+            <span class="dd">{{ user.email }}</span>
+          </div>
+        </div>
+        <div class="hidden-personal-information" *ngIf="!showPersonalInformation">
+          <form #editHardFacts="ngForm" id="editHardFacts" (ngSubmit)="updateUser()">
+            <div class="field input single">
+              <span class="dt">Email:</span>
+              <div class="wrp">
+                <input type="text" class="form-control" [(ngModel)]="user.email" [name]="user.email" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
       <div class="stream-child">
         <div class="img">
           <app-photo-editor [photos]="user.photos" (getProfilePhotoChange)="updateMainPhoto($event)"></app-photo-editor>

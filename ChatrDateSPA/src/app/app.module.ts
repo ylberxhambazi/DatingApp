@@ -22,8 +22,8 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard'
 import { ProfileDetailResolver } from './_resolvers/profile-detail.resolver'
 import { NgxGalleryModule } from '@kolkov/ngx-gallery'
 import { ProfileListResolver } from './_resolvers/profile-list.resolver'
-import { TimeAgoPipe } from 'time-ago-pipe'
 import { RouterModule } from '@angular/router'
+import { ListLikeResolver } from './_resolvers/list-like.resolver'
 
 export function tokenGetter() {
   return localStorage.getItem('token')
@@ -53,7 +53,7 @@ export function tokenGetter() {
       },
     })
   ],
-  providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditResolver, PreventUnsavedChanges, ProfileDetailResolver, ProfileListResolver],
+  providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditResolver, PreventUnsavedChanges, ProfileDetailResolver, ProfileListResolver, ListLikeResolver],
   bootstrap: [AppComponent],
   entryComponents: [LoginDialogComponent],
 })

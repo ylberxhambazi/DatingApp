@@ -145,7 +145,7 @@
 
 .profilePage .stream-grid span {
   display: block;
-  padding: 0.625rem 1.25rem;
+  padding: 0.625rem;
 }
 ::ng-deep .mat-grid-tile .mat-figure {
   justify-content: flex-start !important;
@@ -153,9 +153,184 @@
 }
 .stream-grid {
   display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 30%;
+  background: transparent !important;
+  padding: 0 !important;
 }
 .stream-child {
-  flex: 1;
+  width: 30%;
+}
+
+.stream-grid > div {
+  padding: 0.625rem;
+  background: white;
+  margin-right: 0.25rem;
+}
+.stream-child:last-child {
+  margin-right: 0 !important;
+}
+
+.mainColumn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.intro:first-child {
+  margin-bottom: 3.5rem;
+}
+.hidden-fields {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -0.625rem;
+  margin-right: -0.625rem;
+  margin-left: -0.625rem;
+}
+
+.field {
+  width: 100%;
+}
+.hidden-fields > div {
+  flex: 50%;
+  padding: 0.625rem;
+}
+.hidden-fields select {
+  border-color: #fff;
+  padding: 0.48rem 0.4rem;
+}
+.wrp {
+  border: 1px solid #d5d5d5;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+.select .wrp:after {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.8rem;
+  z-index: 3;
+  border-style: solid;
+  height: 0;
+  width: 0;
+  border-color: #888 transparent transparent;
+  border-width: 0.4rem 0.4rem 0;
+}
+.select .wrp:after,
+.select .wrp:before {
+  content: '';
+  pointer-events: none;
+  cursor: pointer;
+  opacity: 1;
+  -webkit-transition: opacity 240ms ease-in;
+  transition: opacity 240ms ease-in;
+}
+.select .wrp:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 1.6rem;
+  border-left: 1px solid #f2f2f2;
+  background: #fff;
+  -webkit-box-shadow: -4px 0 2px #fff;
+  box-shadow: -4px 0 2px #fff;
+}
+.select .wrp:after,
+.select .wrp:before {
+  content: '';
+  pointer-events: none;
+  cursor: pointer;
+  opacity: 1;
+  -webkit-transition: opacity 240ms ease-in;
+  transition: opacity 240ms ease-in;
+}
+.select.single select {
+  width: calc(100% + 40px);
+}
+.select .wrp select {
+  background: 0 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.selectedButtons {
+  display: flex;
+  justify-content: stretch;
+}
+.hidden-fields.selectedButtons {
+  flex-wrap: wrap;
+}
+.selectedButtons input {
+  display: none;
+}
+.selectedButtons label {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-right: 1px;
+  margin-bottom: 0;
+  border: 0;
+  padding: 0.4rem;
+  color: #fff;
+  text-align: center;
+  background-color: #aeaeae;
+  -webkit-transition: color 240ms ease-in, background-color 240ms ease-in;
+  transition: color 240ms ease-in, background-color 240ms ease-in;
+  font-size: 1em;
+  line-height: 24px;
+}
+
+.selectedButtons i {
+  opacity: 0;
+  width: 0;
+  -webkit-transition: all 240ms ease-in;
+  transition: all 240ms ease-in;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+.selectedButtons input:checked + label {
+  background-color: #e01f4d;
+}
+
+.selectedButtons input:checked + label i {
+  opacity: 1;
+  width: 2rem;
+}
+
+.mainPersonalInformation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.personal-information {
+  margin: -0.625rem;
+}
+
+.personal-information .group {
+  flex: 0 0 25%;
+  padding: 0.625rem;
 }
 
 @media screen and (max-width: 880px) {

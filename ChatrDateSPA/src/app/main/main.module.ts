@@ -27,11 +27,11 @@ import { ChatComponent } from './chat/chat.component'
 import { ProfileComponent } from './profile/profile.component'
 import { HammerModule } from '@angular/platform-browser'
 import { NgxGalleryModule } from '@kolkov/ngx-gallery'
-import { TimeAgoPipe } from 'time-ago-pipe'
 import { FileUploadModule } from 'ng2-file-upload'
 import { PhotoEditorComponent } from '../shared/ui/card/photo-editor/photo-editor.component'
-// import { TimeAgoExtendsPipe } from '../_services/TimeAgoExtendsPipe.pipe'
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { DateAgoPipe } from '../_pipes/DateAgoPipe.pipe'
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -46,7 +46,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     ChatComponent,
     ProfileComponent,
     PhotoEditorComponent,
-    TimeAgoPipe
+    DateAgoPipe
   ],
   imports: [
     CommonModule,
@@ -65,6 +65,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     MatDividerModule,
     FileUploadModule,
     PaginationModule.forRoot()
-  ],
+  ]
 })
 export class MainModule { }

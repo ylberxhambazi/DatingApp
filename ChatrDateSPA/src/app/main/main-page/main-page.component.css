@@ -20,3 +20,161 @@
 .profileTeaser {
   width: 100%;
 }
+
+.asideTop .mat-expansion-panel {
+  width: 100%;
+}
+
+.asideTop .mat-expansion-panel-header-description {
+  justify-content: flex-end;
+}
+
+.asideTop .genders-wrapper .genders-field {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.asideTop .genders-wrapper .genders-field .mat-icon {
+  width: 36px;
+  height: 36px;
+}
+
+::ng-deep .asideTop .genders-wrapper .genders-field .mat-icon svg {
+  color: #e7e7e7;
+}
+
+::ng-deep .asideTop .genders-wrapper .genders-field input[value='male']:checked + mat-icon svg {
+  color: #0d8fba;
+}
+
+::ng-deep .asideTop .genders-wrapper .genders-field input[value='female']:checked + mat-icon svg {
+  color: #e6282e;
+}
+
+.asideTop .search-wrap {
+  display: flex;
+  justify-content: space-around;
+}
+
+.asideTop .genders-wrapper .genders-field label {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.asideTop .genders-wrapper .genders-field input {
+  display: none;
+}
+
+.select-range {
+  display: flex;
+  /* padding-right: 11rem; */
+}
+
+.select-range .select-range-label {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-range .select-range-label .label-text {
+  margin-left: 2rem;
+  margin-right: 1rem;
+}
+
+.select-range .ranger-slider {
+  position: relative;
+  display: block;
+}
+
+.select-range .mat-slider-horizontal {
+  width: 10rem;
+}
+
+::ng-deep .mat-slider-thumb-label {
+  transform: rotate(45deg) !important;
+  border-radius: 50% 50% 0 !important;
+}
+
+::ng-deep .mat-slider-thumb {
+  transform: scale(0) !important;
+}
+
+::ng-deep .mat-slider-thumb-label-text {
+  opacity: 1 !important;
+}
+
+.select-range .formFields {
+  display: flex;
+  justify-content: flex-start;
+  width: 8rem;
+}
+
+.select-range .formFields:before {
+  content: '-';
+  display: block;
+  order: 2;
+  flex: 0 0 20%;
+  line-height: 20px;
+  text-align: center;
+}
+
+.select-range .formFields input[type='number'] {
+  font-size: 0.85em;
+  padding: 0.125rem 0.25rem;
+  text-align: center;
+  max-width: 40%;
+}
+
+.field.location {
+  display: flex;
+  align-items: center;
+}
+
+.field.location label {
+  margin: 0 1rem 0 2rem;
+}
+
+.field.location .group {
+  display: flex;
+}
+
+.field.location .group .places-search {
+  flex: 1 1 100%;
+}
+
+.field.location input:disabled {
+  opacity: 0.8;
+  cursor: progress;
+}
+
+.field.location .group input {
+  flex: 1 1 100%;
+  width: 7.25rem;
+  padding: 0.6rem 0.4rem;
+}
+
+.field.location .group .places-search .places {
+  position: absolute;
+  border: 1px solid #d5d5d5;
+  border-bottom: none;
+  border-top: none;
+  background-color: #fff;
+  z-index: 99;
+  width: 80%;
+}
+
+.field.location .group .mat-icon-button {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.btnPrimaryInverted {
+  color: #e01f4d;
+  background-color: #fff;
+  border: 1px solid #fff;
+}

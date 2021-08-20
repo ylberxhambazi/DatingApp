@@ -24,7 +24,6 @@ export class MainComponent implements OnInit {
   userParams: any = {};
   pagination: Pagination;
   likesParam: string;
-  @ViewChild('mainPage') public mainPage: MainPageComponent;
 
   streamRecords: StreamTeaser[] = [
     {
@@ -299,11 +298,6 @@ export class MainComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadUsers();
-    console.log(this.loadUsers())
-  }
-
-  search(): void {
-    this.mainPage.parentValueSetter = this.route.snapshot.data["users"].result;
   }
 
   loadUsers() {
