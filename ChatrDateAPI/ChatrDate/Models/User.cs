@@ -48,5 +48,7 @@ namespace ChatrDate.Models
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Like> Likers { get; set; }
         public virtual ICollection<Like> Likees { get; set; }
+        public virtual ICollection<Visitors> ViewVisitors { get; set; }
+        public virtual ICollection<Visitors> Visitores { get; set; }
     }
 }

@@ -36,7 +36,7 @@
       <ul>
         <li class="dropdown nav">
           <span class="user">
-            <a [routerLink]="['/main/my-profile/edit']" class="username">{{
+            <a [routerLink]="['/main/my-profile']" class="username">{{
               authService.decodedToken?.unique_name | titlecase
             }}</a>
             <button
@@ -49,7 +49,7 @@
               <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item [routerLink]="['/main/my-profile/edit']">
+              <button mat-menu-item [routerLink]="['/main/my-profile']">
                 <span>My Profile</span>
               </button>
               <button mat-menu-item (click)="onLogout()">
@@ -68,7 +68,7 @@
                 <span>Terms and Conditions</span>
               </button>
             </mat-menu>
-            <a [routerLink]="['/main/my-profile/edit']" class="imgWrp accountImage">
+            <a [routerLink]="['/main/my-profile']" class="imgWrp accountImage">
               <img src="{{ photoUrl }}" alt="" />
               <!-- <img src="../../assets//images/profile/fallback-male.jpg" alt="" /> -->
             </a>

@@ -30,7 +30,7 @@ namespace ChatrDate.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
+        public async Task<IActionResult> GetUsers([FromQuery] UserParams userParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var userFromRepo = await _repo.GetUser(currentUserId);
@@ -96,6 +96,36 @@ namespace ChatrDate.Controllers
                 return Ok();
 
             return BadRequest("Failed to like user");
+        }
+        // POST api.UserController/Visitor
+        [HttpPost("{id}/visitor/{recipientVisitorId}")]
+        public async Task<IActionResult> Visitors(int id, int recipientVisitorId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var visitor = await _repo.GetVisitors(id, recipientVisitorId);
+
+            if (visitor != null)
+            {
+                visitor.VisitorCount++;
+                await _repo.SaveAll();
+            }
+            if (await _repo.GetUser(recipientVisitorId) == null)
+                return NotFound();
+
+            visitor = new Visitors
+            {
+                UserId = id,
+                VisitorId = recipientVisitorId
+            };
+            visitor.VisitorCount++;
+            _repo.Add<Visitors>(visitor);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to visit user");
         }
     }
 }

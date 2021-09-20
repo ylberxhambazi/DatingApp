@@ -29,6 +29,10 @@ namespace ChatrDate.Data
         {
             return await _context.Likes.FirstOrDefaultAsync(u => u.LikerId == userId && u.LikeeId == recepientId);
         }
+        public async Task<Visitors> GetVisitors(int userId, int recipientVisitorId)
+        {
+            return await _context.Visitors.FirstOrDefaultAsync(u => u.UserId == userId && u.VisitorId == recipientVisitorId);
+        }
 
         public async Task<Photo> GetMainPhotoForUser(int userId)
         {
@@ -69,11 +73,15 @@ namespace ChatrDate.Data
                 var userLikers = await GetUserLikes(userParams.UserId, userParams.Likers);
                 users = users.Where(u => userLikers.Contains(u.Id));
             }
-
             if (userParams.Likees)
             {
                 var userLikees = await GetUserLikes(userParams.UserId, userParams.Likers);
                 users = users.Where(u => userLikees.Contains(u.Id));
+            }
+            if (userParams.VisitorCount)
+            {
+                var userViews = await GetUserViews(userParams.UserId, userParams.VisitorCount);
+                users = users.Where(u => userViews.Contains(u.Id));
             }
             if (userParams.MinAge != 18 || userParams.MaxAge != 99)
             {
@@ -94,6 +102,12 @@ namespace ChatrDate.Data
                 }
             }
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
+        }
+
+        private async Task<IEnumerable<int>> GetUserViews(int userId, bool view)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return _context.Visitors.Where(u => u.UserId == userId).Select(i => i.VisitorCount);
         }
 
         private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers)

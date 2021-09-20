@@ -1,5 +1,8 @@
 <section class="mainCol">
   <section class="profilePage">
+    <div *ngIf="editFacts.dirty" class="alert alert-info">
+      <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
+    </div>
     <a [routerLink]="['/main']" class="backLink"> <mat-icon>keyboard_arrow_left</mat-icon>Back </a>
 
     <div class="box profileHeader">
@@ -85,9 +88,9 @@
             <div class="wrp">
               <select matNativeControl [(ngModel)]="user.lookingFor" name="user?.lookingFor">
                 <option value="na" selected>No Answer</option>
-                <option value="women">Women</option>
-                <option value="men">Men</option>
-                <option value="any">Any</option>
+                <option value="Women">Women</option>
+                <option value="Men">Men</option>
+                <option value="Any">Any</option>
               </select>
             </div>
           </div>
@@ -113,10 +116,10 @@
             <div class="wrp">
               <select matNativeControl [(ngModel)]="user.sexualOrientation" [name]="user?.sexualOrientation">
                 <option value="na">No Answer</option>
-                <option value="single">Single</option>
-                <option value="relationship">Relationship</option>
-                <option value="openRelationship">Open relationship</option>
-                <option value="married">Married</option>
+                <option value="Single">Single</option>
+                <option value="Relationship">Relationship</option>
+                <option value="Open Relationship">Open relationship</option>
+                <option value="Married">Married</option>
               </select>
             </div>
           </div>
@@ -253,11 +256,11 @@
             <div class="wrp">
               <select matNativeControl [(ngModel)]="user.bodyType" [name]="user?.bodyType">
                 <option value="na">No Answer</option>
-                <option value="slim">Slim</option>
-                <option value="normal">Normal</option>
-                <option value="athletic">Athletic</option>
-                <option value="muscular">Muscular</option>
-                <option value="chubby">Chubby</option>
+                <option value="Slim">Slim</option>
+                <option value="Normal">Normal</option>
+                <option value="Athletic">Athletic</option>
+                <option value="Muscular">Muscular</option>
+                <option value="Chubby">Chubby</option>
               </select>
             </div>
           </div>
@@ -266,11 +269,11 @@
             <div class="wrp">
               <select matNativeControl [(ngModel)]="user.haveChildren" [name]="user?.haveChildren">
                 <option value="na">No Answer</option>
-                <option value="noKids">No Kids</option>
-                <option value="oneKid">One Kid</option>
-                <option value="twoKids">Two Kids</option>
-                <option value="threeKids">Three Kids</option>
-                <option value="moreThenThreeKids">More then Three Kids</option>
+                <option value="No Kids">No Kids</option>
+                <option value="One Kid">One Kid</option>
+                <option value="Two Kids">Two Kids</option>
+                <option value="Three Kids">Three Kids</option>
+                <option value="More Then Three Kids">More then Three Kids</option>
               </select>
             </div>
           </div>
@@ -279,10 +282,10 @@
             <div class="wrp">
               <select matNativeControl [(ngModel)]="user.smoke" [name]="user?.smoke">
                 <option value="na">No Answer</option>
-                <option value="nonSmoker">Non-Smoker</option>
-                <option value="exSmoker">Ex-Smoker</option>
-                <option value="occasionalSmoker">Occasional Smoker</option>
-                <option value="regularSmoker">Regular Smoker</option>
+                <option value="Non Smoker">Non-Smoker</option>
+                <option value="Ex-Smoker">Ex-Smoker</option>
+                <option value="Occasional Smoker">Occasional Smoker</option>
+                <option value="Regular Smoker">Regular Smoker</option>
               </select>
             </div>
           </div>
@@ -291,9 +294,9 @@
             <div class="wrp">
               <select matNativeControl [(ngModel)]="user.drink" [name]="user?.drink">
                 <option value="na">No Answer</option>
-                <option value="never">Never</option>
-                <option value="sometimes">Sometimes</option>
-                <option value="gladly">Gladly</option>
+                <option value="Never">Never</option>
+                <option value="Sometimes">Sometimes</option>
+                <option value="Gladly">Gladly</option>
               </select>
             </div>
           </div>
@@ -302,13 +305,13 @@
             <div class="wrp">
               <select matNativeControl [(ngModel)]="user.education" [name]="user?.education">
                 <option value="na">No Answer</option>
-                <option value="notFinished">Not finished</option>
-                <option value="apprenticeship">Apprenticeship</option>
-                <option value="secondarySchool">Secondary school</option>
-                <option value="highSchool">High school</option>
-                <option value="highSchoolDiploma">High school diploma</option>
-                <option value="collegeUniversity">College/University</option>
-                <option value="postgraduateDegree">Postgraduate degree</option>
+                <option value="Not Finished">Not finished</option>
+                <option value="Apprenticeship">Apprenticeship</option>
+                <option value="Secondary School">Secondary school</option>
+                <option value="High School">High school</option>
+                <option value="High school diploma">High school diploma</option>
+                <option value="College/University">College/University</option>
+                <option value="Postgraduate degree">Postgraduate degree</option>
               </select>
             </div>
           </div>
@@ -317,14 +320,14 @@
             <div class="wrp">
               <select matNativeControl [(ngModel)]="user.occupation" [name]="user?.occupation">
                 <option value="na">No Answer</option>
-                <option value="seekingWork">Seeking work</option>
-                <option value="trainee">Trainee</option>
-                <option value="employee">Employee</option>
-                <option value="publicOfficial">Public Official</option>
-                <option value="housewife">Housewife</option>
-                <option value="retired">Retired</option>
-                <option value="selfEmployed">Self-employed</option>
-                <option value="student">Student</option>
+                <option value="Seeking work">Seeking work</option>
+                <option value="Trainee">Trainee</option>
+                <option value="Employee">Employee</option>
+                <option value="Public Official">Public Official</option>
+                <option value="Housewife">Housewife</option>
+                <option value="Retired">Retired</option>
+                <option value="Self-employed">Self-employed</option>
+                <option value="Student">Student</option>
               </select>
             </div>
           </div>
@@ -333,7 +336,7 @@
             <input type="text" class="form-control" name="language" [(ngModel)]="user.language" />
           </div>
           <div class="field formButtons">
-            <button>Abort</button>
+            <button (click)="toggle()" class="btnEdit">Abort</button>
             <button [disabled]="!editFacts.dirty" form="editFacts">Save</button>
           </div>
         </div>

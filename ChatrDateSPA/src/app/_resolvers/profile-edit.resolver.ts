@@ -14,7 +14,7 @@ export class ProfileEditResolver implements Resolve<User> {
     return this.userService.getUser(this.authService.decodedToken.nameid).pipe(
       catchError((error) => {
         error('Problem retrieving your data')
-        this.router.navigate(['profile'])
+        this.router.navigate(['/main'])
         return of(null)
       })
     )

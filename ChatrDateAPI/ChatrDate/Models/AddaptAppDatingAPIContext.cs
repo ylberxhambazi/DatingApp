@@ -17,6 +17,7 @@ namespace ChatrDate.Models
         public DbSet<Sample> Samples { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Visitors> Visitors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,9 +38,20 @@ namespace ChatrDate.Models
                 .HasForeignKey(u => u.LikerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            OnModelCreatingPartial(modelBuilder);
-        }
+            modelBuilder.Entity<Visitors>()
+                .HasKey(k => new { k.VisitorId, k.UserId });
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+            modelBuilder.Entity<Visitors>()
+                .HasOne(u => u.Visitor)
+                .WithMany(u => u.Visitores)
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Visitors>()
+                .HasOne(u => u.Visitores)
+                .WithMany(u => u.ViewVisitors)
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

@@ -51,13 +51,13 @@ const routes: Routes = [
         component: SearchComponent,
       },
       {
-        path: 'my-profile/edit',
+        path: 'my-profile',
         component: MyProfileComponent,
         resolve: { user: ProfileEditResolver },
         canDeactivate: [PreventUnsavedChanges],
       },
       {
-        path: 'profile/:id',
+        path: 'profile/:username',
         component: ProfileComponent,
         resolve: { user: ProfileDetailResolver }
       },

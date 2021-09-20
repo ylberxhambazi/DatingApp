@@ -107,7 +107,7 @@ export class MainPageComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userServices.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams, this.likesParam).subscribe(
+    this.userServices.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams).subscribe(
       (res: PaginatedResult<User[]>) => {
         this.users = res.result;
         this.pagination = res.pagination;

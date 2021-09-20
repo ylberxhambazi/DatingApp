@@ -20,48 +20,43 @@ namespace ChatrDate.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ChatrDate.Models.Like", b =>
+            modelBuilder.Entity("ChatrDate.Models.Visitors", b =>
                 {
-                    b.Property<int>("LikerId")
+                    b.Property<int>("VisitorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LikeeId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("LikerId", "LikeeId");
+                    b.Property<int>("VisitorCount")
+                        .HasColumnType("int");
 
-                    b.HasIndex("LikeeId");
+                    b.HasKey("VisitorId", "UserId");
 
-                    b.ToTable("Likes");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Visitors");
                 });
 
-            modelBuilder.Entity("ChatrDate.Models.Like", b =>
+            modelBuilder.Entity("ChatrDate.Models.Visitors", b =>
                 {
-                    b.HasOne("ChatrDate.Models.User", "Likee")
-                        .WithMany("Likers")
-                        .HasForeignKey("LikeeId")
+                    b.HasOne("ChatrDate.Models.User", "Visitores")
+                        .WithMany("ViewVisitors")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ChatrDate.Models.User", "Liker")
-                        .WithMany("Likees")
-                        .HasForeignKey("LikerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("ChatrDate.Models.User", "Visitor")
+                        .WithMany("Visitores")
+                        .HasForeignKey("VisitorId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Likee");
+                    b.Navigation("Visitor");
 
-                    b.Navigation("Liker");
+                    b.Navigation("Visitores");
                 });
 
-            modelBuilder.Entity("ChatrDate.Models.User", b =>
-                {
-                    b.Navigation("Likees");
-
-                    b.Navigation("Likers");
-
-                    b.Navigation("Photos");
-                });
 #pragma warning restore 612, 618
         }
     }
