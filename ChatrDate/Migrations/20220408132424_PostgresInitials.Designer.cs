@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ChatrDate.Migrations
 {
     [DbContext(typeof(AddaptAppDatingAPIContext))]
-    [Migration("20220408110955_PostgresInitial")]
-    partial class PostgresInitial
+    [Migration("20220408132424_PostgresInitials")]
+    partial class PostgresInitials
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

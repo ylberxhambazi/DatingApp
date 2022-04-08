@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ChatrDate.Migrations
 {
-    public partial class PostgresInitial : Migration
+    public partial class PostgresInitials : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
