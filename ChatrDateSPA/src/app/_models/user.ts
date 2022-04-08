@@ -2,10 +2,11 @@ import { Photo } from './photo'
 
 export interface User {
   id: number
-  username: string
+  userName: string
   name?: string
   email: string
   age: number
+  dateOfBirth: Date
   gender: string
   seekGender?: string
   sexualOrientation?: string
@@ -37,4 +38,6 @@ export interface User {
   interests?: string
   photoUrl: string
   photos?: Photo[]
+  favorites?: string,
+  roles?: string[]
 }

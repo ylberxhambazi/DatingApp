@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(page?, itemsPerPage?, userParams?, likesParam?): Observable<PaginatedResult<User[]>> {
+  getUsers(page?, itemsPerPage?, userParams?, likesParam?, favoritesParam?, visitorParam?): Observable<PaginatedResult<User[]>> {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
     let params = new HttpParams();
 
@@ -35,6 +35,18 @@ export class UserService {
 
     if (likesParam === 'Likees') {
       params = params.append('Likees', 'true');
+    }
+
+    if (favoritesParam === 'FavoritsActives') {
+      params = params.append('FavoritsActives', 'true');
+    }
+
+    if (favoritesParam === 'FavoritsDeactives') {
+      params = params.append('FavoritsDeactives', 'true');
+    }
+
+    if (visitorParam === 'VisitorCount') {
+      params = params.append('VisitorCount', 'true');
     }
 
     return this.http.get<User[]>(this.baseUrl + 'Users', { observe: 'response', params }).pipe(
@@ -61,10 +73,18 @@ export class UserService {
   }
 
   deletePhoto(userId: number, id: number) {
-    return this.http.delete(this.baseUrl + 'Users/' + userId + "Photos/" + id);
+    return this.http.delete(this.baseUrl + 'Users/' + userId + "/Photos/" + id);
   }
 
   sendLike(id: number, recepientId: number) {
     return this.http.post(this.baseUrl + 'Users/' + id + '/like/' + recepientId, {})
+  }
+
+  visitorCount(id: number, recipientVisitorId: number) {
+    return this.http.post(this.baseUrl + 'Users/' + id + '/visitor/' + recipientVisitorId, {})
+  }
+
+  FavoritsActives(id: number, recipientFavoriteId: number) {
+    return this.http.post(this.baseUrl + 'Users/' + id + '/favorite/' + recipientFavoriteId, {})
   }
 }

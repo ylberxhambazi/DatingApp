@@ -1,31 +1,35 @@
 <div class="profile">
-  <div [routerLink]="['profile', profile.id]" class="profile triggerRegistration">
+  <div [routerLink]="['user', user.id]" (click)="visitorCount(user.id)" class="profile triggerRegistration">
     <div class="imgWrp">
-      <img src="{{ profile.photoUrl || './assets/images/profile/fallback-male.jpg' }}" alt="{{ profile.username }}" />
+      <img src="{{ user.photoUrl || './assets/images/profile/fallback-male.jpg' }}" alt="{{ user.userName }}" />
     </div>
-    <div class="carouselWrap">
-      <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery> -->
-    </div>
+    <!-- <div class="carouselWrap">
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+    </div> -->
     <div class="cnt">
-      <h4 [class]="getOnlineStatus()">
-        {{ getDisplayName() }}
+      <h4
+        *ngIf="presence$ | async as chatService"
+        class="onlineStatus online"
+        [ngClass]="{
+          'is-success': chatService.status === 'online',
+          'is-warning': chatService.status === 'away',
+          'is-danger': chatService.status === 'offline'
+        }"
+      >
+        {{ chatService.status }}
       </h4>
-      <span class="small">{{ profile.city }}</span>
+      {{ getDisplayName() }}
+      <span class="small">{{ user.city }}</span>
     </div>
   </div>
   <div class="menu">
-    <a
-      mat-icon-button
-      aria-label="Write a message"
-      [routerLink]="['/main/chats/chat/new/123']"
-      class="btnS btnPrimaryInverted"
-    >
+    <a mat-icon-button aria-label="Write a message" class="btnS btnPrimaryInverted" [routerLink]="['chat', user.id]">
       <mat-icon>message</mat-icon>
     </a>
-    <button mat-icon-button (click)="sendLike(profile.id)" class="btnS btnPrimaryInverted">
+    <button mat-icon-button (click)="sendLike(user.id)" class="btnS btnPrimaryInverted">
       <mat-icon>favorite_border</mat-icon>
     </button>
-    <button mat-icon-button aria-label="Send her a kiss" (click)="sendLike(profile.id)" class="btnS btnPrimaryInverted">
+    <button mat-icon-button aria-label="Send her a kiss" (click)="sendLike(user.id)" class="btnS btnPrimaryInverted">
       <mat-icon svgIcon="kiss-icon" aria-hidden="false" class="kiss-icon"></mat-icon>
     </button>
   </div>

@@ -94,7 +94,7 @@ export class LandingpageComponent implements OnInit {
 
   ngOnInit(): void {
     this.regForm = this.fb.group({
-      username: ['', Validators.required],
+      userName: ['', Validators.required],
       password: ['', Validators.required],
       email: ['', Validators.email],
       ageCtl: ['', Validators.required],

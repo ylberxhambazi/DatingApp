@@ -295,6 +295,10 @@ export class MainComponent implements OnInit {
     return this.authService.loggedIn()
   }
 
+  firebaseLogin() {
+    return this.authService.firebaseLogin();
+  }
+
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadUsers();

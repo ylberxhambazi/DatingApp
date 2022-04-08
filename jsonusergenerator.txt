@@ -1,0 +1,45 @@
+[
+  '{{repeat(35)}}',
+  {
+    Username: '{{firstName("male")}}',
+    Gender: '{{gender("male")}}',
+    SeekGender: '{{random("female","male")}}',
+    SexualOrientation: '{{random("Hetero","Transgender","Lesbian","Gay","Bisexual","Asexual","Other")}}',
+    AgeFrom: '{{random(18,32)}}',
+    AgeTo: '{{random(25,38)}}',
+    Headline: '{{lorem(1, "sentences")}}',
+    Description: '{{lorem(1, "sentences")}}',
+    Country: '{{country()}}',
+    State: '{{state()}}',
+    City: '{{city()}}',
+    Zip: '{{repeat(1000,2000)}}',
+    MartialStatus: 'test1',
+    Lookingfor: '{{random("Women","Men","Any")}}',
+    Occupation: '{{random("Seeking work","Trainee","Employee","Public Official","Housewife","Retired","Self-employed","Student")}}',
+    Language: 'English',
+    Race: 'test2',
+    Religion: '{{random("Christianity","Islam","Atheist","Hinduism")}}',
+    Height: '{{repeat(172,193)}}',
+    BodyType: '{{random("Slim","Normal","Athletic","Muscular")}}',
+    EyeColor: '{{random("Black","Brown","Green")}}',
+    HairColor: '{{random("Black","Brown")}}',
+    WantChildren: '{{random("Yes","No","NoAnswer")}}',
+    HaveChildren: '{{random("Yes","No")}}',
+    Education: '{{random("Not finished","Apprenticeship","Secondary school","High school","High school diploma","College/University","Postgraduate degree")}}',
+    Smoke: '{{random("Non-Smoker","Ex-Smoker","Occasional Smoker","Regular Smoker")}}',
+    Drink: '{{random("Never","Sometimes","Gladly")}}',
+    Interests: '{{lorem(1, "sentences")}}',
+    DateOfBirth: '{{date(new Date(1990,0,1), new Date(2002, 11, 31), "YYYY-MM-dd")}}',
+    Created: '{{date(new Date(2021,0,1), new Date(2022, 1, 25), "YYYY-MM-dd")}}',
+    LastActive: function(){return this.Created; },
+    Photos: [
+        {
+          url: function(num) {
+          return 'https://randomuser.me/api/portraits/men/' + num.integer(1,99) + '.jpg';
+        },
+        isMain: true,
+        description: '{{lorem()}}'
+      }
+    ]
+  }
+]

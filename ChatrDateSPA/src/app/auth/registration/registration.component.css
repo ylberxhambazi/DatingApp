@@ -165,9 +165,12 @@ form input[type='date'],
 
 .radioButtons input {
   position: absolute;
+  z-index: 1;
   top: 3px;
-  left: 2px;
-  z-index: -50;
+  left: 0px;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
 }
 
 .radioButtons label {
@@ -212,9 +215,12 @@ form input[type='date'],
 
 .checkbox input {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  z-index: -50;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
 }
 
 .regForm .checkbox label {

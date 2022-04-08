@@ -1,26 +1,28 @@
-<a
-  [attr.data-label]="stream.status == 'sent' ? 'read' : stream.status == 'visit' ? 'Profile' : null"
-  [routerLink]="['/main/chat/123123123']"
-  [class]="getStreamTeaserClass()"
-  title="at 20:28"
->
-  <div class="imgWrp">
-    <img [src]="getImgSrc()" [alt]="stream.name" />
-  </div>
-  <div class="cnt" [attr.data-batch]="stream.status == 'unread' ? 'new' : null">
-    <h4 [class.ellipsis]="stream.type != 'message'">
-      {{ stream.name }}
-      <span class="date onlineStatus online">at {{ stream.timeAt }}</span>
-    </h4>
-    <strong>{{ stream.msg }}</strong>
-  </div>
-  <div *ngIf="stream.type != 'message'" class="buttons">
-    <button mat-raised-button class="btn readButton">read</button>
-    <button mat-raised-button class="btn archiveChat">
-      <mat-icon>delete_forever</mat-icon>
-    </button>
-  </div>
-</a>
-<button *ngIf="stream.type == 'message'" mat-icon-button class="delete" color="warn">
-  <mat-icon>close</mat-icon>
-</button>
+<div *ngFor="let itemChat of chatList | async">
+  <a
+    [attr.data-label]="itemChat.seen == false ? true : itemChat.seen == true ? 'Profile' : null"
+    [routerLink]="['/main/chat', users.id]"
+    [class]="getStreamTeaserClass()"
+    title="at 20:28"
+  >
+    <div class="imgWrp">
+      <img [src]="itemChat?.photoUrl" [alt]="itemChat.userReceived" />
+    </div>
+    <div class="cnt" [attr.data-batch]="itemChat.seen == false ? true : null">
+      <h4 [class.ellipsis]="itemChat.seen != false">
+        {{ itemChat.userReceived }}
+        <span class="date onlineStatus online">at {{ itemChat.timeSent | date: 'short' }}</span>
+      </h4>
+      <strong>{{ itemChat.message }}</strong>
+    </div>
+    <div *ngIf="itemChat.seen != true" class="buttons">
+      <button mat-raised-button class="btn readButton">read</button>
+      <button mat-raised-button class="btn archiveChat">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </div>
+  </a>
+  <button mat-icon-button class="delete" color="warn">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

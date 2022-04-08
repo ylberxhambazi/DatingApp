@@ -7,25 +7,151 @@
           <div class="slogan">
             <h3>Registration</h3>
           </div>
-          <form class="form whiteForm regForm">
+          <form class="form whiteForm regForm" [formGroup]="registerForm" (ngSubmit)="register()">
             <div class="fwWrap" id="regFormWrap">
               <div class="field text">
-                <label for="registerFormUsername">Username</label>
-                <input type="text" id="registerFormUsername" placeholder="Your username" />
+                <label for="registerFormuserName">userName</label>
+                <input
+                  type="text"
+                  id="registerFormuserName"
+                  placeholder="Your userName"
+                  formControlName="userName"
+                  [ngClass]="{
+                    'is-invalid': registerForm.get('userName').errors && registerForm.get('userName').touched
+                  }"
+                  class="form-control"
+                />
+                <div class="invalid-feedback">Please choose a userName</div>
               </div>
               <div class="field text">
                 <label for="registerFormPassword">Password</label>
-                <input type="text" id="registerFormPassword" placeholder="Your username" />
+                <input
+                  type="password"
+                  id="registerFormPassword"
+                  placeholder="Your password"
+                  formControlName="password"
+                  [ngClass]="{
+                    'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched
+                  }"
+                  class="form-control"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched"
+                >
+                  Password is required
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched"
+                >
+                  Password must be at least 4 characters
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched"
+                >
+                  Password cannot exeed 8 characters
+                </div>
+              </div>
+              <div class="field text">
+                <label for="registerFormPassword">Confirm password</label>
+                <input
+                  type="password"
+                  id="registerFormPassword"
+                  placeholder="Your password"
+                  formControlName="confirmPassword"
+                  [ngClass]="{
+                    'is-invalid':
+                      (registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched) ||
+                      (registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch'))
+                  }"
+                  class="form-control"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    registerForm.get('confirmPassword').hasError('required') &&
+                    registerForm.get('confirmPassword').touched
+                  "
+                >
+                  Password is required
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched"
+                >
+                  Password must match
+                </div>
               </div>
               <div class="field text">
                 <label for="registerFormEmail">Email Address</label>
-                <input type="email" name="email" id="registerFormEmail" placeholder="Your email address" />
+                <input
+                  type="email"
+                  name="email"
+                  id="registerFormEmail"
+                  placeholder="Your email address"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched
+                  }"
+                  class="form-control"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched"
+                >
+                  Please choose a email
+                </div>
+                <div
+                  class="invalid-feedback"
+                  *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched"
+                >
+                  Please enter valid email
+                </div>
               </div>
               <div class="field select single">
                 <label for="registerFormBirthday"> Your age </label>
                 <div class="wrp">
-                  <select name="birthday" id="registerFormBirthday">
-                    <option value="2002-01-01" selected="">18</option>
+                  <select id="registerFormBirthday" class="form-control" formControlName="dateOfBirth">
+                    <option value="2004-01-01" selected>18</option>
+                    <option value="2003-01-01">19</option>
+                    <option value="2002-01-01">20</option>
+                    <option value="2001-01-01">21</option>
+                    <option value="2000-01-01">22</option>
+                    <option value="1999-01-01">23</option>
+                    <option value="1998-01-01">24</option>
+                    <option value="1997-01-01">25</option>
+                    <option value="1996-01-01">26</option>
+                    <option value="1995-01-01">27</option>
+                    <option value="1994-01-01">28</option>
+                    <option value="1993-01-01">29</option>
+                    <option value="1992-01-01">30</option>
+                    <option value="1991-01-01">31</option>
+                    <option value="1990-01-01">32</option>
+                    <option value="1989-01-01">33</option>
+                    <option value="1988-01-01">34</option>
+                    <option value="1987-01-01">35</option>
+                    <option value="1986-01-01">36</option>
+                    <option value="1985-01-01">37</option>
+                    <option value="1984-01-01">38</option>
+                    <option value="1983-01-01">39</option>
+                    <option value="1982-01-01">40</option>
+                    <option value="1981-01-01">41</option>
+                    <option value="1980-01-01">42</option>
+                    <option value="1979-01-01">43</option>
+                    <option value="1978-01-01">44</option>
+                    <option value="1977-01-01">45</option>
+                    <option value="1976-01-01">46</option>
+                    <option value="1975-01-01">47</option>
+                    <option value="1974-01-01">48</option>
+                    <option value="1973-01-01">49</option>
+                    <option value="1972-01-01">50</option>
+                    <option value="1971-01-01">51</option>
+                    <option value="1970-01-01">52</option>
+                    <option value="1969-01-01">53</option>
+                    <option value="1968-01-01">54</option>
+                    <option value="1967-01-01">55</option>
                   </select>
                 </div>
               </div>
@@ -33,11 +159,11 @@
                 <span class="label"> I am </span>
                 <div class="radioButtons">
                   <div class="radioBtn">
-                    <input type="radio" name="gender" value="1" id="registerFormGenderWoman" />
+                    <input type="radio" formControlName="gender" value="female" id="registerFormGenderWoman" />
                     <label for="registerFormGenderWoman"> a Woman </label>
                   </div>
                   <div class="radioBtn">
-                    <input type="radio" name="gender" value="2" id="registerFormGenderMen" checked />
+                    <input type="radio" formControlName="gender" value="male" id="registerFormGenderMen" checked />
                     <label for="registerFormGenderMen"> a Man </label>
                   </div>
                 </div>
@@ -46,11 +172,17 @@
                 <span class="label"> I'm looking for </span>
                 <div class="radioButtons">
                   <div class="radioBtn">
-                    <input type="radio" name="searchGender" value="1" id="registerFormSearchGenderWoman" checked="" />
+                    <input
+                      type="radio"
+                      formControlName="lookingFor"
+                      value="female"
+                      id="registerFormSearchGenderWoman"
+                      checked=""
+                    />
                     <label for="registerFormSearchGenderWoman"> a Woman </label>
                   </div>
                   <div class="radioBtn">
-                    <input type="radio" name="searchGender" value="2" id="registerFormSearchGenderMen" />
+                    <input type="radio" formControlName="lookingFor" value="male" id="registerFormSearchGenderMen" />
                     <label for="registerFormSearchGenderMen"> a Man </label>
                   </div>
                 </div>
@@ -60,11 +192,16 @@
                 <label for="registerFormPrivacy">
                   <!-- <mat-icon>check</mat-icon> -->
                   I have read and accepted the
-                  <a href="/" tabindex="-2">Terms and Conditions &amp; Communication Guidelines</a>
-                  and the <a href="#" tabindex="-3">Privacy Policy</a>.
+                  <a [routerLink]="['/terms']" tabindex="-2">Terms and Conditions &amp; Communication Guidelines</a>
+                  and the <a [routerLink]="['/privacy']" tabindex="-3">Privacy Policy</a>.
                 </label>
               </div>
-              <input type="submit" class="btn btnSpotColor btnXL submit fullWidth" value="Register" />
+              <input
+                type="submit"
+                class="btn btnSpotColor btnXL submit fullWidth"
+                [disabled]="!registerForm.valid"
+                value="Register"
+              />
             </div>
           </form>
           <div class="spacer">or</div>

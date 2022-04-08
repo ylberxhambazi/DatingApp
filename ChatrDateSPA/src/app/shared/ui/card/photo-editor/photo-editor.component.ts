@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core'
-import { FileUploader, FileUploadModule } from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
 import { Photo } from 'src/app/_models/photo'
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -23,6 +23,7 @@ export class PhotoEditorComponent implements OnInit {
 
   ngOnInit() {
     this.initializeUploader();
+    console.log(this.photos)
   }
 
   fileOverBase(e: any): void {
@@ -40,8 +41,8 @@ export class PhotoEditorComponent implements OnInit {
       maxFileSize: 10 * 1024 * 1024
     });
 
-    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false };
 
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false };
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const res: Photo = JSON.parse(response);
@@ -53,6 +54,11 @@ export class PhotoEditorComponent implements OnInit {
           isMain: res.isMain
         };
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.changeProfilePhoto(photo.url)
+          this.authService.currentUser.photoUrl = photo.url
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser))
+        }
       }
     };
   }

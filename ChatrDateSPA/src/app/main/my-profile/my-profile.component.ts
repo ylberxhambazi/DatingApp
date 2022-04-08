@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common'
 import { Component, HostListener, OnInit, Pipe, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
@@ -29,15 +30,15 @@ export class MyProfileComponent implements OnInit {
   unloadNotification($event: any) {
     if (this.editFacts.dirty) {
       $event.returnValue = true
-      console.log(this.editFacts.dirty)
     }
   }
 
   show: boolean = true;
   showPersonalInformation: boolean = true;
-  editSaved: any = 'Edit';
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private authService: AuthService, private formBuilder: FormBuilder, private alertify: AlertifyService) {
+  birthDate
+
+  constructor(private userService: UserService, private route: ActivatedRoute, private authService: AuthService, private formBuilder: FormBuilder, private alertify: AlertifyService, private datePipe: DatePipe) {
     this.form = this.formBuilder.group({
       interest: this.formBuilder.array([], [Validators.required])
     })
@@ -47,6 +48,7 @@ export class MyProfileComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.user = data['user']
     });
+    this.birthDate = this.datePipe.transform(this.user.dateOfBirth, 'yyyy-MM-dd')
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
@@ -57,10 +59,11 @@ export class MyProfileComponent implements OnInit {
         if (this.editFacts) {
           this.editFacts.reset(this.user)
           this.toggle()
-          location.reload()
         }
-        if (this.editHardFacts)
+        if (this.editHardFacts) {
           this.editHardFacts.reset(this.user)
+          this.togglePersonalInformation()
+        }
       },
       (error) => {
         this.alertify.error(error)
@@ -74,12 +77,10 @@ export class MyProfileComponent implements OnInit {
 
   toggle() {
     this.show = !this.show;
-    this.show ? this.editSaved = "Edit" : this.editSaved = "Cancel";
   }
 
   togglePersonalInformation() {
     this.showPersonalInformation = !this.showPersonalInformation;
-    this.showPersonalInformation ? this.editSaved = "Edit" : this.editSaved = "Cancel";
   }
 
   onCheckboxChange(e) {

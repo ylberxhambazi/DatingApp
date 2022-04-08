@@ -1,0 +1,143 @@
+<div class="container">
+  <h3 class="title">FAQ</h3>
+  Questions about your account
+  <mat-expansion-panel (opened)="changeEmail = true" (closed)="changeEmail = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> I want to change my email address </mat-panel-title>
+    </mat-expansion-panel-header>
+    To change your email address follow the steps below:
+    <ol>
+      <li>Login to the website.</li>
+      <li>Go to “My profile.”</li>
+      <li>Click on the gear icon.</li>
+      <li>You have arrived at the page where you can change your email address.</li>
+      <li>Fill out your new email address twice and press “Save changes.”</li>
+      <li>You receive an email with your new address. Click on the link to confirm your new address.</li>
+    </ol>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="deleteProfile = true" (closed)="deleteProfile = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> I want to delete my profile </mat-panel-title>
+    </mat-expansion-panel-header>
+    To delete your profile follow the steps below:
+    <ol>
+      <li>Login to the website.</li>
+      <li>Go to “My profile.”</li>
+      <li>Click on the gear icon.</li>
+      <li>At the very bottom of the page click on the button “Permanent removal of account.”</li>
+      <li>Click on “OK” to permanently remove your account.</li>
+    </ol>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="emailNotifications = true" (closed)="emailNotifications = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> I do not want to receive email notifications </mat-panel-title>
+    </mat-expansion-panel-header>
+    To change your email notifications follow the steps below:
+    <ol>
+      <li>Login to the website.</li>
+      <li>Go to “My profile.”</li>
+      <li>Click on the gear icon.</li>
+      <li>Select which email notification you wish to receive.</li>
+      <li>Click “save” to confirm your choice.</li>
+    </ol>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="changeDateofbirth = true" (closed)="changeDateofbirth = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> I want to change my date of birth </mat-panel-title>
+    </mat-expansion-panel-header>
+    To change your date of birth please follow the steps below:
+    <ol>
+      <li>Login to the website.</li>
+      <li>Go to “My profile.”</li>
+      <li>You have arrived at the page where you can change your date of birth.</li>
+      <li>Enter your new date of birth and press “Save.”</li>
+    </ol>
+    Please note: This can only be done once
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="changeGender = true" (closed)="changeGender = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> I want to change my gender </mat-panel-title>
+    </mat-expansion-panel-header>
+    To change your gender follow the steps below:
+    <ol>
+      <li>Login to the website.</li>
+      <li>Go to “My profile.”</li>
+      <li>You have arrived at the page where you can change your gender.</li>
+      <li>Enter your new gender and press “Save.”</li>
+    </ol>
+    Please note: This can only be done once
+  </mat-expansion-panel>
+  Questions about photos
+  <mat-expansion-panel (opened)="uploadPhotos = true" (closed)="uploadPhotos = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> I want to upload my photos, change my photos or remove them </mat-panel-title>
+    </mat-expansion-panel-header>
+    To upload photos, modify them or remove them follow the steps below:
+    <ol>
+      <li>Login to the website.</li>
+      <li>Go to “My photos.”</li>
+      <li>You have arrived at the page where you can upload photos, modify photos or remove them</li>
+    </ol>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="requirementsPhotos = true" (closed)="requirementsPhotos = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> What requirements must photos meet </mat-panel-title>
+    </mat-expansion-panel-header>
+    Photos should have a minimum resolution of 500x500 pixels. The file size of the photo can never be bigger than 5MB.
+    The accepted formats are JPG, JPEG, PNG and GIF.
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="displayPhotos = true" (closed)="displayPhotos = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> How much time does it take until my photos are displayed on the website </mat-panel-title>
+    </mat-expansion-panel-header>
+    When a photo has been manually reviewed and approved it will be shown on the website. The reviewing process may take
+    up to 24 hours.
+  </mat-expansion-panel>
+  Questions about payments
+  <mat-expansion-panel (opened)="paymentsWork = true" (closed)="paymentsWork = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Payments, how does that work? </mat-panel-title>
+    </mat-expansion-panel-header>
+    To send messages on Maplecuties.com credits are required. Purchasing these credits can be done like this: You can
+    choose to purchase a credit bundle. There are different credit bundles available, and paying can be done quick and
+    simple. When purchasing a credit bundle, you can choose the following save payment method: - Mastercard - Visa In
+    case you did not purchase any credits yet or you ran out of credits, and you want to send a message to one of the
+    profiles on Maplecuties.com follow these steps: log in to the website and write a message to the profile of your
+    choice. You can optionally add an attachment. Click on “send”, and you will automatically get the option to buy
+    credits. Here you can select the option of your choice. When your payment has been completed your message will be
+    sent automatically. Naturally, you can choose to upgrade your credit balance at an earlier stage so that you can get
+    directly in touch with the profiles on Maplecuties.com After you logged on to the website, your credits balance will
+    be displayed on the left site of the page. Clicking on the “my credits” button will redirect you to the payment page
+    where you can simply follow the steps and buy the credit bundle of your liking
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="purchasingCredits = true" (closed)="purchasingCredits = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> What appears on my bank statement after purchasing credits? </mat-panel-title>
+    </mat-expansion-panel-header>
+    The description of your purchase on your bank statement will be neutral and discrete. The description of the payment
+    is Graham Web Services B.V.
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="purchaseNotCredited = true" (closed)="purchaseNotCredited = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> I purchased credits, but they are not credited </mat-panel-title>
+    </mat-expansion-panel-header>
+    In case you did not receive your credits after a successful payment we recommend to contact us.
+  </mat-expansion-panel>
+  Questions about Maplecuties.com
+  <mat-expansion-panel (opened)="fakeProfiles = true" (closed)="fakeProfiles = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Does the website contain fake profiles </mat-panel-title>
+    </mat-expansion-panel-header>
+    The website contains both real and entertainment profiles. Entertainment profiles are fake profiles with which
+    meeting is not possible.
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="personalData = true" (closed)="personalData = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title> How can I request my personal data? </mat-panel-title>
+    </mat-expansion-panel-header>
+    The e-mail address where you can send your request to can be found in our
+    <a [routerLink]="['/privacy']">Privacy Policy</a>.
+  </mat-expansion-panel>
+  Question not here? Get in with us at: <a mailto="support@maplecuties.com">support@maplecuties.com</a>
+  <a [routerLink]="['/main']">Back</a>
+</div>

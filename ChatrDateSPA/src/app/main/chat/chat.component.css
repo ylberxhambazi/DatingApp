@@ -15,7 +15,9 @@
   display: flex;
   flex-direction: column;
 }
-
+#writeMessage {
+  width: 100%;
+}
 .chatStream header {
   padding: 0.625rem;
   text-align: center;

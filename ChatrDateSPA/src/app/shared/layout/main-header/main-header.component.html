@@ -26,6 +26,10 @@
         <mat-icon>favorite</mat-icon>
         <span class="label">Favorites</span>
       </a>
+      <a *appHasRole="['Admin', 'Moderator']" [routerLink]="['/main/admin']" routerLinkActive="active">
+        <mat-icon>settings</mat-icon>
+        <span class="label">Admin</span>
+      </a>
     </nav>
     <a [routerLink]="['main/add-coins']" class="addCoinsTeaser" routerLinkActive="active">
       <small>You Have</small>
@@ -55,21 +59,21 @@
               <button mat-menu-item (click)="onLogout()">
                 <span>Logout</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item [routerLink]="['/main/faq']">
                 <span>Help / Support</span>
               </button>
               <button mat-menu-item>
                 <span>Imprint</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item [routerLink]="['/main/privacy']">
                 <span>Privacy Policy</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item [routerLink]="['/main/terms']">
                 <span>Terms and Conditions</span>
               </button>
             </mat-menu>
             <a [routerLink]="['/main/my-profile']" class="imgWrp accountImage">
-              <img src="{{ photoUrl }}" alt="" />
+              <img src="{{ photoUrl || './assets/images/profile/fallback-male.jpg' }}" alt="" />
               <!-- <img src="../../assets//images/profile/fallback-male.jpg" alt="" /> -->
             </a>
           </span>

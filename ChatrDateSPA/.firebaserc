@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "datingapp-chatr": {
+      "hosting": {
+        "mydates": [
+          "datingapp-chatr"
+        ]
+      }
+    }
+  }
+}

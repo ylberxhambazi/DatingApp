@@ -13,7 +13,7 @@ export class ProfileDetailResolver implements Resolve<User> {
     return this.userService.getUser(route.params['id']).pipe(
       catchError(error => {
         error('Problem retrieving data');
-        this.router.navigate(['main']);
+        this.router.navigate(['/profile']);
         return of(null);
       })
     );

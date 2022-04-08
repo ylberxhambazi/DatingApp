@@ -16,7 +16,7 @@ export class ProfileListResolver implements Resolve<User[]> {
     return this.userService.getUsers(this.pageNumber, this.pageSize).pipe(
       catchError((error) => {
         error('Problem retrieving data')
-        this.router.navigate(['main'])
+        this.router.navigate(['/main'])
         return of(null)
       })
     )

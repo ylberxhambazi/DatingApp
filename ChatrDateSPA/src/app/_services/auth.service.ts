@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { AngularFireAuth } from '@angular/fire/auth'
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { BehaviorSubject } from 'rxjs'
 import { map } from 'rxjs/operators'
@@ -17,7 +18,8 @@ export class AuthService {
   photoUrl = new BehaviorSubject<string>('./assets/images/profile/fallback-male.jpg');
   currentPhotoUrl = this.photoUrl.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private afAuth: AngularFireAuth) {
+  }
 
   changeProfilePhoto(photoUrl: string) {
     this.photoUrl.next(photoUrl);
@@ -38,12 +40,34 @@ export class AuthService {
     )
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model)
+  register(user: User) {
+    return this.http.post(this.baseUrl + 'register', user)
   }
 
   loggedIn() {
     const token = localStorage.getItem('token')
     return !this.jwtHelper.isTokenExpired(token)
+  }
+
+  roleMatch(allowedRoles): boolean {
+    let isMatch = false
+    const userRoles = this.decodedToken.role as Array<string>
+    allowedRoles.forEach(element => {
+      if (userRoles.includes(element)) {
+        isMatch = true
+        return
+      }
+    });
+    return isMatch
+  }
+
+  firebaseLogin() {
+    const fireLogin = this.afAuth.signInAnonymously()
+    return fireLogin
+  }
+
+  async signOut() {
+    const logout = await this.afAuth.signOut()
+    return logout
   }
 }

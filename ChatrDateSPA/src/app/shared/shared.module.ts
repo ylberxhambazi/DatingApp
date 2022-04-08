@@ -16,6 +16,14 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatCardModule } from '@angular/material/card'
 import { NgxGalleryModule } from '@kolkov/ngx-gallery'
+import { AdminPanelComponent } from '../admin/admin-panel/admin-panel.component'
+import { HasRoleDirective } from '../_directives/has-role.directive'
+import { TabsModule } from 'ngx-bootstrap/tabs'
+import { MatTabsModule } from '@angular/material/tabs'
+import { UserManagementComponent } from '../admin/user-management/user-management.component'
+import { PhotoManagementComponent } from '../admin/photo-management/photo-management.component'
+import { AdminService } from '../_services/admin.service'
+import { ChatManagementComponent } from '../admin/chat-management/chat-management.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +34,12 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery'
     RegisterDialogComponent,
     StreamTeaserComponent,
     MainHeaderComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    AdminPanelComponent,
+    HasRoleDirective,
+    UserManagementComponent,
+    PhotoManagementComponent,
+    ChatManagementComponent
   ],
   imports: [
     CommonModule,
@@ -36,8 +49,11 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery'
     MatButtonModule,
     MatMenuModule,
     MatCardModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    MatTabsModule,
+    TabsModule.forRoot()
   ],
+  providers: [AdminService],
   exports: [
     HeaderComponent,
     FooterComponent,

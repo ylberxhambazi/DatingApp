@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css';
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
 *,
 :after,
 :before {
@@ -107,11 +107,15 @@ ul {
   font-size: 0.6em;
 }
 
-.onlineStatus.online:after {
+.onlineStatus.is-success:after {
   background: #16be36;
 }
 
-.onlineStatus.offline:after {
+.onlineStatus.is-warning:after {
+  background: #ffcc00;
+}
+
+.onlineStatus.is-danger:after {
   background: #f30800;
 }
 

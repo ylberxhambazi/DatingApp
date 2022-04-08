@@ -12,8 +12,14 @@
         </a>
         <div class="intro-container">
           <div class="intro">
-            <h1>{{ user.username }}</h1>
-            <h2>{{ user.age }} years old from {{ user.city }}</h2>
+            <div class="username">
+              <h1>{{ user.userName }}</h1>
+              <i class="fa fa-pencil"></i>
+            </div>
+            <div class="userAgeCity">
+              <h2>{{ user.age }} years old from {{ user.city }}</h2>
+              <i class="fa fa-pencil"></i>
+            </div>
           </div>
           <div class="intro">
             <h1>About me</h1>
@@ -22,15 +28,17 @@
         </div>
       </article>
       <div class="intro">
-        <h1>{{ user.username }}<span class="onlineStatus online">online</span></h1>
-        <h2>25 years old from {{ user.username }}</h2>
+        <h1>{{ user.userName }}<span class="onlineStatus online">online</span></h1>
+        <h2>25 years old from {{ user.userName }}</h2>
       </div>
     </div>
     <div class="box profileFacts">
       <div class="mainColumn">
         <h3>Hard Facts</h3>
         <div class="button-container">
-          <button (click)="toggle()" class="btnEdit">{{ editSaved }}</button>
+          <button (click)="toggle()" class="btnEdit">
+            <i class="fa fa-pencil" [class]="show ? 'fa fa-pencil' : 'fa fa-check'"></i>
+          </button>
         </div>
       </div>
       <div class="facts" *ngIf="show">
@@ -86,7 +94,12 @@
           <div class="field select single">
             <span class="dt">Looking for:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.lookingFor" name="user?.lookingFor">
+              <select
+                matNativeControl
+                [(ngModel)]="user.lookingFor"
+                [name]="user?.lookingFor"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <option value="na" selected>No Answer</option>
                 <option value="Women">Women</option>
                 <option value="Men">Men</option>
@@ -106,6 +119,7 @@
                   (change)="onCheckboxChange($event)"
                   [name]="webInterest.id"
                   class="form-control"
+                  [ngModelOptions]="{ standalone: true }"
                 />
                 <label [for]="webInterest.id"><i class="fa fa-check"></i>{{ webInterest.name }}</label>
               </div>
@@ -114,7 +128,12 @@
           <div class="field select single">
             <span class="dt">Relationship status:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.sexualOrientation" [name]="user?.sexualOrientation">
+              <select
+                matNativeControl
+                [(ngModel)]="user.sexualOrientation"
+                [name]="user?.sexualOrientation"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <option value="na">No Answer</option>
                 <option value="Single">Single</option>
                 <option value="Relationship">Relationship</option>
@@ -126,7 +145,13 @@
           <div class="field select single">
             <span class="dt">Height:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.height" [name]="user?.height">
+              <select
+                matNativeControl
+                [(ngModel)]="user.height"
+                [name]="user?.height"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <option value="na">No Answer</option>
                 <option value="100">100 cm</option>
                 <option value="101">101 cm</option>
                 <option value="102">102 cm</option>
@@ -254,7 +279,12 @@
           <div class="field select single">
             <span class="dt">Body:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.bodyType" [name]="user?.bodyType">
+              <select
+                matNativeControl
+                [(ngModel)]="user.bodyType"
+                [name]="user?.bodyType"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <option value="na">No Answer</option>
                 <option value="Slim">Slim</option>
                 <option value="Normal">Normal</option>
@@ -267,7 +297,12 @@
           <div class="field select single">
             <span class="dt">Kids:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.haveChildren" [name]="user?.haveChildren">
+              <select
+                matNativeControl
+                [(ngModel)]="user.haveChildren"
+                [name]="user?.haveChildren"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <option value="na">No Answer</option>
                 <option value="No Kids">No Kids</option>
                 <option value="One Kid">One Kid</option>
@@ -280,7 +315,12 @@
           <div class="field select single">
             <span class="dt">Smoker:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.smoke" [name]="user?.smoke">
+              <select
+                matNativeControl
+                [(ngModel)]="user.smoke"
+                [name]="user?.smoke"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <option value="na">No Answer</option>
                 <option value="Non Smoker">Non-Smoker</option>
                 <option value="Ex-Smoker">Ex-Smoker</option>
@@ -292,7 +332,12 @@
           <div class="field select single">
             <span class="dt">Alcohol:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.drink" [name]="user?.drink">
+              <select
+                matNativeControl
+                [(ngModel)]="user.drink"
+                [name]="user?.drink"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <option value="na">No Answer</option>
                 <option value="Never">Never</option>
                 <option value="Sometimes">Sometimes</option>
@@ -303,7 +348,12 @@
           <div class="field select single">
             <span class="dt">Education:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.education" [name]="user?.education">
+              <select
+                matNativeControl
+                [(ngModel)]="user.education"
+                [name]="user?.education"
+                [ngModelOptions]="{ standalone: true }"
+              >
                 <option value="na">No Answer</option>
                 <option value="Not Finished">Not finished</option>
                 <option value="Apprenticeship">Apprenticeship</option>
@@ -318,8 +368,13 @@
           <div class="field select single">
             <span class="dt">Profession:</span>
             <div class="wrp">
-              <select matNativeControl [(ngModel)]="user.occupation" [name]="user?.occupation">
-                <option value="na">No Answer</option>
+              <select
+                matNativeControl
+                [(ngModel)]="user.occupation"
+                [name]="user?.occupation"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <option value="na" selected>No Answer</option>
                 <option value="Seeking work">Seeking work</option>
                 <option value="Trainee">Trainee</option>
                 <option value="Employee">Employee</option>
@@ -333,7 +388,13 @@
           </div>
           <div class="field select single">
             <span class="dt">Language:</span>
-            <input type="text" class="form-control" name="language" [(ngModel)]="user.language" />
+            <input
+              type="text"
+              class="form-control"
+              name="language"
+              [(ngModel)]="user.language"
+              [ngModelOptions]="{ standalone: true }"
+            />
           </div>
           <div class="field formButtons">
             <button (click)="toggle()" class="btnEdit">Abort</button>
@@ -347,7 +408,9 @@
         <div class="mainPersonalInformation">
           <h3>Personal Information</h3>
           <div class="button-container">
-            <button (click)="togglePersonalInformation()" class="btnEdit">{{ editSaved }}</button>
+            <button (click)="togglePersonalInformation()" class="btnEdit">
+              <i class="fa fa-pencil" [class]="showPersonalInformation ? 'fa fa-pencil' : 'fa fa-check'"></i>
+            </button>
           </div>
         </div>
         <div class="personal-information" *ngIf="showPersonalInformation">
@@ -355,13 +418,31 @@
             <span class="dt">Email*</span>
             <span class="dd">{{ user.email }}</span>
           </div>
+          <div class="group">
+            <span class="dt">Birthday*</span>
+            <span class="dd">{{ user.dateOfBirth | date: 'MM/dd/yyyy' }}</span>
+          </div>
         </div>
         <div class="hidden-personal-information" *ngIf="!showPersonalInformation">
           <form #editHardFacts="ngForm" id="editHardFacts" (ngSubmit)="updateUser()">
             <div class="field input single">
               <span class="dt">Email:</span>
               <div class="wrp">
-                <input type="text" class="form-control" [(ngModel)]="user.email" [name]="user.email" />
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.email"
+                  [name]="user.email"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+            </div>
+            <div class="field input single">
+              <div class="dt">Birthday:</div>
+              <div class="wrp">
+                <!-- <select type="text" class="form-control" [(ngModel)]="user.dateOfBirth | date: 'MM/dd/yyyy'" [name]="user.dateOfBirth"></select> -->
+
+                <input type="date" [(ngModel)]="birthDate" name="birthDate" class="form-control" />
               </div>
             </div>
           </form>

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router'
 import { PaginatedResult, Pagination } from 'src/app/_models/pagination'
 import { User } from 'src/app/_models/user'
 import { AuthService } from 'src/app/_services/auth.service'
+import { ChatService } from 'src/app/_services/chat.service'
 import { UserService } from 'src/app/_services/user.service'
 
 @Component({
@@ -47,8 +48,14 @@ export class MainPageComponent implements OnInit {
   ProfileType: string = 'private'
   breakpoint: number
   likesParam: string
+  location = {}
+  setPosition(position) {
+    this.location = position.cords
+    console.log(this.location)
+  }
+  city: any
 
-  constructor(private userServices: UserService, private route: ActivatedRoute, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private authService: AuthService) {
+  constructor(private userServices: UserService, private route: ActivatedRoute, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private authService: AuthService, private chatService: ChatService) {
     this.matIconRegistry.addSvgIcon(
       'kiss-icon',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/kiss-black.svg')
@@ -80,6 +87,22 @@ export class MainPageComponent implements OnInit {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       this.authService.currentUser = user;
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.location = position.coords;
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+        let mapUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+
+        fetch(mapUrl)
+          .then(res => res.json())
+          .then((out) => {
+            this.city = out.city
+          })
+          .catch(err => { throw err })
+      });
     }
   }
 
@@ -116,5 +139,23 @@ export class MainPageComponent implements OnInit {
         error = error
       }
     )
+  }
+
+  cityValue() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.location = position.coords;
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+        let mapUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+
+        fetch(mapUrl)
+          .then(res => res.json())
+          .then((out) => {
+            this.city = out.city
+          })
+          .catch(err => { throw err })
+      });
+    }
   }
 }

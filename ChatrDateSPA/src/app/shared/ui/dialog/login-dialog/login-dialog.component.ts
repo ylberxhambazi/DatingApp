@@ -6,6 +6,7 @@ import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 import { Router } from '@angular/router'
 import { AuthService } from 'src/app/_services/auth.service'
+import { ChatService } from 'src/app/_services/chat.service'
 
 @Component({
   selector: 'app-login-dialog',
@@ -14,6 +15,7 @@ import { AuthService } from 'src/app/_services/auth.service'
 })
 export class LoginDialogComponent implements OnInit {
   model: any = {}
+  photoUrl: string
   // loginForm: FormGroup;
   // emailControl = new FormControl('', [Validators.required, Validators.email]);
   // passwordControl = new FormControl('', [Validators.required]);
@@ -38,10 +40,7 @@ export class LoginDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.loginForm = this.fb.group({
-    //   username: ['', Validators.email],
-    //   password: ['', Validators.required]
-    // });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl)
   }
 
   onCloseDialog(): void {
@@ -52,14 +51,31 @@ export class LoginDialogComponent implements OnInit {
     this.authService.login(this.model).subscribe(
       (next) => {
         console.log('Logged in successfully')
-        this.router.navigateByUrl('/main')
         this.dialogRef.close()
       },
       (error) => {
         console.log('Failed to login')
+      },
+      () => {
+        this.authService.firebaseLogin()
+        this.router.navigate(['/main']);
       }
     )
   }
+
+  loggedIn() {
+    return this.authService.loggedIn();
+  }
+
+  // logout() {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('user');
+  //   this.authService.signOut();
+  //   // this.chatService.signOut();
+  //   this.authService.decodedToken = null;
+  //   this.authService.currentUser = null;
+  //   this.router.navigate(['/auth']);
+  // }
 
   // Submit() {
   //   console.log('Login Submit');

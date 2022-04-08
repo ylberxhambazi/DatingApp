@@ -1,30 +1,58 @@
 <section class="mainCol">
   <section class="profilePage">
-    <a [routerLink]="['main']" class="backLink"> <mat-icon>keyboard_arrow_left</mat-icon>Back </a>
+    <a [routerLink]="['/main']" class="backLink"> <mat-icon>keyboard_arrow_left</mat-icon>Back </a>
 
     <div class="box profileHeader">
       <article class="profileInfo">
         <a href="#" class="imgWrp">
-          <img src="{{ profile?.photoUrl }}" alt="" />
+          <img src="{{ user?.photoUrl }}" alt="" />
         </a>
         <div class="intro">
-          <h1>{{ profile?.username }} <span class="onlineStatus online">online</span></h1>
-          <h2>{{ profile?.age }} years old from {{ profile?.username }}</h2>
+          <h1>
+            {{ user?.userName }}
+            <span
+              *ngIf="presence$ | async as chatService"
+              class="onlineStatus online"
+              [ngClass]="{
+                'is-success': chatService.status === 'online',
+                'is-warning': chatService.status === 'away',
+                'is-danger': chatService.status === 'offline'
+              }"
+              >{{ chatService.status }}</span
+            >
+          </h1>
+          <h2>{{ user?.age }} years old from {{ user?.userName }}</h2>
         </div>
       </article>
       <nav class="profileMenu">
-        <button mat-button class="profileMenuBtn"><mat-icon>favorite_border</mat-icon><span>Like Her</span></button>
+        <button mat-button class="profileMenuBtn" (click)="sendLike(user.id)">
+          <mat-icon>favorite_border</mat-icon><span>Like Her</span>
+        </button>
         <button mat-button class="profileMenuBtn"><mat-icon>chat</mat-icon><span>Send Her a Message</span></button>
         <button mat-button class="profileMenuBtn">
           <mat-icon svgIcon="kiss-icon-white" aria-hidden="false" class="kiss-icon"></mat-icon>
           <span>Send Her a Kiss</span>
         </button>
-        <button mat-button class="profileMenuBtn"><mat-icon>star_outline</mat-icon><span>Add As Favorite</span></button>
+        <button mat-button class="profileMenuBtn" (click)="FavoritsActives(user.id)">
+          <mat-icon>star_outline</mat-icon><span>Add As Favorite</span>
+        </button>
         <button mat-button class="profileMenuBtn discreet"><mat-icon>block</mat-icon><span>Block Her</span></button>
       </nav>
       <div class="intro">
-        <h1>{{ profile?.username }}<span class="onlineStatus online">online</span></h1>
-        <h2>{{ profile?.age }} years old from {{ profile?.username }}</h2>
+        <h1>
+          {{ user?.userName
+          }}<span
+            *ngIf="presence$ | async as chatService"
+            class="onlineStatus online"
+            [ngClass]="{
+              'is-success': chatService.status === 'online',
+              'is-warning': chatService.status === 'away',
+              'is-danger': chatService.status === 'offline'
+            }"
+            >{{ chatService.status }}</span
+          >
+        </h1>
+        <h2>{{ user?.age }} years old from {{ user?.userName }}</h2>
       </div>
     </div>
     <div class="box profileFacts">
@@ -32,13 +60,13 @@
       <div class="facts">
         <div class="group">
           <span class="dt">Location: </span>
-          <span class="dd">{{ profile?.city }}, {{ profile?.country }}</span>
+          <span class="dd">{{ user?.city }}, {{ user?.country }}</span>
           <span class="dt">Age:</span>
-          <span class="dd">{{ profile?.age }}</span>
+          <span class="dd">{{ user?.age }}</span>
           <span class="dt">Last Active:</span>
-          <span class="dd">{{ profile?.lastActive | timeAgo }}</span>
+          <span class="dd">{{ user?.lastActive | timeAgo }}</span>
           <span class="dt">Member since:</span>
-          <span class="dd">{{ profile?.created | date: 'mediumDate' }}</span>
+          <span class="dd">{{ user?.created | date: 'mediumDate' }}</span>
         </div>
       </div>
     </div>

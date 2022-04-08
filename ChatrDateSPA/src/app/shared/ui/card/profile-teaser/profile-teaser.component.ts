@@ -9,6 +9,9 @@ import { Photo } from 'src/app/_models/photo'
 import { UserService } from 'src/app/_services/user.service'
 import { AuthService } from 'src/app/_services/auth.service'
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery'
+import { ChatService } from 'src/app/_services/chat.service'
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-profile-teaser',
@@ -16,17 +19,24 @@ import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov
   styleUrls: ['./profile-teaser.component.css'],
 })
 export class ProfileTeaserComponent implements OnInit {
-  @Input() profile: User
+  @Input() user: User
   @Input() type: string
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  presenceList: AngularFireObject<any>
+  presence: Observable<any>
+  presence$
+  users: User = JSON.parse(localStorage.getItem('user'));
+  userTogether
 
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private chatService: ChatService,
+    private db: AngularFireDatabase
   ) {
     this.matIconRegistry.addSvgIcon(
       'kiss-icon',
@@ -35,49 +45,30 @@ export class ProfileTeaserComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.galleryOptions = [{
-    //   width: '350px',
-    //   height: '267px',
-    //   imagePercent: 100,
-    //   thumbnailsColumns: 4,
-    //   imageAnimation: NgxGalleryAnimation.Slide,
-    //   preview: false
-    // }];
-    // this.galleryImages = this.getImages();
-    // console.log(this.profile.photos)
+    this.getOnlineStatus()
   }
-
-  // getImages() {
-  //   const imageUrls = [];
-  //   console.log('hello')
-  //   for (const photo of this.profile.photos) {
-  //     console.log(photo.url);
-  //     imageUrls.push({
-  //       small: photo.url,
-  //       medium: photo.url,
-  //       big: photo.url
-  //     });
-  //   }
-  //   return imageUrls;
-  // }
-
-  // getImgSrc(img: string) {
-  //   if (img) {
-  //     return this.profile.photos;
-  //   }
-  // }
 
   getDisplayName() {
-    return this.profile.username + ', ' + this.profile.age
+    return this.user['username'] + ', ' + this.user.age
   }
   getOnlineStatus() {
-    return this.profile.lastActive ? 'onlineStatus online' : 'onlineStatus offline'
+    this.presence$ = this.chatService.getPresence(this.user['username'])
   }
 
   sendLike(id: number) {
     this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(
       (data) => {
-        console.log('You have liked: ' + this.profile.username)
+        console.log('You have liked: ' + this.user['username'])
+      },
+      (error) => {
+        error = error
+      }
+    )
+  }
+  visitorCount(id: number) {
+    this.userService.visitorCount(this.authService.decodedToken.nameid, id).subscribe(
+      (data) => {
+        console.log('You visited profile: ' + this.user['username'])
       },
       (error) => {
         error = error

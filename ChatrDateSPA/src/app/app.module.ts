@@ -24,6 +24,18 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery'
 import { ProfileListResolver } from './_resolvers/profile-list.resolver'
 import { RouterModule } from '@angular/router'
 import { ListLikeResolver } from './_resolvers/list-like.resolver'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { ListFavoritesResolver } from './_resolvers/list-favorites.resolver'
+import { ListVisitorResolver } from './_resolvers/list-visitors.resolver'
+import { AngularFireModule } from '@angular/fire'
+import { AngularFireDatabaseModule } from '@angular/fire/database'
+import { environment } from 'src/environments/environment'
+import { ChatDetailResolver } from './_resolvers/chat-detail.resolver'
+import { ChatService } from './_services/chat.service'
+import { AngularFireAuthModule } from '@angular/fire/auth'
+import { DatePipe } from '@angular/common';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component'
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 export function tokenGetter() {
   return localStorage.getItem('token')
@@ -42,19 +54,25 @@ export function tokenGetter() {
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatExpansionModule,
     NgxGalleryModule,
     HammerModule,
     RouterModule,
+    ModalModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: ['localhost:44378'],
         disallowedRoutes: ['localhost:44378/api/Auth'],
       },
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditResolver, PreventUnsavedChanges, ProfileDetailResolver, ProfileListResolver, ListLikeResolver],
+
+  providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditResolver, PreventUnsavedChanges, ProfileDetailResolver, ProfileListResolver, ListLikeResolver, ListFavoritesResolver, ListVisitorResolver, ChatDetailResolver, ChatService, DatePipe],
   bootstrap: [AppComponent],
-  entryComponents: [LoginDialogComponent],
+  entryComponents: [LoginDialogComponent, RolesModalComponent],
 })
 export class AppModule { }

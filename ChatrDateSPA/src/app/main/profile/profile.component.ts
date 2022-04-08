@@ -4,6 +4,8 @@ import { DomSanitizer } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery'
 import { User } from 'src/app/_models/user'
+import { AuthService } from 'src/app/_services/auth.service'
+import { ChatService } from 'src/app/_services/chat.service'
 import { UserService } from 'src/app/_services/user.service'
 
 @Component({
@@ -56,15 +58,18 @@ export class ProfileComponent implements OnInit {
   //     dd: "Russian"
   //   }
   // ]
-  profile: User;
+  user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  presence$
 
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private chatService: ChatService
   ) {
     this.matIconRegistry.addSvgIcon(
       'kiss-icon-white',
@@ -76,7 +81,7 @@ export class ProfileComponent implements OnInit {
     this.onUpdateGridColumn();
 
     this.route.data.subscribe(data => {
-      this.profile = data['user'];
+      this.user = data['user'];
     });
 
     this.galleryOptions = [{
@@ -88,11 +93,16 @@ export class ProfileComponent implements OnInit {
       preview: false
     }];
     this.galleryImages = this.getImages();
+    this.getOnlineStatus()
+  }
+
+  getOnlineStatus() {
+    this.presence$ = this.chatService.getPresence(this.user.userName)
   }
 
   getImages() {
     let imageUrls = [];
-    for (let photo of this.profile.photos) {
+    for (let photo of this.user.photos) {
       imageUrls.push({
         small: photo.url,
         medium: photo.url,
@@ -113,6 +123,27 @@ export class ProfileComponent implements OnInit {
     } else {
       this.breakpoint = 2
     }
+  }
+
+  sendLike(id: number) {
+    this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(
+      (data) => {
+        console.log('You have liked: ' + this.user.userName)
+      },
+      (error) => {
+        error = error
+      }
+    )
+  }
+  FavoritsActives(id: number) {
+    this.userService.FavoritsActives(this.authService.decodedToken.nameid, id).subscribe(
+      (data) => {
+        console.log('You favorite this profile: ' + this.user.userName)
+      },
+      (error) => {
+        error = error
+      }
+    )
   }
 
 }

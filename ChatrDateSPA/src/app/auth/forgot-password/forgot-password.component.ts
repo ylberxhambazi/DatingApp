@@ -15,11 +15,11 @@ export class ForgotPasswordComponent implements OnInit {
     console.log(`Resolved captcha with response: ${captchaResponse}`)
   }
 
-  constructor(public dialog: MatDialog, private router: Router, private fb: FormBuilder) {}
+  constructor(public dialog: MatDialog, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.forgotpwdForm = this.fb.group({
-      username: [''],
+      userName: [''],
       recaptchaReactive: [null],
     })
   }

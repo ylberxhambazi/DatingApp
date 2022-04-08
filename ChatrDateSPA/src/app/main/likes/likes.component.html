@@ -5,7 +5,7 @@
   <div class="hidden"></div>
   <mat-grid-list [cols]="breakpoint" rowHeight="1:1.3" gutterSize="0.625rem" (window:resize)="onResize($event)">
     <mat-grid-tile *ngFor="let userLike of users">
-      <app-profile-teaser [profile]="userLike" [type]="userLike" class="profileTeaser"> </app-profile-teaser>
+      <app-profile-teaser [user]="userLike" [type]="userLike" class="profileTeaser"> </app-profile-teaser>
     </mat-grid-tile>
   </mat-grid-list>
 

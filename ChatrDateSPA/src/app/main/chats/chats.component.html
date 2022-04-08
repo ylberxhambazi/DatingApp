@@ -1,7 +1,19 @@
 <section class="mainCol">
   <ul class="chatsStream">
-    <li *ngFor="let record of streamRecords">
-      <app-stream-teaser [stream]="record"> </app-stream-teaser>
+    <li *ngFor="let record of users">
+      <app-stream-teaser [users]="record"></app-stream-teaser>
     </li>
   </ul>
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
 </section>

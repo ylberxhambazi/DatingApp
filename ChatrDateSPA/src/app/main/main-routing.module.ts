@@ -15,6 +15,15 @@ import { ProfileComponent } from './profile/profile.component'
 import { SearchComponent } from './search/search.component'
 import { VisitorsComponent } from './visitors/visitors.component'
 import { ListLikeResolver } from '../_resolvers/list-like.resolver'
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component'
+import { TermsComponent } from './terms/terms.component'
+import { FaqComponent } from './faq/faq.component'
+import { ListVisitorResolver } from '../_resolvers/list-visitors.resolver'
+import { ListFavoritesResolver } from '../_resolvers/list-favorites.resolver'
+import { ProfileListResolver } from '../_resolvers/profile-list.resolver'
+import { ChatDetailResolver } from '../_resolvers/chat-detail.resolver'
+import { AdminPanelComponent } from '../admin/admin-panel/admin-panel.component'
+import { AuthGuard } from '../_guards/auth.guard'
 
 const routes: Routes = [
   {
@@ -24,10 +33,12 @@ const routes: Routes = [
       {
         path: 'chats',
         component: ChatsComponent,
+        resolve: { users: ProfileListResolver }
       },
       {
         path: 'chat/:id',
         component: ChatComponent,
+        resolve: { user: ChatDetailResolver }
       },
       {
         path: 'inbox',
@@ -36,15 +47,17 @@ const routes: Routes = [
       {
         path: 'visitors',
         component: VisitorsComponent,
+        resolve: { user: ListVisitorResolver }
       },
       {
         path: 'likes',
         component: LikesComponent,
-        resolve: { users: ListLikeResolver }
+        resolve: { user: ListLikeResolver }
       },
       {
         path: 'favorites',
         component: FavoritesComponent,
+        resolve: { user: ListFavoritesResolver }
       },
       {
         path: 'search',
@@ -57,9 +70,26 @@ const routes: Routes = [
         canDeactivate: [PreventUnsavedChanges],
       },
       {
-        path: 'profile/:username',
+        path: 'user/:id',
         component: ProfileComponent,
         resolve: { user: ProfileDetailResolver }
+      },
+      {
+        path: 'privacy',
+        component: PrivacyPolicyComponent
+      },
+      {
+        path: 'terms',
+        component: TermsComponent
+      },
+      {
+        path: 'faq',
+        component: FaqComponent
+      },
+      {
+        path: 'admin',
+        component: AdminPanelComponent,
+        data: { roles: ['Admin', 'Moderator'] }
       },
       {
         path: '',

@@ -192,13 +192,12 @@ export class LikesComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeRoute.data.subscribe(data => {
-      this.users = data['users'].result;
-      this.pagination = data['users'].pagination;
+      this.users = data['user'].result;
+      this.pagination = data['user'].pagination;
     })
     this.likesParam = 'Likers';
-    this.loadUsers()
-    this.breakpoint = 4
-    this.onUpdateGridColumn()
+    this.breakpoint = 4;
+    this.onUpdateGridColumn();
   }
 
   onResize(event) {
@@ -208,13 +207,15 @@ export class LikesComponent implements OnInit {
   onUpdateGridColumn() {
     if (window.innerWidth >= 1024) {
       this.breakpoint = 4
-    } else {
+    } else if (window.innerWidth >= 900) {
+      this.breakpoint = 3
+    } else if (window.innerWidth <= 768) {
       this.breakpoint = 2
     }
   }
 
   loadUsers() {
-    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, null, this.likesParam).subscribe(
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, null, this.likesParam, null, null).subscribe(
       (res: PaginatedResult<User[]>) => {
         this.users = res.result;
         this.pagination = res.pagination;

@@ -2,11 +2,21 @@
   <section class="chatStream">
     <header>
       <div class="imgWrp hideAbove-1">
-        <img src="./assets/images/user/abc1.jpg" alt="" />
+        <img src="{{ user.photoUrl }}" alt="" />
       </div>
       <div class="cnt">
-        <h1>Elizaveta</h1>
-        <h5 class="onlineStatus online">online</h5>
+        <h1>{{ user['username'] }}</h1>
+        <h5
+          *ngIf="presence$ | async as chatService"
+          class="onlineStatus online"
+          [ngClass]="{
+            'is-success': chatService.status === 'online',
+            'is-warning': chatService.status === 'away',
+            'is-danger': chatService.status === 'offline'
+          }"
+        >
+          {{ chatService.status }}
+        </h5>
         <button mat-button class="btnS" color="accent">
           <mat-icon>favorite_border</mat-icon>
           Like her
@@ -18,15 +28,17 @@
       </div>
     </header>
     <article class="chatStreamMessages">
-      <ul>
+      <ul #scroller>
         <li class="chatBubble hasArrow in">
-          <div>
+          <div *ngFor="let message of messageList | async">
             <a href="#" class="imgWrp">
-              <img src="./assets/images/user/abc1.jpg" alt="" />
+              <img src="{{ message.photoUrl }}" alt="" />
             </a>
             <div class="cnt arrow">
-              <small>at 13:45</small>
-              <p><span>Hello! I'm from Borovoy</span></p>
+              <small>at {{ message.timeSent }}</small>
+              <p>
+                <span>{{ message.message }}</span>
+              </p>
             </div>
           </div>
         </li>
@@ -35,13 +47,20 @@
     <footer>
       <form action="#">
         <div class="textarea">
-          <textarea name="message" id="writeMessage" cols="30" rows="2" placeholder="Write a message"></textarea>
-          <button class="btnPrimary">
+          <input
+            type="text"
+            id="writeMessage"
+            [(ngModel)]="newMsg"
+            (keydown.enter)="handleSubmit($event)"
+            placeholder="Write a message"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <button class="btnPrimary" (click)="newMessage()">
             <mat-icon>send</mat-icon>
           </button>
         </div>
         <div class="buttons">
-          <button mat-button class="icon-kiss">
+          <button mat-button type="button" class="icon-kiss">
             <mat-icon svgIcon="kiss-icon-red" aria-hidden="false"></mat-icon>
           </button>
         </div>
@@ -50,14 +69,13 @@
     <!-- profile for mobile -->
     <div class="chatProfileInfo">
       <a href="#" class="imgWrp">
-        <img src="./assets/images/user/abc1.jpg" alt="" />
+        <img src="{{ user.photoUrl }}" alt="" />
       </a>
       <div class="cnt">
-        <a href="#" class="h2 ellipsis chatProfileInfoName"> Elizaveta52 </a>
-        <p>30 years old from Yurga</p>
+        <a href="#" class="h2 ellipsis chatProfileInfoName"> {{ user.userName }} </a>
+        <p>{{ user.age }} years old from Yurga</p>
         <p>
-          I am a wife and a mother, but I do not feel fulfilled. I want to experience something exciting again - maybe
-          with a man who feels something similar?
+          {{ user.description }}
         </p>
       </div>
       <div class="box profileFacts">
@@ -65,11 +83,11 @@
           <!-- ngFor group -->
           <div class="group">
             <span class="dt">Looking for</span>
-            <span class="dd">Men</span>
+            <span class="dd">{{ user.lookingFor }}</span>
           </div>
           <div class="group">
             <span class="dt">Interested in</span>
-            <span class="dd">Acquaintance</span>
+            <span class="dd">{{ user.interests }}</span>
           </div>
         </div>
       </div>
@@ -79,14 +97,13 @@
 <aside class="asideLeft">
   <div class="chatProfileInfo">
     <a href="#" class="imgWrp">
-      <img src="./assets/images/user/abc1.jpg" alt="" />
+      <img src="{{ user.photoUrl }}" alt="" />
     </a>
     <div class="cnt">
-      <a href="#" class="h2 ellipsis chatProfileInfoName"> Elizaveta52 </a>
-      <p>30 years old from Yurga</p>
+      <a href="#" class="h2 ellipsis chatProfileInfoName"> {{ user.userName }} </a>
+      <p>{{ user.age }} years old from Yurga</p>
       <p>
-        I am a wife and a mother, but I do not feel fulfilled. I want to experience something exciting again - maybe
-        with a man who feels something similar?
+        {{ user.description }}
       </p>
     </div>
     <div class="box profileFacts">
@@ -94,11 +111,11 @@
         <!-- ngFor group -->
         <div class="group">
           <span class="dt">Looking for</span>
-          <span class="dd">Men</span>
+          <span class="dd">{{ user.lookingFor }}</span>
         </div>
         <div class="group">
           <span class="dt">Interested in</span>
-          <span class="dd">Acquaintance</span>
+          <span class="dd">{{ user.interests }}</span>
         </div>
       </div>
     </div>

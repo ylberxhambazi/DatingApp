@@ -333,6 +333,26 @@
   padding: 0.625rem;
 }
 
+.username,
+.userAgeCity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 !important;
+}
+
+.btnEdit {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+.fa-check {
+  color: #0099e4;
+}
+
 @media screen and (max-width: 880px) {
   .profilePage .profileHeader > .intro {
     padding: 1.25rem;

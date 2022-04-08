@@ -105,12 +105,12 @@
       </div>
     </div>
     <div class="publicTeaserList">
-      <mat-grid-list [cols]="breakpoint" rowHeight="3:4" (window:resize)="onResize($event)">
+      <!-- <mat-grid-list [cols]="breakpoint" rowHeight="3:4" (window:resize)="onResize($event)">
         <mat-grid-tile *ngFor="let publicProfile of publicProfiles">
-          <app-profile-teaser [profile]="publicProfile" [type]="ProfileType" class="profileTeaser public">
+          <app-profile-teaser [user]="publicProfile" [type]="ProfileType" class="profileTeaser public">
           </app-profile-teaser>
         </mat-grid-tile>
-      </mat-grid-list>
+      </mat-grid-list> -->
     </div>
     <div class="container">
       <app-article

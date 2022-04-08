@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
+import { FaqComponent } from './main/faq/faq.component'
+import { PrivacyPolicyComponent } from './main/privacy-policy/privacy-policy.component'
+import { TermsComponent } from './main/terms/terms.component'
 import { AuthGuard } from './_guards/auth.guard'
 import { ProfileListResolver } from './_resolvers/profile-list.resolver'
 
@@ -20,7 +23,19 @@ const routes: Routes = [
       }
     ],
   },
-  { path: '**', redirectTo: '/auth', pathMatch: 'full' },
+  {
+    path: 'privacy',
+    component: PrivacyPolicyComponent
+  },
+  {
+    path: 'terms',
+    component: TermsComponent
+  },
+  {
+    path: 'faq',
+    component: FaqComponent
+  },
+  { path: '', redirectTo: '/auth', pathMatch: 'full' },
 ]
 
 @NgModule({

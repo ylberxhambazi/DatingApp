@@ -30,7 +30,11 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery'
 import { FileUploadModule } from 'ng2-file-upload'
 import { PhotoEditorComponent } from '../shared/ui/card/photo-editor/photo-editor.component'
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { DateAgoPipe } from '../_pipes/DateAgoPipe.pipe'
+import { DateAgoPipe } from '../_pipes/DateAgoPipe.pipe';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsComponent } from './terms/terms.component';
+import { FaqComponent } from './faq/faq.component'
+import { RolesModalComponent } from '../admin/roles-modal/roles-modal.component'
 
 @NgModule({
   declarations: [
@@ -46,7 +50,11 @@ import { DateAgoPipe } from '../_pipes/DateAgoPipe.pipe'
     ChatComponent,
     ProfileComponent,
     PhotoEditorComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    PrivacyPolicyComponent,
+    TermsComponent,
+    FaqComponent,
+    RolesModalComponent
   ],
   imports: [
     CommonModule,
