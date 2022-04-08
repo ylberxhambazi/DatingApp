@@ -8,7 +8,7 @@ import { ProfileListResolver } from './_resolvers/profile-list.resolver'
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {

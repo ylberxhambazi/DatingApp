@@ -33,8 +33,10 @@ export class MainHeaderComponent implements OnInit {
     this.authService.currentUser = null;
     this.authService.signOut();
     this.chatService.signOut();
-    this.router.navigateByUrl('/auth/login');
-    window.location.reload();
+    this.router.navigateByUrl('');
+    setTimeout(() => {
+      window.location.reload();
+    }, 250);
   }
 
   onMyProfile() {

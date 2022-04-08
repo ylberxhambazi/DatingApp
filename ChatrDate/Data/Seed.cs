@@ -35,6 +35,7 @@ namespace ChatrDate.Data
 
                 foreach (var user in users)
                 {
+                    user.UserName = user.UserName.ToLower();
                     userManager.CreateAsync(user, "password").Wait();
                     userManager.AddToRoleAsync(user, "Member").Wait();
                 }

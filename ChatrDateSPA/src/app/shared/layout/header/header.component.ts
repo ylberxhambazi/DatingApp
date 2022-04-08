@@ -9,16 +9,16 @@ import { LoginDialogComponent } from '../../ui/dialog/login-dialog/login-dialog.
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(public dialog: MatDialog, private router: Router) {}
+  constructor(public dialog: MatDialog, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onLogin() {
-    this.router.navigateByUrl('/auth/login')
+    this.router.navigateByUrl('/login')
   }
 
   onRegistration() {
-    this.router.navigateByUrl('/auth/registration')
+    this.router.navigateByUrl('/registration')
   }
 
   openLoginDialog() {

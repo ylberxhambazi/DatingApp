@@ -39,16 +39,21 @@ namespace ChatrDate.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
+            if (await UserExists(userForRegisterDto.Username)) return BadRequest("Username is taken");
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+            var roleResult = await _userManager.AddToRoleAsync(userToCreate, "Member");
             var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
             if (result.Succeeded)
             {
-                return CreatedAtRoute("GetUser", new
+                if (roleResult.Succeeded)
                 {
-                    controller = "Users",
-                    id = userToCreate.Id
-                }, userToReturn);
+                    return CreatedAtRoute("GetUser", new
+                    {
+                        controller = "Users",
+                        id = userToCreate.Id
+                    }, userToReturn);
+                }
             }
             return BadRequest(result.Errors);
         }
@@ -103,6 +108,10 @@ namespace ChatrDate.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+        private async Task<bool> UserExists(string username)
+        {
+            return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());
         }
     }
 }

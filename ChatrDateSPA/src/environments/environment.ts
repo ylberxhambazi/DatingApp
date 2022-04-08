@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:44378/api/',
+  apiUrl: 'https://localhost:5001/api/',
   firebase: {
     apiKey: "AIzaSyDCTp0fyN8svydB4lRhTCtZ567coR-zVu0",
     authDomain: "datingapp-chatr.firebaseapp.com",
