@@ -99,7 +99,7 @@ namespace ChatrDate
             services.AddScoped<IAddaptDating, AddaptDating>();
             services.AddScoped<LogUserActivity>();
             // Heroku setup
-            services.AddEntityFrameworkNpgsql().AddDbContext<AddaptAppDatingAPIContext>(options =>
+            services.AddDbContext<AddaptAppDatingAPIContext>(options =>
             {
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
                 string connStr;
