@@ -16,8 +16,7 @@ namespace ChatrDate.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.12")
-                .HasAnnotation("Relational:Collation", "Latin1_General_CI_AS")
+                .HasAnnotation("ProductVersion", "3.1.18")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("ChatrDate.Models.Favorites", b =>
@@ -116,114 +115,6 @@ namespace ChatrDate.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
-                });
-
-            modelBuilder.Entity("ChatrDate.Models.Sample", b =>
-                {
-                    b.Property<int>("MemberId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int?>("AgeFrom")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("AgeTo")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Birthdate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("BodyType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("City")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Drink")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Education")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EyeColor")
-                        .HasColumnType("text");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("text");
-
-                    b.Property<string>("HairColor")
-                        .HasColumnType("text");
-
-                    b.Property<string>("HaveChildren")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Headline")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Height")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Interests")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LookingFor")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MaritalStatus")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Occupation")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("PhotoCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Race")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Religion")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SeekGender")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SexualOrientation")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Smoke")
-                        .HasColumnType("text");
-
-                    b.Property<string>("State")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("text");
-
-                    b.Property<string>("WantChildren")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Zip")
-                        .HasColumnType("text");
-
-                    b.HasKey("MemberId");
-
-                    b.ToTable("Samples");
                 });
 
             modelBuilder.Entity("ChatrDate.Models.User", b =>

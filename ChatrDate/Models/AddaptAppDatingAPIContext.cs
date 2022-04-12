@@ -8,38 +8,46 @@ namespace ChatrDate.Models
 {
     public class AddaptAppDatingAPIContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
-        public AddaptAppDatingAPIContext(DbContextOptions<AddaptAppDatingAPIContext> options)
+        public AddaptAppDatingAPIContext(DbContextOptions options)
             : base(options)
         {
         }
 
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<Sample> Samples { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Visitors> Visitors { get; set; }
         public DbSet<Favorites> Favorites { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
-
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<UserRole>(userRole =>
-            {
-                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+            // modelBuilder.Entity<UserRole>(userRole =>
+            // {
+            //     userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
 
-                userRole.HasOne(ur => ur.Role)
-                    .WithMany(r => r.UserRoles)
-                    .HasForeignKey(ur => ur.RoleId)
-                    .IsRequired();
+            //     userRole.HasOne(ur => ur.Role)
+            //         .WithMany(r => r.UserRoles)
+            //         .HasForeignKey(ur => ur.RoleId)
+            //         .IsRequired();
 
 
-                userRole.HasOne(ur => ur.User)
-                    .WithMany(r => r.UserRoles)
-                    .HasForeignKey(ur => ur.UserId)
-                    .IsRequired();
-            });
+            //     userRole.HasOne(ur => ur.User)
+            //         .WithMany(r => r.UserRoles)
+            //         .HasForeignKey(ur => ur.UserId)
+            //         .IsRequired();
+            // });
+            modelBuilder.Entity<User>()
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.User)
+                .HasForeignKey(ur => ur.UserId)
+                .IsRequired();
+
+            modelBuilder.Entity<Role>()
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.Role)
+                .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
 
             modelBuilder.Entity<Like>()
                 .HasKey(k => new { k.LikerId, k.LikeeId });

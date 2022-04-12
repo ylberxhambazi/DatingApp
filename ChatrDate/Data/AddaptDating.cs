@@ -50,18 +50,6 @@ namespace ChatrDate.Data
             return photo;
         }
 
-        public async Task<Sample> GetSample(int id)
-        {
-            var sample = await _context.Samples.FirstOrDefaultAsync(s => s.MemberId == id);
-            return sample;
-        }
-
-        public async Task<IEnumerable<Sample>> GetSamples()
-        {
-            var samples = await _context.Samples.ToListAsync();
-            return samples;
-        }
-
         public async Task<User> GetUser(int id, bool isCurrentUser)
         {
             var query = _context.Users.Include(p => p.Photos).Include(f => f.Actives).Include(fd => fd.Deactives).Include(v => v.ViewVisitors).Include(l => l.Likers).AsQueryable();

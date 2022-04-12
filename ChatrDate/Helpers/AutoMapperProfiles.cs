@@ -45,16 +45,6 @@ namespace ChatrDate.Helpers
                 {
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
-            CreateMap<Sample, SamplesForListDto>()
-                .ForMember(dest => dest.Age, opt =>
-                {
-                    opt.ResolveUsing(d => d.Birthdate.CalculateAge());
-                });
-            CreateMap<Sample, SamplesForDetailedDto>()
-                .ForMember(dest => dest.Age, opt =>
-                {
-                    opt.ResolveUsing(d => d.Birthdate.CalculateAge());
-                });
             CreateMap<UserForUpdateDto, User>();
             CreateMap<Photo, PhotosForDetailedDto>();
             CreateMap<Photo, PhotoForReturnDto>();

@@ -18,24 +18,24 @@ namespace ChatrDate
     {
         public static void Main(string[] args)
         {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            // AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             var host = CreateHostBuilder(args).Build();
-            using (var scope = host.Services.CreateScope())
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            Console.WriteLine("host, scope, services", host, scope, services);
+            try
             {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var context = services.GetRequiredService<AddaptAppDatingAPIContext>();
-                    var userManager = services.GetRequiredService<UserManager<User>>();
-                    var roleManager = services.GetRequiredService<RoleManager<Role>>();
-                    context.Database.Migrate();
-                    Seed.SeedUsers(userManager, roleManager);
-                }
-                catch (System.Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occured during migration");
-                }
+                var context = services.GetRequiredService<AddaptAppDatingAPIContext>();
+                var userManager = services.GetRequiredService<UserManager<User>>();
+                var roleManager = services.GetRequiredService<RoleManager<Role>>();
+                Console.WriteLine("context, userM, userR", context, userManager, roleManager);
+                context.Database.Migrate();
+                Seed.SeedUsers(userManager, roleManager);
+            }
+            catch (System.Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occured during migration");
             }
             host.Run();
         }
