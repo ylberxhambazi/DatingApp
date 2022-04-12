@@ -42,7 +42,7 @@ namespace ChatrDate
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AddaptAppDatingAPIContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("HerokuConnectionString")));
 
             services.AddIdentityCore<User>(opt =>
             {
@@ -119,7 +119,7 @@ namespace ChatrDate
                 if (env == "Development")
                 {
                     // Use connection string from file.
-                    connStr = Configuration.GetConnectionString("DefaultConnection");
+                    connStr = Configuration.GetConnectionString("HerokuConnectionString");
                     Console.WriteLine("default constr: ", connStr);
                 }
                 else
