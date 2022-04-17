@@ -40,7 +40,7 @@ namespace ChatrDate.Controllers
             {
                 userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
             }
-            
+
             var users = await _repo.GetUsers(userParams);
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
             Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);

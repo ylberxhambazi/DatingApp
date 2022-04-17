@@ -8,12 +8,12 @@
     <div class="box profileHeader">
       <article class="profileInfo">
         <a href="#" class="imgWrp">
-          <img src="{{ photoUrl || './assets/images/profile/fallback-male.jpg' }}" alt="" />
+          <img src="{{ photoUrl || './assets/images/profile/fallback-male.jpg' }}" alt="getUsername()" />
         </a>
         <div class="intro-container">
           <div class="intro">
             <div class="username">
-              <h1>{{ user.userName }}</h1>
+              <h1>{{ getUsername() }}</h1>
               <i class="fa fa-pencil"></i>
             </div>
             <div class="userAgeCity">
@@ -28,8 +28,8 @@
         </div>
       </article>
       <div class="intro">
-        <h1>{{ user.userName }}<span class="onlineStatus online">online</span></h1>
-        <h2>25 years old from {{ user.userName }}</h2>
+        <h1>{{ getUsername() }}<span class="onlineStatus online">online</span></h1>
+        <h2>{{ user.age }} years old from {{ getUsername() }}</h2>
       </div>
     </div>
     <div class="box profileFacts">

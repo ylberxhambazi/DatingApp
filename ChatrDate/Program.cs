@@ -22,13 +22,11 @@ namespace ChatrDate
             var host = CreateHostBuilder(args).Build();
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
-            Console.WriteLine("host, scope, services", host, scope, services);
             try
             {
                 var context = services.GetRequiredService<AddaptAppDatingAPIContext>();
                 var userManager = services.GetRequiredService<UserManager<User>>();
                 var roleManager = services.GetRequiredService<RoleManager<Role>>();
-                Console.WriteLine("context, userM, userR", context, userManager, roleManager);
                 context.Database.Migrate();
                 Seed.SeedUsers(userManager, roleManager);
             }

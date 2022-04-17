@@ -102,4 +102,8 @@ export class MyProfileComponent implements OnInit {
       // interest.removeAt(index);
     }
   }
+
+  getUsername() {
+    return this.user['username']
+  }
 }

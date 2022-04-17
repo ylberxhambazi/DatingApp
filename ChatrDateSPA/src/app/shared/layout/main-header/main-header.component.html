@@ -2,11 +2,15 @@
   <div class="container">
     <div class="logoContainer">
       <div class="logo">
-        <a [routerLink]="['/main']"><img src="../../assets/images/logo.svg" alt="" /></a>
+        <a [routerLink]="['/main']"
+          ><h3>ChatrDate</h3>
+          <!-- <img src="../../assets/images/logo.svg" alt="" /> -->
+        </a>
       </div>
     </div>
     <nav class="mainNav">
-      <a [routerLink]="['/main/chats']" routerLinkActive="active" data-count="2">
+      <a [routerLink]="['/main/chats']" routerLinkActive="active">
+        <!-- data-count="2" -->
         <mat-icon>chat</mat-icon>
         <span class="label">Chats</span>
       </a>
