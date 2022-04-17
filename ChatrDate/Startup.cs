@@ -119,7 +119,6 @@ namespace ChatrDate
                 {
                     // Use connection string from file.
                     connStr = Configuration.GetConnectionString("HerokuConnectionString");
-                    Console.WriteLine("default constr: ", connStr);
                 }
                 else
                 {
