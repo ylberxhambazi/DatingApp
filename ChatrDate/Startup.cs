@@ -104,8 +104,6 @@ namespace ChatrDate
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(AddaptDating).Assembly);
-            // services.AddTransient<Seed>();
-            // services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAddaptDating, AddaptDating>();
             services.AddScoped<LogUserActivity>();
             // Heroku setup
