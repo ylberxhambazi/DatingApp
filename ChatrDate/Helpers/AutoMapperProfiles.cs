@@ -20,22 +20,6 @@ namespace ChatrDate.Helpers
                 .ForMember(dest => dest.Age, opt =>
                 {
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
-                })
-                .ForMember(fav => fav.Favorites, opt =>
-                {
-                    opt.MapFrom(src => src.Actives.FirstOrDefault(f => f.FavoriteActive).FavoriteActive);
-                })
-                .ForMember(fav => fav.Favorites, opt =>
-                {
-                    opt.MapFrom(src => src.Deactives.FirstOrDefault(f => f.FavoriteActive).FavoriteActive);
-                })
-                .ForMember(visit => visit.Visitor, opt =>
-                {
-                    opt.MapFrom(src => src.Visitores.FirstOrDefault().VisitorCount);
-                })
-                .ForMember(like => like.Like, opt =>
-                {
-                    opt.MapFrom(src => src.Likers.FirstOrDefault().LikeeId);
                 });
             CreateMap<User, UserForDetailedDto>()
                 .ForMember(dest => dest.PhotoUrl, opt =>

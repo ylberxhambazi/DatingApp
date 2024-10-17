@@ -19,5 +19,6 @@ namespace ChatrDate.Data
         Task<Like> GetLike(int userId, int recepientId);
         Task<Visitors> GetVisitors(int userId, int recipientVisitorId);
         Task<Favorites> GetFavorites(int userId, int recipientFavoriteId);
+        Task<bool> CheckFavorites(int userId);
     }
 }

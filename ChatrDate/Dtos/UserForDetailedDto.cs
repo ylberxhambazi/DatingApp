@@ -30,6 +30,7 @@ namespace ChatrDate.Dtos
         public string Drink { get; set; }
         public string Education { get; set; }
         public string Occupation { get; set; }
+        public string Language { get; set; }
         public ICollection<PhotosForDetailedDto> Photos { get; set; }
     }
 }

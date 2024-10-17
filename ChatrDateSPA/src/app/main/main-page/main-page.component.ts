@@ -49,11 +49,6 @@ export class MainPageComponent implements OnInit {
   breakpoint: number
   likesParam: string
   location = {}
-  setPosition(position) {
-    this.location = position.cords
-    console.log(this.location)
-  }
-  city: any
 
   constructor(private userServices: UserService, private route: ActivatedRoute, private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private authService: AuthService, private chatService: ChatService) {
     this.matIconRegistry.addSvgIcon(
@@ -78,17 +73,22 @@ export class MainPageComponent implements OnInit {
       this.pagination = data['users'].pagination;
     })
 
+    this.getLocationAndSetCity();
+
     this.likesParam = 'Likers';
 
     this.userParams.gender = this.user?.gender === 'female' ? 'male' : 'female';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
+    this.userParams.city ? this.userParams.city : 'Unknown';
 
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       this.authService.currentUser = user;
     }
+  }
 
+  private getLocationAndSetCity(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.location = position.coords;
@@ -99,7 +99,7 @@ export class MainPageComponent implements OnInit {
         fetch(mapUrl)
           .then(res => res.json())
           .then((out) => {
-            this.city = out.city
+            this.userParams.city = out.city;
           })
           .catch(err => { throw err })
       });
@@ -133,6 +133,7 @@ export class MainPageComponent implements OnInit {
     this.userServices.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams).subscribe(
       (res: PaginatedResult<User[]>) => {
         this.users = res.result;
+        console.log(this.users)
         this.pagination = res.pagination;
       },
       (error) => {
@@ -142,20 +143,6 @@ export class MainPageComponent implements OnInit {
   }
 
   cityValue() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.location = position.coords;
-        const latitude = position.coords.latitude
-        const longitude = position.coords.longitude
-        let mapUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-
-        fetch(mapUrl)
-          .then(res => res.json())
-          .then((out) => {
-            this.city = out.city
-          })
-          .catch(err => { throw err })
-      });
-    }
+    this.getLocationAndSetCity();
   }
 }

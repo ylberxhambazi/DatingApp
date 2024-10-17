@@ -120,6 +120,7 @@ export class FavoritesComponent implements OnInit {
   ngOnInit(): void {
     this.activeRoute.data.subscribe(data => {
       this.users = data["user"].result;
+      console.log(this.users)
       this.pagination = data["user"].pagination;
     });
     this.favoritesParam = 'FavoritsActives'

@@ -24,196 +24,22 @@ export class MainComponent implements OnInit {
   userParams: any = {};
   pagination: Pagination;
   likesParam: string;
+  visitorParam: string;
+  favoritesParam: string;
+  selectedNotificationType: string;
+  likesUsers: User[];
+  favoritesUsers: User[];
+  visitorsUsers: User[];
 
-  streamRecords: StreamTeaser[] = [
-    {
-      name: 'abc1',
-      image: 'abc1.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc2',
-      image: 'abc2.jpg',
-      timeAt: '19:00',
-      type: 'message',
-      status: 'visit',
-      msg: 'has visited your Profile',
-      online: true,
-    },
-    {
-      name: 'abc3',
-      image: 'abc3.jpg',
-      timeAt: '18:00',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc4',
-      image: 'abc4.jpg',
-      timeAt: '17:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc5',
-      image: 'abc5.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc6',
-      image: 'abc6.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc7',
-      image: 'abc7.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc8',
-      image: 'abc8.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc9',
-      image: 'abc9.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc10',
-      image: 'abc10.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc11',
-      image: 'abc11.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc12',
-      image: 'abc12.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc13',
-      image: 'abc13.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc14',
-      image: 'abc14.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc15',
-      image: 'abc15.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-    {
-      name: 'abc16',
-      image: 'abc16.jpg',
-      timeAt: '20:08',
-      type: 'message',
-      status: 'sent',
-      msg: 'sent message to you',
-      online: true,
-    },
-  ]
+  messageStream: StreamTeaser[];
+  likeStream: StreamTeaser[];
+  kissStream: StreamTeaser[];
+  profileVisitStream: StreamTeaser[];
 
-  isMinValueInit = true
-  isMaxValueInit = true
-  thumbLabel = true
-
-  @Input() minValue: number
-  @Input() maxValue: number
-  @Input() minColor: ThemePalette = 'accent'
-  @Input() maxColor: ThemePalette = 'accent'
-
-  @Input() formatLabel = (v) => v
-
-  @Output() output = new EventEmitter<RangeType>()
-
-  maxConf = 80
-
-  @Input()
-  set max(m: number) {
-    this.maxConf = parseInt(m.toString(), 10)
-  }
-  get max(): number {
-    return this.maxConf
-  }
-
-  minConf = 18
-
-  @Input()
-  set min(m: number) {
-    this.minConf = parseInt(m.toString(), 10)
-  }
-  get min(): number {
-    return this.minConf
-  }
-
-  @Input()
-  set value(v: { min: number; max: number }) {
-    this.minValue = v.min
-    this.maxValue = v.max
-  }
-
-  get rulerArray(): number[] {
-    return [...Array(this.max - this.min).keys()].map((i) => i + this.min)
-  }
+  messageStreamLoaded: boolean = false;
+  likeStreamLoaded: boolean = false;
+  kissStreamLoaded: boolean = false;
+  profileVisitStreamLoaded: boolean = false;
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -237,30 +63,26 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.minValue) {
-      this.minValue = this.min
-    }
-    if (!this.maxValue) {
-      this.maxValue = this.max
-    }
-    this.isMinValueInit = this.minValue === this.min
-    this.isMaxValueInit = this.maxValue === this.max
-    this.output.emit({ min: this.minValue, max: this.maxValue })
-
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     });
+
     this.likesParam = 'Likers';
+    this.favoritesParam = 'FavoritsActives'
 
     this.userParams.gender = this.user?.gender === 'female' ? 'male' : 'female';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
+    this.userParams.city = '';
 
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       this.authService.currentUser = user;
     }
+
+    this.selectedNotificationType = 'message';
+    this.loadNotifications();
   }
 
   changeGender(gender) {
@@ -273,30 +95,8 @@ export class MainComponent implements OnInit {
     return style
   }
 
-  valueChange(): void {
-    this.output.emit({ min: this.minValue, max: this.maxValue })
-  }
-
-  minValueInput(a: MatSliderChange): void {
-    this.isMinValueInit = a.value === this.min
-    if (a.value >= this.maxValue) {
-      a.source.value = this.maxValue
-    }
-  }
-
-  maxValueInput(a: MatSliderChange): void {
-    this.isMaxValueInit = a.value === this.max
-    if (a.value <= this.minValue) {
-      a.source.value = this.minValue
-    }
-  }
-
   loggedIn() {
     return this.authService.loggedIn()
-  }
-
-  firebaseLogin() {
-    return this.authService.firebaseLogin();
   }
 
   pageChanged(event: any): void {
@@ -308,11 +108,104 @@ export class MainComponent implements OnInit {
     this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams).subscribe(
       (res: PaginatedResult<User[]>) => {
         this.users = res.result;
+        if (this.selectedNotificationType === 'message') {
+          this.users;
+        }
         this.pagination = res.pagination;
       },
       (error) => {
         error = error
       }
     )
+  }
+
+  loadLike() {
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, null, this.likesParam).subscribe(
+      (res: PaginatedResult<User[]>) => {
+        this.likesUsers = res.result;
+        this.likeStream = this.likesUsers.map((user) => ({
+          image: user.photoUrl || '',
+          type: 'like',
+          timeAt: new Date().toISOString(),
+          msg: 'liked your profile',
+          name: user['username'] || 'Default Name',
+          online: true,
+          status: 'liked'
+        }));
+        this.likeStreamLoaded = true;
+        this.pagination = res.pagination;
+      })
+  }
+
+  loadFavorite() {
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, null, null, this.favoritesParam).subscribe(
+      (res: PaginatedResult<User[]>) => {
+        this.favoritesUsers = res.result;
+        this.kissStream = this.favoritesUsers.map((user) => ({
+          image: user.photoUrl || '',
+          type: 'kiss',
+          timeAt: new Date().toISOString(),
+          msg: 'favorited your profile',
+          name: user['username'] || 'Default Name',
+          online: true,
+          status: 'favorited'
+        }));
+        this.kissStreamLoaded = true;
+        this.pagination = res.pagination;
+      })
+  }
+
+  loadVisitor() {
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, null, null, null, this.visitorParam).subscribe(
+      (res: PaginatedResult<User[]>) => {
+        this.visitorsUsers = res.result;
+        this.profileVisitStream = this.visitorsUsers.map((user) => ({
+          image: user.photoUrl || '',
+          type: 'profileVisit',
+          timeAt: new Date().toISOString(),
+          msg: 'has visited your profile',
+          name: user['username'] || 'Default Name',
+          online: true,
+          status: 'visit'
+        }));
+        this.profileVisitStreamLoaded = true;
+        this.pagination = res.pagination;
+      })
+  }
+
+  changeNotificationType(type: string) {
+    this.selectedNotificationType = type;
+    this.loadNotifications(); // Load notifications when the notification type changes
+  }
+
+  loadNotifications() {
+    switch (this.selectedNotificationType) {
+      case 'message':
+        if (!this.messageStreamLoaded) {
+          this.loadUsers();
+        }
+        break;
+      case 'like':
+        this.likesParam = 'Likers';
+        if (!this.likeStreamLoaded) {
+          this.loadLike();
+        }
+        break;
+      case 'kiss':
+        this.favoritesParam = 'FavoritsActives';
+        if (!this.kissStreamLoaded) {
+          this.loadFavorite();
+        }
+        break;
+      case 'profileVisit':
+        this.visitorParam = 'VisitorCount';
+        if (!this.profileVisitStreamLoaded) {
+          this.loadVisitor();
+        }
+        break;
+      default:
+        console.error('Invalid notification type');
+        break;
+    }
   }
 }

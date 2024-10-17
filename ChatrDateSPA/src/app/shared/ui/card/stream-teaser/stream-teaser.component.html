@@ -1,28 +1,122 @@
-<div *ngFor="let itemChat of chatList | async">
-  <a
-    [attr.data-label]="itemChat.seen == false ? true : itemChat.seen == true ? 'Profile' : null"
-    [routerLink]="['/main/chat', users.id]"
-    [class]="getStreamTeaserClass()"
-    title="at 20:28"
-  >
-    <div class="imgWrp">
-      <img [src]="itemChat?.photoUrl" [alt]="itemChat.userReceived" />
-    </div>
-    <div class="cnt" [attr.data-batch]="itemChat.seen == false ? true : null">
-      <h4 [class.ellipsis]="itemChat.seen != false">
-        {{ itemChat.userReceived }}
-        <span class="date onlineStatus online">at {{ itemChat.timeSent | date: 'short' }}</span>
-      </h4>
-      <strong>{{ itemChat.message }}</strong>
-    </div>
-    <div *ngIf="itemChat.seen != true" class="buttons">
-      <button mat-raised-button class="btn readButton">read</button>
-      <button mat-raised-button class="btn archiveChat">
-        <mat-icon>delete_forever</mat-icon>
-      </button>
-    </div>
-  </a>
-  <button mat-icon-button class="delete" color="warn">
-    <mat-icon>close</mat-icon>
-  </button>
+<div *ngIf="showMessages && selectedNotificationType === 'message'">
+  <div *ngFor="let itemChat of chatList | async">
+    <a
+      [attr.data-label]="itemChat.seen == false ? true : itemChat.seen == true ? 'Profile' : null"
+      [routerLink]="['/main/chat', users.id]"
+      [class]="getStreamTeaserClass()"
+      title="at {{ itemChat.timeSent | date: 'short' }}"
+    >
+      <div class="imgWrp">
+        <img [src]="itemChat.photoUrl" [alt]="itemChat.userReceived" />
+      </div>
+      <div class="cnt" [attr.data-batch]="itemChat.seen === false ? true : null">
+        <h4 [class.ellipsis]="itemChat.seen">
+          {{ itemChat.userReceived }}
+          <span class="date onlineStatus online">at {{ itemChat.timeSent | date: 'short' }}</span>
+        </h4>
+        <strong>{{ itemChat.message }}</strong>
+      </div>
+      <div *ngIf="itemChat.seen != true" class="buttons">
+        <button mat-raised-button class="btn readButton">read</button>
+        <button mat-raised-button class="btn archiveChat">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </a>
+    <button mat-icon-button class="delete" color="warn" (click)="closeMessages()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+<div *ngIf="showLikes && selectedNotificationType === 'like'">
+  <div *ngFor="let user of likesUsers; let i = index">
+    <!-- Assuming stream is an array of StreamTeaser objects -->
+    <a
+      [attr.data-label]="stream && stream[i]?.online == false ? true : stream[i]?.online == true ? 'Profile' : null"
+      [routerLink]="['/main/likes']"
+      [class]="getStreamTeaserClass()"
+      title="at {{ stream[i]?.timeAt | date: 'short' }}"
+    >
+      <div class="imgWrp">
+        <img [src]="stream[i]?.image" [alt]="user.username" />
+      </div>
+      <div class="cnt" [attr.data-batch]="stream && stream[i]?.online === false ? true : null">
+        <h4 [class.ellipsis]="stream && !stream[i]?.online">
+          {{ user.username }}
+          <span class="date onlineStatus online">at {{ stream[i]?.timeAt | date: 'short' }}</span>
+        </h4>
+        <strong>{{ stream[i]?.msg }}</strong>
+      </div>
+      <div *ngIf="stream && !stream[i]?.online != true" class="buttons">
+        <button mat-raised-button class="btn readButton">read</button>
+        <button mat-raised-button class="btn archiveChat">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </a>
+    <button mat-icon-button class="delete" color="warn" (click)="closeLikes()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="showFavorites && selectedNotificationType === 'kiss'">
+  <div *ngFor="let user of favoritesUsers; let i = index">
+    <a
+      [attr.data-label]="stream && stream[i]?.online == false ? true : stream[i]?.online == true ? 'Profile' : null"
+      [routerLink]="['/main/favorites']"
+      [class]="getStreamTeaserClass()"
+      title="at {{ stream[i]?.timeAt | date: 'short' }}"
+    >
+      <div class="imgWrp">
+        <img [src]="stream[i]?.image" [alt]="user.userReceived" />
+      </div>
+      <div class="cnt" [attr.data-batch]="stream && stream[i]?.online === false ? true : null">
+        <h4 [class.ellipsis]="stream && !stream[i]?.online">
+          {{stream[i]?.name}}
+          <span class="date onlineStatus online">at {{ stream[i]?.timeAt | date: 'short' }}</span>
+        </h4>
+        <strong>{{ stream[i]?.msg }}</strong>
+      </div>
+      <div *ngIf="stream && !stream[i]?.online != true" class="buttons">
+        <button mat-raised-button class="btn readButton">read</button>
+        <button mat-raised-button class="btn archiveChat">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </a>
+    <button mat-icon-button class="delete" color="warn" (click)="closeFavorites()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+<div *ngIf="showVisitors && selectedNotificationType === 'profileVisit'">
+  <div *ngFor="let user of visitorsUsers; let i = index">
+    <a
+      [attr.data-label]="stream && stream[i]?.online == false ? true : stream[i]?.online == true ? 'Profile' : null"
+      [routerLink]="['/main/visitors']"
+      [class]="getStreamTeaserClass()"
+      title="at {{ stream[i]?.timeAt | date: 'short' }}"
+    >
+      <div class="imgWrp">
+        <img [src]="stream[i]?.image" [alt]="user.userReceived" />
+      </div>
+      <div class="cnt" [attr.data-batch]="stream && stream[i]?.online === false ? true : null">
+        <h4 [class.ellipsis]="stream && !stream[i]?.online">
+          {{stream[i]?.name}}
+          <span class="date onlineStatus online">at {{ stream[i]?.timeAt | date: 'short' }}</span>
+        </h4>
+        <strong>{{ stream[i]?.msg }}</strong>
+      </div>
+      <div *ngIf="stream && !stream[i]?.online != true" class="buttons">
+        <button mat-raised-button class="btn readButton">read</button>
+        <button mat-raised-button class="btn archiveChat">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+    </a>
+    <button mat-icon-button class="delete" color="warn" (click)="closeVisitor()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 </div>

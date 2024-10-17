@@ -9,7 +9,7 @@
         </a>
         <div class="intro">
           <h1>
-            {{ user?.userName }}
+            {{ user["username"] }}
             <span
               *ngIf="presence$ | async as chatService"
               class="onlineStatus online"
@@ -21,12 +21,13 @@
               >{{ chatService.status }}</span
             >
           </h1>
-          <h2>{{ user?.age }} years old from {{ user?.userName }}</h2>
+          <h2>{{ user?.age }} years old from {{ user["username"] }}</h2>
         </div>
       </article>
       <nav class="profileMenu">
         <button mat-button class="profileMenuBtn" (click)="sendLike(user.id)">
-          <mat-icon>favorite_border</mat-icon><span>Like Her</span>
+          <mat-icon>{{ getLikes ? 'favorite' : 'favorite_border' }}</mat-icon>
+          <span>{{ getLikes ? 'Liked her' : 'Like Her' }}</span>
         </button>
         <button mat-button class="profileMenuBtn"><mat-icon>chat</mat-icon><span>Send Her a Message</span></button>
         <button mat-button class="profileMenuBtn">
@@ -34,13 +35,14 @@
           <span>Send Her a Kiss</span>
         </button>
         <button mat-button class="profileMenuBtn" (click)="FavoritsActives(user.id)">
-          <mat-icon>star_outline</mat-icon><span>Add As Favorite</span>
+          <mat-icon>{{ getFavorites ? 'star' : 'star_outline' }}</mat-icon
+          ><span>{{ getFavorites ? 'Added' : 'Add As Favorite' }}</span>
         </button>
         <button mat-button class="profileMenuBtn discreet"><mat-icon>block</mat-icon><span>Block Her</span></button>
       </nav>
       <div class="intro">
         <h1>
-          {{ user?.userName
+          {{ user["username"]
           }}<span
             *ngIf="presence$ | async as chatService"
             class="onlineStatus online"
@@ -52,7 +54,7 @@
             >{{ chatService.status }}</span
           >
         </h1>
-        <h2>{{ user?.age }} years old from {{ user?.userName }}</h2>
+        <h2>{{ user?.age }} years old from {{ user["username"] }}</h2>
       </div>
     </div>
     <div class="box profileFacts">

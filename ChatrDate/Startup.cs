@@ -2,6 +2,7 @@ using AutoMapper;
 using ChatrDate.Data;
 using ChatrDate.Helpers;
 using ChatrDate.Models;
+//using EmailService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -42,7 +43,7 @@ namespace ChatrDate
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AddaptAppDatingAPIContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("HerokuConnectionString")));
+                options.UseSqlServer(Configuration.GetConnectionString("LocalSqlServerConnection")));
 
             services.AddIdentityCore<User>(opt =>
             {
@@ -106,6 +107,8 @@ namespace ChatrDate
             services.AddAutoMapper(typeof(AddaptDating).Assembly);
             services.AddScoped<IAddaptDating, AddaptDating>();
             services.AddScoped<LogUserActivity>();
+            // services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+            // services.AddScoped<IEmailSender, EmailSender>();
             // Heroku setup
             services.AddDbContext<AddaptAppDatingAPIContext>(options =>
             {
@@ -116,28 +119,29 @@ namespace ChatrDate
                 if (env == "Development")
                 {
                     // Use connection string from file.
-                    connStr = Configuration.GetConnectionString("HerokuConnectionString");
+                    connStr = Configuration.GetConnectionString("LocalSqlServerConnection");
                 }
                 else
                 {
                     // Use connection string provided at runtime by Heroku.
                     var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-                    // Parse connection URL to connection string for Npgsql
-                    connUrl = connUrl.Replace("postgres://", string.Empty);
-                    var pgUserPass = connUrl.Split("@")[0];
-                    var pgHostPortDb = connUrl.Split("@")[1];
-                    var pgHostPort = pgHostPortDb.Split("/")[0];
-                    var pgDb = pgHostPortDb.Split("/")[1];
-                    var pgUser = pgUserPass.Split(":")[0];
-                    var pgPass = pgUserPass.Split(":")[1];
-                    var pgHost = pgHostPort.Split(":")[0];
-                    var pgPort = pgHostPort.Split(":")[1];
+                    // // Parse connection URL to connection string for Npgsql
+                    // connUrl = connUrl.Replace("postgres://", string.Empty);
+                    // var pgUserPass = connUrl.Split("@")[0];
+                    // var pgHostPortDb = connUrl.Split("@")[1];
+                    // var pgHostPort = pgHostPortDb.Split("/")[0];
+                    // var pgDb = pgHostPortDb.Split("/")[1];
+                    // var pgUser = pgUserPass.Split(":")[0];
+                    // var pgPass = pgUserPass.Split(":")[1];
+                    // var pgHost = pgHostPort.Split(":")[0];
+                    // var pgPort = pgHostPort.Split(":")[1];
 
-                    connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb}";
+                    // connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb}";
+                    connStr = $"Server=YLBER\\SQLT470;Database=AddaptApp;Trusted_Connection=True;MultipleActiveResultSets=true";
                 }
                 // Whether the connection string came from the local development configuration file
                 // or from the environment variable from Heroku, use it to set up your DbContext.
-                options.UseNpgsql(connStr);
+                options.UseSqlServer(connStr);
             });
         }
 
@@ -183,7 +187,7 @@ namespace ChatrDate
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapFallbackToController("Index", "Fallback");
+                // endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }

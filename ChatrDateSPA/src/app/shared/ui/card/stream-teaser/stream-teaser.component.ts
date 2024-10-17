@@ -12,10 +12,19 @@ import { ChatService } from 'src/app/_services/chat.service'
 })
 export class StreamTeaserComponent implements OnInit {
   @Input() users: User
-  @Input() stream: StreamTeaser
+  @Input() likesUsers: User;
+  @Input() favoritesUsers: User;
+  @Input() visitorsUsers: User;
+  @Input() stream: StreamTeaser[];
+  @Input() selectedNotificationType: string;
+
   chatList: any
   selectedUser: any
   user: User = JSON.parse(localStorage.getItem('user'));
+  showMessages: boolean = true;
+  showLikes: boolean = true;
+  showFavorites: boolean = true;
+  showVisitors: boolean = true;
 
   constructor(private chatService: ChatService) { }
 
@@ -50,15 +59,37 @@ export class StreamTeaserComponent implements OnInit {
   }
 
   getStreamTeaserClass() {
-    var temp = ''
-    if (this.chatList.seen == false && this.chatList.seen == true) {
-      temp = ' message'
+    var temp = '';
+
+    if (this.stream && this.stream.length > 0) {
+      const firstItem = this.stream[0];
+
+      if (firstItem.type === 'message') {
+        temp = ' message';
+      } else if (firstItem.type === 'like') {
+        temp = ' like';
+      } else if (firstItem.type === 'kiss') {
+        temp = ' kiss';
+      } else if (firstItem.type === 'profileVisit') {
+        temp = ' profileVisit';
+      }
     }
-    // else if (this.stream.type == 'message' && this.stream.status == 'visit') {
-    //   temp = ' profileView'
-    // } else if (this.stream.type == 'inbox' && this.stream.status == 'unread') {
-    //   temp = ' unread'
-    // }
-    return 'streamTeaser' + temp
+    return 'streamTeaser' + temp;
+  }
+
+  closeMessages() {
+    this.showMessages = false;
+  }
+
+  closeLikes() {
+    this.showLikes = false;
+  }
+
+  closeFavorites() {
+    this.showFavorites = false;
+  }
+
+  closeVisitor() {
+    this.showVisitors = false;
   }
 }

@@ -41,6 +41,10 @@ namespace ChatrDate.Controllers
                 userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
             }
 
+            // userParams.City = string.IsNullOrEmpty(userParams.City)
+            //     ? userFromRepo.City
+            //     : userParams.City;
+
             var users = await _repo.GetUsers(userParams);
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
             Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
@@ -53,7 +57,6 @@ namespace ChatrDate.Controllers
         {
             var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
             var user = await _repo.GetUser(id, isCurrentUser);
-            var remoteIPAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
 
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
             return Ok(userToReturn);
@@ -63,16 +66,23 @@ namespace ChatrDate.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+            try
+            {
+                if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                    return Unauthorized();
 
-            var userFromRepo = await _repo.GetUser(id, true);
-            _mapper.Map(userForUpdateDto, userFromRepo);
+                var userFromRepo = await _repo.GetUser(id, true);
+                _mapper.Map(userForUpdateDto, userFromRepo);
 
-            if (await _repo.SaveAll())
-                return NoContent();
-
-            throw new Exception($"Updating user {id} failed on save");
+                if (await _repo.SaveAll())
+                    return NoContent();
+                else
+                    return StatusCode(500, "Updating user failed. Check for duplicate values.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while updating user: {ex.Message}");
+            }
         }
         // POST api/UserController/Like
         [HttpPost("{id}/like/{recipientId}")]
@@ -83,24 +93,39 @@ namespace ChatrDate.Controllers
 
             var like = await _repo.GetLike(id, recipientId);
 
+            // Check if the like record already exists
             if (like != null)
-                return BadRequest("You already like this user");
+            {
+                // Toggle the IsActive status
+                like.IsActive = !like.IsActive;
+
+                // Save changes to the database
+                if (await _repo.GetUser(recipientId, false) != null && await _repo.SaveAll())
+                    return Ok();
+            }
+
+            // Check if the recipient user exists
             if (await _repo.GetUser(recipientId, false) == null)
                 return NotFound();
 
+            // Create a new like record
             like = new Like
             {
                 LikerId = id,
-                LikeeId = recipientId
+                LikeeId = recipientId,
+                IsActive = true,
+                LikedAt = DateTime.Now // Assuming you want to record the timestamp when liked
             };
 
             _repo.Add<Like>(like);
 
+            // Save changes to the database
             if (await _repo.SaveAll())
                 return Ok();
 
             return BadRequest("Failed to like user");
         }
+
 
         // POST api.UserController/Visitor
         [HttpPost("{id}/visitor/{recipientVisitorId}")]
@@ -109,30 +134,37 @@ namespace ChatrDate.Controllers
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
+            // Check if the visitor record already exists
             var visitor = await _repo.GetVisitors(id, recipientVisitorId);
 
             if (visitor != null)
             {
-                visitor.VisitorCount++;
-                if (await _repo.SaveAll())
-                    return Ok();
+                // Visitor record already exists, no need to update or count visits
+                return Ok();
             }
+
+            // Check if the recipient visitor exists
             if (await _repo.GetUser(recipientVisitorId, false) == null)
                 return NotFound();
 
+            // Create a new visitor record
             visitor = new Visitors
             {
                 UserId = id,
-                VisitorId = recipientVisitorId
+                VisitoredUserId = recipientVisitorId,
+                VisitTime = DateTime.Now
             };
-            visitor.VisitorCount++;
+
+            // Add the visitor record to the repository
             _repo.Add<Visitors>(visitor);
 
+            // Save changes to the database
             if (await _repo.SaveAll())
                 return Ok();
 
             return BadRequest("Failed to visit user");
         }
+
 
         // POST api.UserController/Favorites
         [HttpPost("{id}/favorite/{recipientFavoriteId}")]
@@ -143,37 +175,42 @@ namespace ChatrDate.Controllers
 
             var favorites = await _repo.GetFavorites(id, recipientFavoriteId);
 
+            // Check if the favorite record already exists
             if (favorites != null)
             {
-                if (favorites.FavoriteActive != true)
-                {
-                    favorites.FavoriteActive = true;
-                    if (await _repo.GetUser(recipientFavoriteId, false) != null && await _repo.SaveAll())
-                        return Ok();
-                }
-                if (favorites.FavoriteActive != false)
-                {
-                    favorites.FavoriteActive = false;
-                    if (await _repo.GetUser(recipientFavoriteId, false) != null && await _repo.SaveAll())
-                        return Ok();
-                }
+                // Toggle the FavoriteActive status
+                favorites.FavoriteActive = !favorites.FavoriteActive;
+
+                // Save changes to the database
+                if (await _repo.GetUser(recipientFavoriteId, false) != null && await _repo.SaveAll())
+                    return Ok();
             }
 
+            // Check if the recipient user exists
             if (await _repo.GetUser(recipientFavoriteId, false) == null)
                 return NotFound();
 
+            // Create a new favorite record
             favorites = new Favorites
             {
                 UserId = id,
-                FavoriteId = recipientFavoriteId,
-                FavoriteActive = true
+                FavoritedUserId = recipientFavoriteId,
+                FavoriteActive = true,
+                FavoritedAt = DateTime.Now // Assuming you want to record the timestamp when favorited
             };
             _repo.Add<Favorites>(favorites);
 
+            // Save changes to the database
             if (await _repo.SaveAll())
                 return Ok();
 
-            return BadRequest("Failed to add favrite this user");
+            return BadRequest("Failed to add favorite for this user");
+        }
+
+        [HttpGet("{id}/favorite")]
+        public async Task<bool> IsFavoritedBy(int userId)
+        {
+            return await _repo.CheckFavorites(userId);
         }
     }
 }

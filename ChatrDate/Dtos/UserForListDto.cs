@@ -16,8 +16,6 @@ namespace ChatrDate.Dtos
         public DateTime? Created { get; set; }
         public DateTime? LastActive { get; set; }
         public string PhotoUrl { get; set; }
-        public Boolean Favorites { get; set; }
-        public int Like { get; set; }
-        public int Visitor { get; set; }
+        public string City { get; set; }
     }
 }

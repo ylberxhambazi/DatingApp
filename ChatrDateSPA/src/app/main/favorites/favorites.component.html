@@ -2,7 +2,7 @@
   <div class="hidden"></div>
   <mat-grid-list [cols]="breakpoint" rowHeight="1:1.3" gutterSize="0.625rem" (window:resize)="onResize($event)">
     <mat-grid-tile *ngFor="let favorites of users">
-      <app-profile-teaser *ngIf="favorites.favorites" [user]="favorites" [type]="favorites" class="profileTeaser">
+      <app-profile-teaser [user]="favorites" [type]="favorites" class="profileTeaser">
       </app-profile-teaser>
     </mat-grid-tile>
   </mat-grid-list>

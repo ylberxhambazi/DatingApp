@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,38 @@ namespace ChatrDate.Data
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
+        }
+
+        private async Task<string> GetCityFromIpAsync()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://freegeoip.app/json/");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResult = await response.Content.ReadAsStringAsync();
+                        dynamic resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonResult);
+
+                        // Extract the city or relevant location information from the resultObject
+                        string city = resultObject.city;
+
+                        if (!string.IsNullOrEmpty(city))
+                        {
+                            return city;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions (log, return a default value, etc.)
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
+
+            return "Unknown";
         }
 
         public async Task<bool> UserExists(string username)

@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ChatrDate.Migrations
 {
-    public partial class FinalInitials : Migration
+    public partial class ModelFixes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +12,7 @@ namespace ChatrDate.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
@@ -28,7 +27,7 @@ namespace ChatrDate.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -84,7 +83,7 @@ namespace ChatrDate.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -105,7 +104,7 @@ namespace ChatrDate.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -189,17 +188,19 @@ namespace ChatrDate.Migrations
                 name: "Favorites",
                 columns: table => new
                 {
-                    FavoriteId = table.Column<int>(nullable: false),
+                    FavoriteId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
+                    FavoritedUserId = table.Column<int>(nullable: false),
                     FavoriteActive = table.Column<bool>(nullable: false),
-                    ActiveId = table.Column<int>(nullable: true)
+                    FavoritedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favorites", x => new { x.FavoriteId, x.UserId });
+                    table.PrimaryKey("PK_Favorites", x => x.FavoriteId);
                     table.ForeignKey(
-                        name: "FK_Favorites_AspNetUsers_ActiveId",
-                        column: x => x.ActiveId,
+                        name: "FK_Favorites_AspNetUsers_FavoritedUserId",
+                        column: x => x.FavoritedUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -216,7 +217,9 @@ namespace ChatrDate.Migrations
                 columns: table => new
                 {
                     LikerId = table.Column<int>(nullable: false),
-                    LikeeId = table.Column<int>(nullable: false)
+                    LikeeId = table.Column<int>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false),
+                    LikedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -240,7 +243,7 @@ namespace ChatrDate.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Url = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     DateAdded = table.Column<DateTime>(nullable: true),
@@ -263,13 +266,15 @@ namespace ChatrDate.Migrations
                 name: "Visitors",
                 columns: table => new
                 {
-                    VisitorId = table.Column<int>(nullable: false),
+                    VisitorId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
-                    VisitorCount = table.Column<int>(nullable: false)
+                    VisitoredUserId = table.Column<int>(nullable: false),
+                    VisitTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Visitors", x => new { x.VisitorId, x.UserId });
+                    table.PrimaryKey("PK_Visitors", x => x.VisitorId);
                     table.ForeignKey(
                         name: "FK_Visitors_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -277,11 +282,11 @@ namespace ChatrDate.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Visitors_AspNetUsers_VisitorId",
-                        column: x => x.VisitorId,
+                        name: "FK_Visitors_AspNetUsers_VisitoredUserId",
+                        column: x => x.VisitoredUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -293,7 +298,8 @@ namespace ChatrDate.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -319,12 +325,13 @@ namespace ChatrDate.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorites_ActiveId",
+                name: "IX_Favorites_FavoritedUserId",
                 table: "Favorites",
-                column: "ActiveId");
+                column: "FavoritedUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Favorites_UserId",
@@ -345,6 +352,11 @@ namespace ChatrDate.Migrations
                 name: "IX_Visitors_UserId",
                 table: "Visitors",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Visitors_VisitoredUserId",
+                table: "Visitors",
+                column: "VisitoredUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

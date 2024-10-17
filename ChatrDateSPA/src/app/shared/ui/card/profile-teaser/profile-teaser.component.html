@@ -27,7 +27,7 @@
       <mat-icon>message</mat-icon>
     </a>
     <button mat-icon-button (click)="sendLike(user.id)" class="btnS btnPrimaryInverted">
-      <mat-icon>favorite_border</mat-icon>
+      <mat-icon>{{ getLikes ? 'favorite' : 'favorite_border' }}</mat-icon>
     </button>
     <button mat-icon-button aria-label="Send her a kiss" (click)="sendLike(user.id)" class="btnS btnPrimaryInverted">
       <mat-icon svgIcon="kiss-icon" aria-hidden="false" class="kiss-icon"></mat-icon>

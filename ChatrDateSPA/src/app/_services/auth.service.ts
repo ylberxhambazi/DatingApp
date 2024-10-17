@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
+import { AngularFireDatabase } from '@angular/fire/database'
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { BehaviorSubject } from 'rxjs'
 import { map } from 'rxjs/operators'
@@ -18,7 +19,7 @@ export class AuthService {
   photoUrl = new BehaviorSubject<string>('./assets/images/profile/fallback-male.jpg');
   currentPhotoUrl = this.photoUrl.asObservable();
 
-  constructor(private http: HttpClient, private afAuth: AngularFireAuth) {
+  constructor(private http: HttpClient, private afAuth: AngularFireAuth, private db: AngularFireDatabase) {
   }
 
   changeProfilePhoto(photoUrl: string) {
@@ -35,6 +36,7 @@ export class AuthService {
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           this.currentUser = user.user;
           this.changeProfilePhoto(this.currentUser.photoUrl);
+          this.db.object(`/users/${this.currentUser.userName}`).update({ status: 'online' });
         }
       })
     )
@@ -46,6 +48,7 @@ export class AuthService {
 
   loggedIn() {
     const token = localStorage.getItem('token')
+    this.db.object(`/users/${this.currentUser.userName}`).update({ status: 'offline' });
     return !this.jwtHelper.isTokenExpired(token)
   }
 

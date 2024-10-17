@@ -1,0 +1,10 @@
+D:\Personal\Projects\ChatrDate1\EmailService\bin\Debug\netcoreapp3.1\EmailService.deps.json
+D:\Personal\Projects\ChatrDate1\EmailService\bin\Debug\netcoreapp3.1\EmailService.dll
+D:\Personal\Projects\ChatrDate1\EmailService\bin\Debug\netcoreapp3.1\EmailService.pdb
+D:\Personal\Projects\ChatrDate1\EmailService\obj\Debug\netcoreapp3.1\EmailService.csproj.AssemblyReference.cache
+D:\Personal\Projects\ChatrDate1\EmailService\obj\Debug\netcoreapp3.1\EmailService.GeneratedMSBuildEditorConfig.editorconfig
+D:\Personal\Projects\ChatrDate1\EmailService\obj\Debug\netcoreapp3.1\EmailService.AssemblyInfoInputs.cache
+D:\Personal\Projects\ChatrDate1\EmailService\obj\Debug\netcoreapp3.1\EmailService.AssemblyInfo.cs
+D:\Personal\Projects\ChatrDate1\EmailService\obj\Debug\netcoreapp3.1\EmailService.csproj.CoreCompileInputs.cache
+D:\Personal\Projects\ChatrDate1\EmailService\obj\Debug\netcoreapp3.1\EmailService.dll
+D:\Personal\Projects\ChatrDate1\EmailService\obj\Debug\netcoreapp3.1\EmailService.pdb

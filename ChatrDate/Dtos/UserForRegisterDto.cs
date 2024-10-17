@@ -21,6 +21,7 @@ namespace ChatrDate.Dtos
         [Required]
         public string Gender { get; set; }
         public string ImLooking { get; set; }
+        public string City { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
         public UserForRegisterDto()

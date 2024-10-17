@@ -33,12 +33,14 @@ namespace ChatrDate.Data
         {
             return await _context.Visitors.FirstOrDefaultAsync(u => u.UserId == userId && u.VisitorId == recipientVisitorId);
         }
-
         public async Task<Favorites> GetFavorites(int userId, int recipientFavoriteId)
         {
             return await _context.Favorites.FirstOrDefaultAsync(u => u.UserId == userId && u.FavoriteId == recipientFavoriteId);
         }
-
+        public async Task<bool> CheckFavorites(int userId)
+        {
+            return await _context.Favorites.AnyAsync(u => u.FavoritedUserId == userId);
+        }
         public async Task<Photo> GetMainPhotoForUser(int userId)
         {
             return await _context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
@@ -46,13 +48,13 @@ namespace ChatrDate.Data
 
         public async Task<Photo> GetPhoto(int id)
         {
-            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+            var photo = await _context.Photos.IgnoreQueryFilters().FirstOrDefaultAsync(p => p.Id == id);
             return photo;
         }
 
         public async Task<User> GetUser(int id, bool isCurrentUser)
         {
-            var query = _context.Users.Include(p => p.Photos).Include(f => f.Actives).Include(fd => fd.Deactives).Include(v => v.ViewVisitors).Include(l => l.Likers).AsQueryable();
+            var query = _context.Users.Include(p => p.Photos).AsQueryable();
 
             if (isCurrentUser)
                 query = query.IgnoreQueryFilters();
@@ -63,7 +65,7 @@ namespace ChatrDate.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.Include(p => p.Photos).Include(f => f.Actives).Include(fd => fd.Deactives).Include(v => v.Visitores).Include(l => l.Likers).OrderByDescending(u => u.LastActive).AsQueryable();
+            var users = _context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
             users = users.Where(u => u.Id != userParams.UserId);
             users = users.Where(u => u.Gender == userParams.Gender);
             if (userParams.Likers)
@@ -88,7 +90,7 @@ namespace ChatrDate.Data
             }
             if (userParams.FavoritsDeactives)
             {
-                var userDeactiveFavorites = await GetUserFavorites(userParams.UserId, userParams.FavoritsDeactives);
+                var userDeactiveFavorites = await GetUserFavorites(userParams.UserId, userParams.FavoritsActives);
                 users = users.Where(u => userDeactiveFavorites.Contains(u.Id));
             }
             if (userParams.MinAge != 18 || userParams.MaxAge != 99)
@@ -109,35 +111,80 @@ namespace ChatrDate.Data
                         break;
                 }
             }
+            if (!string.IsNullOrEmpty(userParams.City))
+            {
+                // Filter by city, allowing partial matches
+                users = users.Where(u => u.City != null && u.City.ToLower().Contains(userParams.City.ToLower()));
+            }
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
         private async Task<IEnumerable<int>> GetUserViews(int userId, bool view)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            return _context.Visitors.Where(u => u.VisitorId == userId).Select(i => i.UserId);
+            var activeVisitors = await _context.Users
+                .Include(u => u.ViewVisitors)
+                .Include(u => u.Visitores)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (activeVisitors != null)
+            {
+                if (view)
+                {
+                    // Return visitors for the current user
+                    return activeVisitors.ViewVisitors
+                        .Where(u => u.VisitoredUserId == userId)
+                        .Select(v => v.UserId);
+                }
+                else
+                {
+                    // Return visited users by the current user
+                    return activeVisitors.Visitores
+                        .Where(u => u.UserId == userId)
+                        .Select(v => v.VisitoredUserId);
+                }
+            }
+            else
+            {
+                return Enumerable.Empty<int>();
+            }
         }
 
         private async Task<IEnumerable<int>> GetUserFavorites(int userId, bool favorites)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            if (favorites)
-                return _context.Favorites.Where(u => u.FavoriteId == userId).Select(f => f.UserId);
-            else
-                return _context.Favorites.Where(u => u.FavoriteId == userId).Select(f => f.UserId);
-        }
-
-        private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-
-            if (likers)
+            var user = await _context.Users.Include(u => u.FavoritedBy).FirstOrDefaultAsync(u => u.Id == userId);
+            if (user != null)
             {
-                return _context.Likes.Where(u => u.LikeeId == id).Select(i => i.LikerId);
+                if (favorites)
+                {
+                    return user.FavoritedBy.Where(u => u.FavoriteActive).Select(i => i.FavoritedUserId);
+                }
+                else
+                {
+                    return user.FavoritedBy.Where(u => u.FavoriteActive).Select(i => i.UserId);
+                }
             }
             else
             {
-                return _context.Likes.Where(u => u.LikerId == id).Select(i => i.LikeeId);
+                return Enumerable.Empty<int>();
+            }
+        }
+        private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers)
+        {
+            var user = await _context.Users.Include(u => u.Likers).Include(u => u.Likees).FirstOrDefaultAsync(u => u.Id == id);
+            if (user != null)
+            {
+                if (likers)
+                {
+                    return user.Likers.Where(u => u.LikeeId == id).Select(i => i.LikerId);
+                }
+                else
+                {
+                    return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
+                }
+            }
+            else
+            {
+                return Enumerable.Empty<int>();
             }
         }
 

@@ -13,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class ChatService {
   user: User = JSON.parse(localStorage.getItem('user'));
   messageList: AngularFireList<any>
+  roomList: AngularFireList<any>
   messageChat: Observable<any[]>;
   presenceList: AngularFireObject<any>
   presence: Observable<any>
@@ -20,10 +21,14 @@ export class ChatService {
   userAuth
 
   constructor(private authService: AuthService, private db: AngularFireDatabase, private afAuth: AngularFireAuth, private http: HttpClient) {
-
+    this.roomList = db.list('/datingappchat/conversations/', ref => { return ref.orderByChild('timestamp') });
     this.updateOnUser().subscribe()
     this.updateOnDisconnect().subscribe()
     this.updateOnAway()
+  }
+
+  getUserMessages(): AngularFireList<any> {
+    return this.roomList;
   }
 
   getMessage(user) {
@@ -46,9 +51,7 @@ export class ChatService {
 
   sendMessage(user, messageBody, chatID, usersKey) {
     const timestamp = this.getTimeStamp()
-    if (this.user) {
-      this.authService.currentUser = this.user;
-    }
+    const currentUser = this.authService.currentUser;
     const messageData = {
       message: messageBody,
       timeSent: timestamp,
@@ -60,6 +63,20 @@ export class ChatService {
       userKey: usersKey
     }
     this.db.list(`datingappchat/conversations/${chatID}`).push(messageData)
+  }
+
+  updateSeenStatus(conversationId: string) {
+    const loggedInUsername = this.authService.currentUser['username'];
+
+    this.db.list(`datingappchat/conversations/${conversationId}`).query.ref
+      .once('value', snapshot => {
+        snapshot.forEach(childSnapshot => {
+          const message = childSnapshot.val();
+          if (message.userReceived === loggedInUsername) {
+            childSnapshot.ref.update({ seen: true });
+          }
+        });
+      });
   }
 
   getTimeStamp() {
@@ -75,18 +92,19 @@ export class ChatService {
   }
 
   getPresence(user) {
-    return this.db.object(`datingappchat/presence/${user}`).valueChanges().pipe(first()).toPromise()
+    return this.db.object(`datingappchat/presence/${user}`).valueChanges().pipe(first())
   }
 
   getUser() {
-    return this.db.object('datingappchat/presence/').valueChanges().pipe(first()).toPromise()
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).username : null;
   }
 
   async setPersistence(status: string) {
     const user = await this.getUser()
     const timestamp = this.getTimeStamp()
     if (user) {
-      return this.db.object(`datingappchat/presence/${this.authService.currentUser['username']}`).update({ status, timeStamp: timestamp })
+      return this.db.object(`datingappchat/presence/${user}`).update({ status, timeStamp: timestamp })
     }
   }
 

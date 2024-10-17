@@ -28,6 +28,8 @@ export class ProfileTeaserComponent implements OnInit {
   presence$
   users: User = JSON.parse(localStorage.getItem('user'));
   userTogether
+  getLikes
+  data
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -46,6 +48,7 @@ export class ProfileTeaserComponent implements OnInit {
 
   ngOnInit() {
     this.getOnlineStatus()
+    this.getLike(this.authService.decodedToken.nameid)
   }
 
   getDisplayName() {
@@ -53,6 +56,10 @@ export class ProfileTeaserComponent implements OnInit {
   }
   getOnlineStatus() {
     this.presence$ = this.chatService.getPresence(this.user['username'])
+  }
+
+  getLike(id: number) {
+    this.getLikes = this.userService.getLike(id)
   }
 
   sendLike(id: number) {

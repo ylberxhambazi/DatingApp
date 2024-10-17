@@ -27,6 +27,7 @@ export class UserService {
       params = params.append('minAge', userParams.minAge);
       params = params.append('maxAge', userParams.maxAge);
       params = params.append('gender', userParams.gender);
+      params = params.append('city', userParams.city);
     }
 
     if (likesParam === 'Likers') {
@@ -74,6 +75,18 @@ export class UserService {
 
   deletePhoto(userId: number, id: number) {
     return this.http.delete(this.baseUrl + 'Users/' + userId + "/Photos/" + id);
+  }
+
+  getLike(id: number) {
+    return this.http.get(this.baseUrl + 'Users/' + id + '/like')
+  }
+
+  getFavorite(id: number) {
+    return this.http.get(this.baseUrl + 'Users/' + id + '/favorite')
+  }
+
+  getVisitor(id: number) {
+    return this.http.get(this.baseUrl + 'Users/' + id + '/visitor')
   }
 
   sendLike(id: number, recepientId: number) {

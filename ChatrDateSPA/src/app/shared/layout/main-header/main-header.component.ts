@@ -28,14 +28,13 @@ export class MainHeaderComponent implements OnInit {
 
   onLogout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
     this.authService.signOut();
-    this.chatService.signOut();
+    this.chatService.setPersistence('offline');
     this.router.navigateByUrl('');
     setTimeout(() => {
-      window.location.reload();
+      localStorage.removeItem('user');
     }, 250);
   }
 

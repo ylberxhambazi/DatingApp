@@ -35,9 +35,10 @@
               <img src="{{ message.photoUrl }}" alt="" />
             </a>
             <div class="cnt arrow">
-              <small>at {{ message.timeSent }}</small>
+              <small>{{message.userReceived}} at {{ message.timeSent }}</small>
               <p>
                 <span>{{ message.message }}</span>
+                <!-- <span *ngIf="message.seen && message.userReceived === users['username']" class="seen-status">Seen</span> -->
               </p>
             </div>
           </div>

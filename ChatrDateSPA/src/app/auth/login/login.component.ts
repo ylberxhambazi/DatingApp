@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
 import { Router } from '@angular/router'
+import { AlertifyService } from 'src/app/_services/alertify.service'
 import { AuthService } from 'src/app/_services/auth.service'
 import { ChatService } from 'src/app/_services/chat.service'
 
@@ -12,8 +13,11 @@ import { ChatService } from 'src/app/_services/chat.service'
 })
 export class LoginComponent implements OnInit {
   model: any = {}
+  photoUrl: string;
+
   constructor(
     private authService: AuthService,
+    private alertify: AlertifyService,
     private router: Router,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
@@ -28,15 +32,17 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+  }
 
   login() {
     this.authService.login(this.model).subscribe(
       (next) => {
-        console.log('Logged in successfully')
+        this.alertify.success('Logged in successfully');
       },
       (error) => {
-        console.log('Failed to login')
+        this.alertify.error(error);
       },
       () => {
         this.authService.firebaseLogin()

@@ -65,33 +65,33 @@ namespace ChatrDate.Models
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Visitors>()
-                .HasKey(k => new { k.VisitorId, k.UserId });
+                .HasKey(k => new { k.VisitorId });
 
             modelBuilder.Entity<Visitors>()
-                .HasOne(u => u.Visitor)
+                .HasOne(u => u.VisitorUser)
+                .WithMany(u => u.ViewVisitors)
+                .HasForeignKey(u => u.VisitoredUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Visitors>()
+                .HasOne(u => u.VisitedUser)
                 .WithMany(u => u.Visitores)
                 .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Visitors>()
-                .HasOne(u => u.Visitores)
-                .WithMany(u => u.ViewVisitors)
-                .HasForeignKey(u => u.UserId)
+            modelBuilder.Entity<Favorites>()
+                .HasKey(k => new { k.FavoriteId });
+
+            modelBuilder.Entity<Favorites>()
+                .HasOne(f => f.User)
+                .WithMany(u => u.FavoritedBy)
+                .HasForeignKey(f => f.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Favorites>()
-                .HasKey(k => new { k.FavoriteId, k.UserId });
-
-            modelBuilder.Entity<Favorites>()
-                .HasOne(u => u.Active)
-                .WithMany(u => u.Actives)
-                .HasForeignKey(u => u.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Favorites>()
-                .HasOne(u => u.Deactive)
-                .WithMany(u => u.Deactives)
-                .HasForeignKey(u => u.UserId)
+                .HasOne(f => f.FavoritedUser)
+                .WithMany()
+                .HasForeignKey(f => f.FavoritedUserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

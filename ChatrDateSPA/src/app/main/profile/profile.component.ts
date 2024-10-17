@@ -62,6 +62,8 @@ export class ProfileComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   presence$
+  getFavorites
+  getLikes
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -83,6 +85,7 @@ export class ProfileComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data['user'];
     });
+    console.log(this.getFavorite(3))
 
     this.galleryOptions = [{
       width: '350px',
@@ -94,10 +97,12 @@ export class ProfileComponent implements OnInit {
     }];
     this.galleryImages = this.getImages();
     this.getOnlineStatus()
+    this.getFavorite(this.authService.decodedToken.nameid)
+    this.getLike(this.authService.decodedToken.nameid)
   }
 
   getOnlineStatus() {
-    this.presence$ = this.chatService.getPresence(this.user.userName)
+    this.presence$ = this.chatService.getPresence(this.user["username"])
   }
 
   getImages() {
@@ -128,7 +133,7 @@ export class ProfileComponent implements OnInit {
   sendLike(id: number) {
     this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(
       (data) => {
-        console.log('You have liked: ' + this.user.userName)
+        console.log('You have liked: ' + this.user["username"])
       },
       (error) => {
         error = error
@@ -138,12 +143,17 @@ export class ProfileComponent implements OnInit {
   FavoritsActives(id: number) {
     this.userService.FavoritsActives(this.authService.decodedToken.nameid, id).subscribe(
       (data) => {
-        console.log('You favorite this profile: ' + this.user.userName)
+        console.log('You favorite this profile: ' + this.user["username"])
       },
       (error) => {
         error = error
       }
     )
   }
-
+  getFavorite(id: number) {
+    this.getFavorites = this.userService.getFavorite(id)
+  }
+  getLike(id: number) {
+    this.getLikes = this.userService.getLike(id)
+  }
 }

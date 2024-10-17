@@ -1,1 +1,10 @@
-<p>chat-management works!</p>
+<div class="list row">
+  <div class="col-md-6">
+    <h4>Messages List</h4>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let message of transformArray">
+        <strong>{{ message.userKey }}</strong>: {{message.message}}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -58,17 +58,17 @@ export function tokenGetter() {
     NgxGalleryModule,
     HammerModule,
     RouterModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     ModalModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:44378'],
-        disallowedRoutes: ['localhost:44378/api/Auth'],
+        allowedDomains: ['localhost:5001'],
+        disallowedRoutes: ['localhost:5001/api/Auth'],
       },
     }),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule
   ],
 
   providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditResolver, PreventUnsavedChanges, ProfileDetailResolver, ProfileListResolver, ListLikeResolver, ListFavoritesResolver, ListVisitorResolver, ChatDetailResolver, ChatService, DatePipe],

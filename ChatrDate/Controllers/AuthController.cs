@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace ChatrDate.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        // private readonly IEmailSender _emailSender;
 
         public AuthController(IConfiguration config, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
@@ -34,12 +36,25 @@ namespace ChatrDate.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _config = config;
+            // _emailSender = emailSender;
         }
 
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             if (await UserExists(userForRegisterDto.Username)) return BadRequest("Username is taken");
+            string userIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+            if (userIpAddress != "::1")
+            {
+                string userCity = await GetCityFromIpAsync(HttpContext.Connection.RemoteIpAddress.ToString());
+                Console.WriteLine("ip", userCity);
+                userForRegisterDto.City = userCity;
+            }
+            else
+            {
+                userForRegisterDto.City = "Kentacky";
+            }
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
             var roleResult = await _userManager.AddToRoleAsync(userToCreate, "Member");
@@ -65,7 +80,7 @@ namespace ChatrDate.Controllers
 
             if (result.Succeeded)
             {
-                var appUser = await _userManager.Users.Include(p => p.Photos).Include(f => f.Actives).Include(fd => fd.Deactives).Include(v => v.Visitores).Include(l => l.Likers).FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
+                var appUser = await _userManager.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
                 var userToReturn = _mapper.Map<UserForListDto>(appUser);
 
                 return Ok(new
@@ -109,6 +124,42 @@ namespace ChatrDate.Controllers
 
             return tokenHandler.WriteToken(token);
         }
+
+        private async Task<string> GetCityFromIpAsync(string userIp)
+        {
+            Console.WriteLine(userIp);
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync("https://freegeoip.app/json/" + userIp);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResult = await response.Content.ReadAsStringAsync();
+                        dynamic resultObject = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonResult);
+
+                        // Extract the city or relevant location information from the resultObject
+                        string city = resultObject?.city;
+                        string country = resultObject?.country_name;
+                        string state = resultObject?.region_code;
+
+                        if (!string.IsNullOrEmpty(city))
+                        {
+                            return city;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions (log, return a default value, etc.)
+                    Console.WriteLine($"Exception: {ex.Message}");
+                }
+
+                return "Unknown";
+            }
+        }
+
         private async Task<bool> UserExists(string username)
         {
             return await _userManager.Users.AnyAsync(x => x.UserName == username.ToLower());

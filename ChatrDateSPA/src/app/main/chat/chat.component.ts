@@ -44,6 +44,7 @@ export class ChatComponent implements OnInit {
 
     this.messageList = this.chatService.getMessagesList(this.userTogether)
     this.presence$ = this.chatService.getPresence(this.user['username'])
+    this.chatService.updateSeenStatus(this.userTogether);
   }
 
   ngOnChanges() {
@@ -54,7 +55,9 @@ export class ChatComponent implements OnInit {
     this.selectedUser = user;
     this.chatService.getMessagesId(user).subscribe(messages => {
       if (messages) {
-        Object.keys(messages).map(key => { });
+        Object.keys(messages).map(key => {
+          messages[key]['seen'] = true;
+        });
       }
     });
   }

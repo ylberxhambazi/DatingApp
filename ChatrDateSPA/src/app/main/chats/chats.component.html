@@ -1,8 +1,10 @@
 <section class="mainCol">
   <ul class="chatsStream">
-    <li *ngFor="let record of users">
-      <app-stream-teaser [users]="record"></app-stream-teaser>
-    </li>
+    <ng-container *ngIf="selectedNotificationType === 'message'">
+      <li *ngFor="let record of users">
+        <app-stream-teaser [users]="record" [stream]="messageStream" [selectedNotificationType]="selectedNotificationType"></app-stream-teaser>
+      </li>
+    </ng-container>
   </ul>
   <pagination
     [boundaryLinks]="true"

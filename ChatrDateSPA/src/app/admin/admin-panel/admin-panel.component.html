@@ -5,10 +5,7 @@
       <tab heading="User Management" *appHasRole="['Admin']">
         <app-user-management></app-user-management>
       </tab>
-      <tab heading="Photo Management" *appHasRole="['Admin', 'Moderator']">
-        <app-photo-management></app-photo-management>
-      </tab>
-      <tab heading="Chat Management">
+      <tab heading="Chat Management" *appHasRole="['Admin', 'Moderator']">
         <app-chat-management></app-chat-management>
       </tab>
     </tabset>

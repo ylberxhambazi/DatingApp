@@ -15,9 +15,11 @@
   display: flex;
   flex-direction: column;
 }
+
 #writeMessage {
   width: 100%;
 }
+
 .chatStream header {
   padding: 0.625rem;
   text-align: center;
@@ -298,6 +300,23 @@ small {
 .profileFacts .dd,
 .profileFacts .dt {
   display: block;
+}
+
+/* seen */
+.chatBubble.hasArrow.in:last-child .cnt {
+  position: relative;
+  /* Ensure relative positioning for absolute positioning of "Seen" status */
+}
+
+.chatBubble.hasArrow.in:last-child .seen-status {
+  position: absolute;
+  bottom: -1.5em;
+  /* Adjust position as needed */
+  right: 0;
+  color: #888;
+  /* Adjust color as needed */
+  font-size: 0.8em;
+  /* Adjust font size as needed */
 }
 
 @media screen and (min-width: 1024px) {
