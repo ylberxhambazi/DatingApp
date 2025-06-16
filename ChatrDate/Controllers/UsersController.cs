@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace ChatrDate.Controllers
 {
-    // [Authorize(Roles = "Admin, Moderator, Member")]
+    [Authorize(Roles = "Admin, Moderator, Member")]
     [ServiceFilter(typeof(LogUserActivity))]
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]

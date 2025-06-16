@@ -42,8 +42,8 @@ namespace ChatrDate
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AddaptAppDatingAPIContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalSqlServerConnection")));
+            // services.AddDbContext<AddaptAppDatingAPIContext>(options =>
+            //     options.UseSqlServer(Configuration.GetConnectionString("LocalSqlServerConnection")));
 
             services.AddIdentityCore<User>(opt =>
             {
@@ -137,7 +137,7 @@ namespace ChatrDate
                     // var pgPort = pgHostPort.Split(":")[1];
 
                     // connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb}";
-                    connStr = $"Server=YLBER\\SQLT470;Database=AddaptApp;Trusted_Connection=True;MultipleActiveResultSets=true";
+                    connStr = $"Server=YLBER\\SQLT470;Database=AddaptApp;User Id=sa; Password=qwerty;Trusted_Connection=True;MultipleActiveResultSets=true";
                 }
                 // Whether the connection string came from the local development configuration file
                 // or from the environment variable from Heroku, use it to set up your DbContext.

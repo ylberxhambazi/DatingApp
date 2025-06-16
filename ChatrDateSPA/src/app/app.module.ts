@@ -38,41 +38,41 @@ import { RolesModalComponent } from './admin/roles-modal/roles-modal.component'
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 export function tokenGetter() {
-  return localStorage.getItem('token')
+    return localStorage.getItem('token')
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginDialogComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatExpansionModule,
-    NgxGalleryModule,
-    HammerModule,
-    RouterModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    ModalModule.forRoot(),
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:5001'],
-        disallowedRoutes: ['localhost:5001/api/Auth'],
-      },
-    }),
-  ],
+    declarations: [AppComponent, LoginDialogComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        MatExpansionModule,
+        NgxGalleryModule,
+        HammerModule,
+        RouterModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
+        ModalModule.forRoot(),
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: ['localhost:5000'],
+                disallowedRoutes: ['localhost:5000/api/Auth'],
+            },
+        }),
+    ],
 
-  providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditResolver, PreventUnsavedChanges, ProfileDetailResolver, ProfileListResolver, ListLikeResolver, ListFavoritesResolver, ListVisitorResolver, ChatDetailResolver, ChatService, DatePipe],
-  bootstrap: [AppComponent],
-  entryComponents: [LoginDialogComponent, RolesModalComponent],
+    providers: [AuthService, ErrorInterceptorProvide, AuthGuard, UserService, ProfileEditResolver, PreventUnsavedChanges, ProfileDetailResolver, ProfileListResolver, ListLikeResolver, ListFavoritesResolver, ListVisitorResolver, ChatDetailResolver, ChatService, DatePipe],
+    bootstrap: [AppComponent],
+    entryComponents: [LoginDialogComponent, RolesModalComponent],
 })
 export class AppModule { }
